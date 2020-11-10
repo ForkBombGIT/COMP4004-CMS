@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    command: yarn start
+    ports:
+      - 8080:8080
+    volumes:
+      - ./backend/:/backend
+      - backend-modules:/backend/node_modules
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    command: yarn start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/:/frontend
+      - frontend-modules:/frontend/node_modules
+volumes:
+  backend-modules:
+  frontend-modules:
+    
