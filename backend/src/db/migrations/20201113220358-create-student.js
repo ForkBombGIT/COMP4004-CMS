@@ -1,21 +1,17 @@
-'use strict';
+const tableNames = require('db/tableNames');
+const {studentsSchema} = require('db/schemas');
+const {addDateFields, addForeignKey} = require('db/utils');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
-  },
+    await queryInterface.createTable(tableNames.STUDENTS, addDateFields(Sequelize, studentsSchema));
 
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.addIndex(tableNames.STUDENTS, ['name']);
+
+    const foreignKeyAdder = addForeignKey(queryInterface, Sequelize);
+    await foreignKeyAdder(tableNames.PROFESSOR, tableNames.ADMINISTRATOR, 'administrator_id');
+  },
+  down: (queryInterface) => {
+    return queryInterface.dropTable(tableNames.STUDENTS);
   }
 };

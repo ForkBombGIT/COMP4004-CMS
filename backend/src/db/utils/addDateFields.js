@@ -2,15 +2,15 @@
  * since creating the actual Sequelize models with `sequelize.define` automatically
  * adds the date fields. */
 const addDateFields = (Sequelize, schema) => ({
-    ...schema(Sequelize),
-    createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-    },
-    updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-    }
+  ...schema(Sequelize),
+  createdAt: {
+    allowNull: false,
+    type: Sequelize.DATE
+  },
+  updatedAt: {
+    allowNull: false,
+    type: Sequelize.DATE
+  }
 });
 
 module.exports = addDateFields;

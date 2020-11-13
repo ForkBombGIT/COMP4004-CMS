@@ -1,25 +1,25 @@
-const academicDeadline = require('./academicDeadline.schema');
-const administrator = require('./administrator.schema');
-const application = require('./application.schema');
-const course = require('./course.schema');
-const deliverable = require('./deliverable.schema');
-const enrolled = require('./enrolled.schema');
-const prerequisites = require('./prerequisites.schema');
-const professor = require('./professor.schema');
-const student = require('./student.schema');
-const submits = require('./submits.schema');
-const teaches = require('./teaches.schema');
+const academicDeadlineSchema = require('./academicDeadline.schema');
+const administratorSchema = require('./administrator.schema');
+const applicationSchema = require('./application.schema');
+const courseSchema = require('./course.schema');
+const deliverableSchema = require('./deliverable.schema');
+const enrolledSchema = require('./enrolled.schema');
+const prerequisitesSchema = require('./prerequisites.schema');
+const professorSchema = require('./professor.schema');
+const studentSchema = require('./student.schema');
+const submitsSchema = require('./submits.schema');
+const teachesSchema = require('./teaches.schema');
 
 module.exports = {
-  academicDeadline,
-  administrator,
-  application,
-  course,
-  deliverable,
-  enrolled,
-  prerequisites,
-  professor,
-  student,
-  submits,
-  teaches
+  academicDeadlineSchema,
+  administratorSchema,
+  applicationSchema,
+  courseSchema,
+  deliverableSchema,
+  enrolledSchema,
+  prerequisitesSchema,
+  professorSchema,
+  studentSchema,
+  submitsSchema,
+  teachesSchema
 };
