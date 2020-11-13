@@ -2,7 +2,7 @@ version: "3.7"
 services:
   db:
     image: postgres
-    container_name: db
+    container_name: CMS-database
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -12,7 +12,7 @@ services:
   backend:
     build:
       context: ./backend
-    container_name: backend
+    container_name: CMS-backend
     command: yarn start
     ports:
       - 8080:8080
@@ -22,7 +22,7 @@ services:
   frontend:
     build:
       context: ./frontend
-    container_name: frontend
+    container_name: CMS-frontend
     command: yarn start
     ports:
       - 3000:3000
