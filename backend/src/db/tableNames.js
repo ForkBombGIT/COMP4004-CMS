@@ -3,7 +3,7 @@ module.exports = {
   ADMINISTRATOR:'administrator',
   APPLICATION: 'application', 
   COURSE: 'course',
-  DELIVERABLES: 'deliverables',
+  DELIVERABLE: 'deliverable',
   ENROLLED: 'enrolled',
   PREREQUISITES: 'prerequisites',
   PROFESSOR: 'professor',

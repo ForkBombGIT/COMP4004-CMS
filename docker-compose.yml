@@ -7,13 +7,26 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    volumes:
+      - database-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+  db-migrator:
+    build:
+      context: ./backend
+    command: sh -c "yarn db:retryable-migrate && yarn db:seed"
+    depends_on:
+      - db
+    image: backend
   backend:
     build:
       context: ./backend
+    image: backend
     container_name: CMS-backend
     command: yarn start
+    depends_on:
+      - db
+      - db-migrator
     ports:
       - 8080:8080
     volumes:
@@ -30,5 +43,7 @@ services:
       - ./frontend/:/frontend
       - frontend-modules:/frontend/node_modules
 volumes:
+  database-data:
+    driver: local
   backend-modules:
   frontend-modules:

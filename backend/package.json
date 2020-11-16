@@ -24,7 +24,10 @@
     "lint": "NODE_PATH=src/ eslint src/. test/. --config .eslintrc.json --fix",
     "dev": "NODE_PATH=src/ nodemon src/",
     "start": "NODE_PATH=src/ nodemon src/",
-    "jest": "jest  --forceExit"
+    "jest": "jest  --forceExit",
+    "db:seed": "NODE_PATH=src/ sequelize db:seed:all",
+    "db:migrate": "NODE_PATH=src/ sequelize db:migrate",
+    "db:retryable-migrate": "sh ./scripts/db-migrate.sh"
   },
   "standard": {
     "env": [

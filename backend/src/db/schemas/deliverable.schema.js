@@ -10,7 +10,7 @@ module.exports = (DataTypes) => ({
     type: DataTypes.STRING
   },
   name: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   },
   weight: {

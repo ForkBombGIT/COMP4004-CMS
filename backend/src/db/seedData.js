@@ -1,39 +1,138 @@
-// const keyIdByName = (acc, obj) => {
-//   acc[obj.name] = obj.id;
-//   return acc;
-// };
+const keyIdByName = (acc, obj) => {
+  acc[obj.name] = obj.id;
+  return acc;
+};
 
-const ACADEMIC_DEADLINE = [];
+const COURSE = [
+  {
+    id: '63b804de-c0fd-47c2-a391-5d14999c27a1',
+    name: 'COMP4004',
+    time_slot: 'Friday at noon',
+    capacity: 59,
+    status: 'cancelled',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
+const COURSE_IDS = COURSE.map((val) => val.id);
+const COURSE_IDS_BY_NAME = [...COURSE].reduce(keyIdByName, {});
+
+const ACADEMIC_DEADLINE = [
+  {
+    id: '7583ccee-266b-4387-8f40-e53d411b4482',
+    type: 'Registration',
+    due_date: new Date(),
+    course_id: COURSE_IDS_BY_NAME[0],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 const ACADEMIC_DEADLINE_IDS = ACADEMIC_DEADLINE.map((val) => val.id);
 
-const ADMINISTRATOR = [];
+const ADMINISTRATOR = [
+  {
+    id: 'c5f20a34-66ab-4872-bc7c-2d29693105bd',
+    name: 'Jelog Yugislav',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 const ADMINISTRATOR_IDS = ADMINISTRATOR.map((val) => val.id);
+const ADMINISTRATOR_IDS_BY_NAME = [...ADMINISTRATOR].reduce(keyIdByName, {});
 
-const APPLICATION = [];
+const APPLICATION = [
+  {
+    id: '715db196-4669-4dd2-9212-1cb677b02473',
+    name: 'Xelostrad kulio',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 const APPLICATION_IDS = APPLICATION.map((val) => val.id);
 
-const COURSE = [];
-const COURSE_IDS = COURSE.map((val) => val.id);
+const PROFESSOR = [
+  {
+    id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
+    name: 'Joslo Fredrickson',
+    administrator_id: ADMINISTRATOR_IDS_BY_NAME[0],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
+const PROFESSOR_IDS = PROFESSOR.map((val) => val.id);
+const PROFESSOR_IDS_BY_NAME = [...PROFESSOR].reduce(keyIdByName, {});
 
-const DELIVERABLE = [];
+const STUDENT = [
+  {
+    id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
+    name: 'Josh Gorman',
+    student_number: '101052915',
+    administrator_id: ADMINISTRATOR_IDS_BY_NAME[0],
+    birth_date: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
+const STUDENT_IDS = STUDENT.map((val) => val.id);
+const STUDENT_IDS_BY_NAME = [...STUDENT].reduce(keyIdByName, {});
+
+const DELIVERABLE = [
+  {
+    id: '520471c9-d12d-4582-9491-098011100558',
+    name: 'assignment 2',
+    weight: 0.2,
+    due_date: new Date(),
+    course_id: COURSE_IDS_BY_NAME[0],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 const DELIVERABLE_IDS = DELIVERABLE.map((val) => val.id);
+const DELIVERABLE_IDS_BY_NAME = [...DELIVERABLE].reduce(keyIdByName, {});
 
-const ENROLLED = [];
+const ENROLLED = [
+  {
+    id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
+    grade: 20,
+    student_id: STUDENT_IDS_BY_NAME[0],
+    course_id: COURSE_IDS_BY_NAME[0],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 const ENROLLED_IDS = ENROLLED.map((val) => val.id);
 
-const PREREQUISITES = [];
+const PREREQUISITES = [
+  {
+    id: 'd59e0654-3cdb-4d68-b8ac-a3a370c773a4',
+    course_id: COURSE_IDS_BY_NAME[0],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 const PREREQUISITES_IDS = PREREQUISITES.map((val) => val.id);
 
-const PROFESSOR = [];
-const PROFESSOR_IDS = PROFESSOR.map((val) => val.id);
-
-const STUDENT = [];
-const STUDENT_IDS = STUDENT.map((val) => val.id);
-
-const SUBMITS = [];
+const SUBMITS = [
+  {
+    id: '5e9fb958-9881-4895-8033-1467d15b116a',
+    grade: 50,
+    deliverable_id: DELIVERABLE_IDS_BY_NAME[0],
+    student_id: STUDENT_IDS_BY_NAME[0],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 const SUBMITS_IDS = SUBMITS.map((val) => val.id);
 
-const TEACHES = [];
+const TEACHES = [
+  {
+    id: '5e9fb958-9881-4895-8033-1467d15b116a',
+    professor_id: PROFESSOR_IDS_BY_NAME[0],
+    course_id: COURSE_IDS_BY_NAME[0],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 const TEACHES_IDS = TEACHES.map((val) => val.id);
 
 module.exports = {
