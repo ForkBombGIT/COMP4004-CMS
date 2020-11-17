@@ -1,5 +1,5 @@
 module.exports = {
-  ACADEMIC_DEADLINE: 'academicDeadline',
+  ACADEMIC_DEADLINE: 'academic_deadline',
   ADMINISTRATOR:'administrator',
   APPLICATION: 'application', 
   COURSE: 'course',
