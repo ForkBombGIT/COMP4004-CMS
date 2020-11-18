@@ -3,11 +3,11 @@
  * adds the date fields. */
 const addDateFields = (Sequelize, schema) => ({
   ...schema(Sequelize),
-  createdAt: {
+  created_at: {
     allowNull: false,
     type: Sequelize.DATE
   },
-  updatedAt: {
+  updated_at: {
     allowNull: false,
     type: Sequelize.DATE
   }

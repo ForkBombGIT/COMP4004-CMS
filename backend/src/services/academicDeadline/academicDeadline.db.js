@@ -12,7 +12,8 @@ module.exports = function (app) {
       beforeCount(options) {
         options.raw = true;
       }
-    }
+    },
+    underscored: true
   });
 
   academicDeadline.associate = function(models) {

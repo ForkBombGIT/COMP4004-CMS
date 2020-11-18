@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const allConfig = require('./config/config.json');
 
-const env = process.env.NODE_ENV || 'development';
+const env = 'development';
 
 module.exports = function (app) {
   const config = allConfig[env];

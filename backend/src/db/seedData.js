@@ -10,8 +10,8 @@ const COURSE = [
     time_slot: 'Friday at noon',
     capacity: 59,
     status: 'cancelled',
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const COURSE_IDS = COURSE.map((val) => val.id);
@@ -23,8 +23,8 @@ const ACADEMIC_DEADLINE = [
     type: 'Registration',
     due_date: new Date(),
     course_id: COURSE_IDS_BY_NAME[0],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const ACADEMIC_DEADLINE_IDS = ACADEMIC_DEADLINE.map((val) => val.id);
@@ -33,8 +33,8 @@ const ADMINISTRATOR = [
   {
     id: 'c5f20a34-66ab-4872-bc7c-2d29693105bd',
     name: 'Jelog Yugislav',
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const ADMINISTRATOR_IDS = ADMINISTRATOR.map((val) => val.id);
@@ -44,8 +44,8 @@ const APPLICATION = [
   {
     id: '715db196-4669-4dd2-9212-1cb677b02473',
     name: 'Xelostrad kulio',
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const APPLICATION_IDS = APPLICATION.map((val) => val.id);
@@ -55,8 +55,8 @@ const PROFESSOR = [
     id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
     name: 'Joslo Fredrickson',
     administrator_id: ADMINISTRATOR_IDS_BY_NAME[0],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const PROFESSOR_IDS = PROFESSOR.map((val) => val.id);
@@ -69,8 +69,8 @@ const STUDENT = [
     student_number: '101052915',
     administrator_id: ADMINISTRATOR_IDS_BY_NAME[0],
     birth_date: new Date(),
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const STUDENT_IDS = STUDENT.map((val) => val.id);
@@ -83,8 +83,8 @@ const DELIVERABLE = [
     weight: 0.2,
     due_date: new Date(),
     course_id: COURSE_IDS_BY_NAME[0],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const DELIVERABLE_IDS = DELIVERABLE.map((val) => val.id);
@@ -96,8 +96,8 @@ const ENROLLED = [
     grade: 20,
     student_id: STUDENT_IDS_BY_NAME[0],
     course_id: COURSE_IDS_BY_NAME[0],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const ENROLLED_IDS = ENROLLED.map((val) => val.id);
@@ -106,8 +106,8 @@ const PREREQUISITES = [
   {
     id: 'd59e0654-3cdb-4d68-b8ac-a3a370c773a4',
     course_id: COURSE_IDS_BY_NAME[0],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const PREREQUISITES_IDS = PREREQUISITES.map((val) => val.id);
@@ -118,8 +118,8 @@ const SUBMITS = [
     grade: 50,
     deliverable_id: DELIVERABLE_IDS_BY_NAME[0],
     student_id: STUDENT_IDS_BY_NAME[0],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const SUBMITS_IDS = SUBMITS.map((val) => val.id);
@@ -129,8 +129,8 @@ const TEACHES = [
     id: '5e9fb958-9881-4895-8033-1467d15b116a',
     professor_id: PROFESSOR_IDS_BY_NAME[0],
     course_id: COURSE_IDS_BY_NAME[0],
-    createdAt: new Date(),
-    updatedAt: new Date()
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const TEACHES_IDS = TEACHES.map((val) => val.id);
