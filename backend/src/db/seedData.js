@@ -12,6 +12,15 @@ const COURSE = [
     status: 'cancelled',
     created_at: new Date(),
     updated_at: new Date()
+  },
+  {
+    id: 'e21cd32c-900a-42fe-bd86-b3f554aeebcc',
+    name: 'COMP3004',
+    time_slot: 'Friday at noon',
+    capacity: 58,
+    status: 'running',
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const COURSE_IDS = COURSE.map((val) => val.id);
@@ -22,7 +31,7 @@ const ACADEMIC_DEADLINE = [
     id: '7583ccee-266b-4387-8f40-e53d411b4482',
     type: 'Registration',
     due_date: new Date(),
-    course_id: COURSE_IDS_BY_NAME[0],
+    course_id: COURSE_IDS_BY_NAME['COMP4004'],
     created_at: new Date(),
     updated_at: new Date()
   }
@@ -54,7 +63,6 @@ const PROFESSOR = [
   {
     id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
     name: 'Joslo Fredrickson',
-    administrator_id: ADMINISTRATOR_IDS_BY_NAME[0],
     created_at: new Date(),
     updated_at: new Date()
   }
@@ -67,7 +75,6 @@ const STUDENT = [
     id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
     name: 'Josh Gorman',
     student_number: '101052915',
-    administrator_id: ADMINISTRATOR_IDS_BY_NAME[0],
     birth_date: new Date(),
     created_at: new Date(),
     updated_at: new Date()
@@ -82,7 +89,7 @@ const DELIVERABLE = [
     name: 'assignment 2',
     weight: 0.2,
     due_date: new Date(),
-    course_id: COURSE_IDS_BY_NAME[0],
+    course_id: COURSE_IDS_BY_NAME['COMP4004'],
     created_at: new Date(),
     updated_at: new Date()
   }
@@ -94,30 +101,30 @@ const ENROLLED = [
   {
     id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
     grade: 20,
-    student_id: STUDENT_IDS_BY_NAME[0],
-    course_id: COURSE_IDS_BY_NAME[0],
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    course_id: COURSE_IDS_BY_NAME['COMP4004'],
     created_at: new Date(),
     updated_at: new Date()
   }
 ];
 const ENROLLED_IDS = ENROLLED.map((val) => val.id);
 
-const PREREQUISITES = [
+const PREREQUISITE = [
   {
     id: 'd59e0654-3cdb-4d68-b8ac-a3a370c773a4',
-    course_id: COURSE_IDS_BY_NAME[0],
+    prerequisite_course_id: COURSE_IDS_BY_NAME['COMP3004'],
     created_at: new Date(),
     updated_at: new Date()
   }
 ];
-const PREREQUISITES_IDS = PREREQUISITES.map((val) => val.id);
+const PREREQUISITE_IDS = PREREQUISITE.map((val) => val.id);
 
 const SUBMITS = [
   {
     id: '5e9fb958-9881-4895-8033-1467d15b116a',
     grade: 50,
-    deliverable_id: DELIVERABLE_IDS_BY_NAME[0],
-    student_id: STUDENT_IDS_BY_NAME[0],
+    deliverable_id: DELIVERABLE_IDS_BY_NAME['assignment 2'],
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
     created_at: new Date(),
     updated_at: new Date()
   }
@@ -127,8 +134,8 @@ const SUBMITS_IDS = SUBMITS.map((val) => val.id);
 const TEACHES = [
   {
     id: '5e9fb958-9881-4895-8033-1467d15b116a',
-    professor_id: PROFESSOR_IDS_BY_NAME[0],
-    course_id: COURSE_IDS_BY_NAME[0],
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    course_id: COURSE_IDS_BY_NAME['COMP4004'],
     created_at: new Date(),
     updated_at: new Date()
   }
@@ -148,8 +155,8 @@ module.exports = {
   DELIVERABLE_IDS,
   ENROLLED,
   ENROLLED_IDS,
-  PREREQUISITES,
-  PREREQUISITES_IDS,
+  PREREQUISITE,
+  PREREQUISITE_IDS,
   PROFESSOR,
   PROFESSOR_IDS,
   STUDENT,

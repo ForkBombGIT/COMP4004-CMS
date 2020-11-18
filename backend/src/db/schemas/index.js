@@ -4,7 +4,7 @@ const applicationSchema = require('./application.schema');
 const courseSchema = require('./course.schema');
 const deliverableSchema = require('./deliverable.schema');
 const enrolledSchema = require('./enrolled.schema');
-const prerequisitesSchema = require('./prerequisites.schema');
+const prerequisiteSchema = require('./prerequisite.schema');
 const professorSchema = require('./professor.schema');
 const studentSchema = require('./student.schema');
 const submitsSchema = require('./submits.schema');
@@ -17,7 +17,7 @@ module.exports = {
   courseSchema,
   deliverableSchema,
   enrolledSchema,
-  prerequisitesSchema,
+  prerequisiteSchema,
   professorSchema,
   studentSchema,
   submitsSchema,

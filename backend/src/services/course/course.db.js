@@ -17,12 +17,11 @@ module.exports = function (app) {
   });
 
   course.associate = function(models) {
-    course.belongsToMany(models.student, {through: models.enrolled, foreignKey: 'course_id'});
-    course.belongsToMany(models.professor, {through: models.teaches, foreignKey: 'course_id'});
-    // Need a new model coursePrereqs for this many to many relationship to work... 
-    //course.belongsToMany(models.prerequisites, {through: models.coursePrereqs, foreignKey: 'course_id'});
-    course.hasMany(models.deliverable);
-    course.hasMany(models.academicDeadline);
+    course.belongsToMany(models.student, {through: models.enrolled, foreignKey: 'courseId'});
+    course.belongsToMany(models.professor, {through: models.teaches, foreignKey: 'courseId'});
+    course.hasMany(models.prerequisite, {foreignKey: 'courseId'});
+    course.hasMany(models.deliverable, {foreignKey: 'courseId'});
+    course.hasMany(models.academicDeadline, {foreignKey: 'courseId'});
   };
 
   return course;

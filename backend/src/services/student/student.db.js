@@ -17,9 +17,8 @@ module.exports = function (app) {
   });
 
   student.associate = function(models) {
-    student.belongsTo(models.administrator);
-    student.belongsToMany(models.course, {through: models.enrolled, foreignKey: 'student_id'});
-    student.belongsToMany(models.deliverable, {through: models.submits, foreignKey: 'student_id'});
+    student.belongsToMany(models.course, {through: models.enrolled, foreignKey: 'studentId'});
+    student.belongsToMany(models.deliverable, {through: models.submits, foreignKey: 'studentId'});
   };
 
   return student;

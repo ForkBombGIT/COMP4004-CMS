@@ -17,8 +17,7 @@ module.exports = function (app) {
   });
 
   professor.associate = function(models) {
-    professor.belongsTo(models.administrator);
-    professor.belongsToMany(models.course, {through: models.teaches, foreignKey: 'professor_id'});
+    professor.belongsToMany(models.course, {through: models.teaches, foreignKey: 'professorId'});
   };
 
   return professor;

@@ -5,7 +5,7 @@ module.exports = {
   COURSE: 'course',
   DELIVERABLE: 'deliverable',
   ENROLLED: 'enrolled',
-  PREREQUISITES: 'prerequisites',
+  PREREQUISITE: 'prerequisite',
   PROFESSOR: 'professor',
   STUDENT: 'student',
   SUBMITS: 'submits',

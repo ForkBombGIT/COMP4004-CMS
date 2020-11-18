@@ -17,9 +17,7 @@ module.exports = function (app) {
   });
 
   administrator.associate = function(models) {
-    administrator.hasMany(models.application);
-    administrator.hasMany(models.student);
-    administrator.hasMany(models.professor);
+    administrator.hasMany(models.application, {foreignKey: 'administratorId'});
   };
 
   return administrator;

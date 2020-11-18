@@ -5,7 +5,7 @@ const { service: applicationService} = require('./application');
 const { service: courseService} = require('./course');
 const { service: deliverableService} = require('./deliverable');
 const { service: enrolledService} = require('./enrolled');
-const { service: prerequisitesService} = require('./prerequisites');
+const { service: prerequisiteService} = require('./prerequisite');
 const { service: professorService} = require('./professor');
 const { service: studentService} = require('./student');
 const { service: submitsService} = require('./submits');
@@ -18,7 +18,7 @@ const services = (app) => {
   app.configure(courseService);
   app.configure(deliverableService);
   app.configure(enrolledService);
-  app.configure(prerequisitesService);
+  app.configure(prerequisiteService);
   app.configure(professorService);
   app.configure(studentService);
   app.configure(submitsService);
