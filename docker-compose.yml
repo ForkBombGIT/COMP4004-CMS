@@ -42,8 +42,16 @@ services:
     volumes:
       - ./frontend/:/frontend
       - frontend-modules:/frontend/node_modules
+  test:
+    build:
+      context: ./test
+    container_name: bdd-test 
+    volumes:
+      - ./test/:/test
+      - test-modules:/test/node_modules
 volumes:
   database-data:
     driver: local
   backend-modules:
   frontend-modules:
+  test-modules:
