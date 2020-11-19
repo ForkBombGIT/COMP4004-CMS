@@ -47,7 +47,7 @@ const ADMINISTRATOR = [
   }
 ];
 const ADMINISTRATOR_IDS = ADMINISTRATOR.map((val) => val.id);
-const ADMINISTRATOR_IDS_BY_NAME = [...ADMINISTRATOR].reduce(keyIdByName, {});
+//const ADMINISTRATOR_IDS_BY_NAME = [...ADMINISTRATOR].reduce(keyIdByName, {});
 
 const APPLICATION = [
   {
