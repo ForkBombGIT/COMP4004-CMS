@@ -16,9 +16,9 @@ module.exports = function (app) {
     underscored: true
   });
 
-  application.associate = function(models) {
-    application.belongsTo(models.administrator);
-  };
+  // application.associate = function(models) {
+  //   application.belongsTo(models.administrator);
+  // };
 
   return application;
 };

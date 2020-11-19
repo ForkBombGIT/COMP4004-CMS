@@ -5,8 +5,7 @@ import "./LoginPage.scss";
 const LoginPage = () => {
   return (
     <div id="content">
-      <Container maxWidth="sm">
-      </Container>
+      <Container maxWidth="sm" />
     </div>
   );
 };

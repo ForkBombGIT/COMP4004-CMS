@@ -5,7 +5,7 @@ import "./StudentPage.scss";
 const StudentPage = () => {
   return (
     <div id="content">
-      <Container maxWidth="sm"></Container>
+      <Container maxWidth="sm" />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 const RouterPaths = {
-    LOGIN: "/",
-    ADMIN: "/admin",
-    PROFESSOR: "/professor",
-    STUDENT: "/student"
-}
+  LOGIN: "/",
+  ADMIN: "/admin",
+  PROFESSOR: "/professor",
+  STUDENT: "/student",
+};
 
-export default RouterPaths; 
+export default RouterPaths;

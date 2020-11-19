@@ -1,8 +1,13 @@
 const app = require('app');
 
-describe('"academicDeadlines" service', () => {
-  it('registered the service', () => {
-    const service = app.service('academicDeadlines');
+describe('"academicDeadline" service', () => {
+  it('registered the service', async () => {
+    const service = app.service('academicDeadline');
     expect(service).toBeTruthy();
+
+    console.log(app);
+    const g = await app.service('student').find({
+      name: 'james'
+    });
   });
 });

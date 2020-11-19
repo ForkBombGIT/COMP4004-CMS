@@ -6,7 +6,7 @@ module.exports = function (app) {
   const Model = createModel(app);
 
   const options = {
-    Model 
+    Model
   };
 
   // Initialize our service with any options it requires

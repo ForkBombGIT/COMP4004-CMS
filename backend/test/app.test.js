@@ -11,17 +11,6 @@ const getUrl = pathname => url.format({
 });
 
 describe('Feathers application tests (with jest)', () => {
-  let server;
-
-  beforeAll(done => {
-    server = app.listen(port);
-    server.once('listening', () => done());
-  });
-
-  afterAll(done => {
-    server.close(done);
-  });
-
   it('starts and shows the index page', async () => {
     expect.assertions(1);
 

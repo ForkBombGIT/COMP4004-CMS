@@ -1,0 +1,1 @@
+Feature: As a student I want to be able to register for a course

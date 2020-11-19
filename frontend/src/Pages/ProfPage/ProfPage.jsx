@@ -5,7 +5,7 @@ import "./ProfPage.scss";
 const ProfPage = () => {
   return (
     <div id="content">
-      <Container maxWidth="sm"></Container>
+      <Container maxWidth="sm" />
     </div>
   );
 };

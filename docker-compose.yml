@@ -1,5 +1,16 @@
 version: "3.7"
 services:
+  testdb:
+    image: postgres
+    container_name: CMS-test-database
+    environment:
+      - POSTGRES_DB=postgrestest
+      - POSTGRES_USER=postgrestest
+      - POSTGRES_PASSWORD=postgrestest
+    volumes:
+      - test-database-data:/var/lib/postgresql/data
+    ports:
+      - 5000:5432
   db:
     image: postgres
     container_name: CMS-database
@@ -14,6 +25,8 @@ services:
   db-migrator:
     build:
       context: ./backend
+      args:
+        - ENV=development
     command: sh -c "yarn db:retryable-migrate && yarn db:seed"
     depends_on:
       - db
@@ -42,16 +55,10 @@ services:
     volumes:
       - ./frontend/:/frontend
       - frontend-modules:/frontend/node_modules
-  test:
-    build:
-      context: ./test
-    container_name: bdd-test 
-    volumes:
-      - ./test/:/test
-      - test-modules:/test/node_modules
 volumes:
   database-data:
     driver: local
+  test-database-data:
+    driver: local
   backend-modules:
   frontend-modules:
-  test-modules:

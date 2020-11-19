@@ -10,17 +10,14 @@
     }
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "postgrestest",
+    "password": "postgrestest",
+    "database": "postgrestest",
+    "host": "testdb",
+    "port": 5000,
+    "dialect": "postgres",
+    "define": {
+      "freezeTableName": true
+    }
   }
 }
