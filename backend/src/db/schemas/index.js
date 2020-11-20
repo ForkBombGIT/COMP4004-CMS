@@ -9,6 +9,7 @@ const professorSchema = require('./professor.schema');
 const studentSchema = require('./student.schema');
 const submitsSchema = require('./submits.schema');
 const teachesSchema = require('./teaches.schema');
+const loginCredentialSchema = require('./loginCredential.schema');
 
 module.exports = {
   academicDeadlineSchema,
@@ -21,5 +22,6 @@ module.exports = {
   professorSchema,
   studentSchema,
   submitsSchema,
-  teachesSchema
+  teachesSchema,
+  loginCredentialSchema
 };

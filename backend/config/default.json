@@ -1,5 +1,23 @@
 {
   "host": "localhost",
   "port": 8080,
-  "paginate": {}
+  "paginate": {},
+  "authentication": {
+    "secret": "horse-battery-staple",
+    "authStrategies": ["jwt", "local"],
+    "entity": "user",
+    "service": "loginCredential",
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
 }

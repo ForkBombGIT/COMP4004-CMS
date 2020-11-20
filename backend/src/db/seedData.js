@@ -142,6 +142,20 @@ const TEACHES = [
 ];
 const TEACHES_IDS = TEACHES.map((val) => val.id);
 
+const LOGIN_CREDENTIAL = [
+  {
+    id: '81cdcfd0-969a-4949-affe-dc999a07618e',
+    user_role: 'professor',
+    email: 'test@gmail.com',
+    professor_id: PROFESSOR_IDS_BY_NAME['joslo Fredrickson'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  }
+];
+const LOGIN_CREDENTIAL_IDS = LOGIN_CREDENTIAL.map((val) => val.id);
+
 module.exports = {
   ACADEMIC_DEADLINE,
   ACADEMIC_DEADLINE_IDS,
@@ -164,5 +178,7 @@ module.exports = {
   SUBMITS,
   SUBMITS_IDS,
   TEACHES,
-  TEACHES_IDS
+  TEACHES_IDS,
+  LOGIN_CREDENTIAL,
+  LOGIN_CREDENTIAL_IDS
 };

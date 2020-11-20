@@ -17,6 +17,7 @@ module.exports = function (app) {
   });
 
   professor.associate = function(models) {
+    professor.hasOne(models.loginCredential);
     professor.belongsToMany(models.course, {through: models.teaches, foreignKey: 'professorId'});
   };
 
