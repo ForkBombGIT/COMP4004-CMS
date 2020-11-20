@@ -13,7 +13,10 @@ describe('checkObjectContains', () => {
       phone: '905-543-415'
     };
 
-    expect(checkObjectContains(obj1, obj2)).toBe(true);
-    expect(checkObjectContains(obj2, obj1)).toBe(false);
+    //Object 1 does not contain all key/values of 2
+    expect(checkObjectContains(obj1, obj2)).toBe(false);
+
+    //Object 2 contains all key/values of 1 
+    expect(checkObjectContains(obj2, obj1)).toBe(true);
   });
 });
