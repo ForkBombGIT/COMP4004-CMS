@@ -31,7 +31,7 @@ uninstall:
 #--------- Test code for repo standards ---------#
 # Requires containers to be up:
 cucumber:
-	docker-compose exec test yarn test
+	docker-compose exec frontend yarn bdd 
 
 test:
 	yarn run --cwd frontend test
