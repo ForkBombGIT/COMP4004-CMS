@@ -1,8 +1,33 @@
 const app = require('app');
+const { checkObjectContains } = require('utils/helpers.js');
 
 describe('"application" service', () => {
-  it('registered the service', () => {
-    const service = app.service('application');
+  let service;
+
+  beforeAll(() => {
+    service = app.service('application');
+  });
+
+  it('registered the service', ()=> {
     expect(service).toBeTruthy();
   });
+  it('creates an application', async () => {
+    // Remove record if it exists
+
+    const testApplication = {
+      id: '99d21763-f1e1-4bba-b163-a4a56dba5257',
+      name: 'james'
+    };
+
+    try { 
+      await service.remove(testApplication.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let createdRecord = await service.create(testApplication);
+
+    expect(checkObjectContains(createdRecord, testApplication)).toBeTruthy();
+  });
+
+  
+
 });
