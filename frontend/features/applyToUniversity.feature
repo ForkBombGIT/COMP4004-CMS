@@ -1,1 +1,0 @@
-Feature: As a student I want to be able to apply to join the university
