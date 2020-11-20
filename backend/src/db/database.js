@@ -5,9 +5,6 @@ const env = process.env.NODE_ENV || 'development';
 
 module.exports = function (app) {
   const config = allConfig[env];
-  // config.database = 'postgres';
-  // config.password = 'postgres';
-  // config.username = 'postgres';
   const sequelize = new Sequelize(config.database, config.username, config.password, config);
   const oldSetup = app.setup;
 

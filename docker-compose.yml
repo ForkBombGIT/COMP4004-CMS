@@ -1,16 +1,5 @@
 version: "3.7"
 services:
-  testdb:
-    image: postgres
-    container_name: CMS-test-database
-    environment:
-      - POSTGRES_DB=postgrestest
-      - POSTGRES_USER=postgrestest
-      - POSTGRES_PASSWORD=postgrestest
-    volumes:
-      - test-database-data:/var/lib/postgresql/data
-    ports:
-      - 5000:5432
   db:
     image: postgres
     container_name: CMS-database

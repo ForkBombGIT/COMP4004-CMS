@@ -8,16 +8,5 @@
     "define": {
       "freezeTableName": true
     }
-  },
-  "test": {
-    "username": "postgrestest",
-    "password": "postgrestest",
-    "database": "postgrestest",
-    "host": "testdb",
-    "port": 5000,
-    "dialect": "postgres",
-    "define": {
-      "freezeTableName": true
-    }
   }
 }

@@ -20,7 +20,7 @@
     "config": "config/"
   },
   "scripts": {
-    "test": "NODE_PATH=src/ NODE_ENV=test npm run jest",
+    "test": "NODE_PATH=src/ npm run jest",
     "lint": "NODE_PATH=src/ eslint src/. test/. --config .eslintrc.json --fix",
     "dev": "NODE_PATH=src/ nodemon src/",
     "start": "NODE_PATH=src/ nodemon src/",
