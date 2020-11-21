@@ -13,25 +13,21 @@ down:
 reinstall:
 	rm -rf frontend/node_modules
 	rm -rf backend/node_modules
-	rm -rf test/node_modules
 	yarn --cwd frontend
 	yarn --cwd backend
-	yarn --cwd test 
 
 install:
-	yarn --cwd test 
 	yarn --cwd frontend
 	yarn --cwd backend
 
 uninstall:
 	rm -rf frontend/node_modules
 	rm -rf backend/node_modules
-	rm -rf test/node_modules
 
 #--------- Test code for repo standards ---------#
 # Requires containers to be up:
 cucumber:
-	docker-compose exec test yarn test
+	docker-compose exec backend yarn bdd
 
 test:
 	yarn run --cwd frontend test
