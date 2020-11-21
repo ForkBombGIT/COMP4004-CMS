@@ -1,1 +1,1 @@
-export { default as Client } from "./Feathers.js";
+export { default as Client } from "./Feathers";
