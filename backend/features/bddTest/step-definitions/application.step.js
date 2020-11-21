@@ -1,9 +1,4 @@
 module.exports = function () {
-  this.Given(/^I am on the login page$/, function (callback) {
-    helpers.loadPage('http://localhost:3000/');
-    callback();
-  });
-
   this.Then(/^I enter a name in the student name field$/, function (callback) {
     driver.findElement(By.id('student-name')).sendKeys(
       shared.studentApplication.studentName

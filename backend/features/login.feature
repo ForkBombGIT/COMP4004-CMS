@@ -4,4 +4,4 @@ Scenario: Successful Login
     Then I enter "test@gmail.com" in the email field
     Then I enter "supersecret" in the password field
     When I click the "login-button" button
-    Then I am notified of "successful" login
+    Then I am notified of successful login

@@ -1,31 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Typography, Button } from "@material-ui/core/";
 import { Client } from "Server/";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { notifySuccess, notifyFailure } from "Utils/";
 import "./RegisterForm.scss";
-
-const notifySuccess = () =>
-  toast.success("Application Created!", {
-    position: "bottom-left",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-  });
-
-const notifyFailure = () =>
-  toast.error("Application Creation Failed", {
-    position: "bottom-left",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: false,
-    progress: undefined,
-  });
 
 export const createApplication = (nameVar) => ({
   name: nameVar,
@@ -45,9 +22,9 @@ const RegisterForm = () => {
       await Client.service("application").create(
         createApplication(studentName)
       );
-      notifySuccess();
+      notifySuccess("Application Created!");
     } catch (e) {
-      notifyFailure();
+      notifyFailure("Application Creation Failed");
     }
   };
 

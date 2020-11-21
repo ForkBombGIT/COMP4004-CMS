@@ -146,8 +146,8 @@ const LOGIN_CREDENTIAL = [
   {
     id: '81cdcfd0-969a-4949-affe-dc999a07618e',
     user_role: 'professor',
-    email: 'test@gmail.com',
-    professor_id: PROFESSOR_IDS_BY_NAME['joslo Fredrickson'],
+    email: 'joslo@gmail.com',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
     //password = "supersecret"
     password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
     created_at: new Date(),
