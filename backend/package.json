@@ -25,6 +25,8 @@
     "dev": "NODE_PATH=src/ nodemon src/",
     "start": "NODE_PATH=src/ nodemon src/",
     "jest": "jest --watchAll",
+    "bdd": "NODE_ENV=local NODE_PATH=src/ node ./node_modules/selenium-cucumber-js/index.js",
+    "bddInDocker": "NODE_PATH=src/ node ./node_modules/selenium-cucumber-js/index.js",
     "db:seed": "NODE_PATH=src/ sequelize db:seed:all",
     "db:migrate": "NODE_PATH=src/ sequelize db:migrate",
     "db:retryable-migrate": "sh ./scripts/db-migrate.sh"
@@ -63,6 +65,7 @@
     "axios": "^0.21.0",
     "eslint": "^7.13.0",
     "jest": "^26.6.3",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "selenium-cucumber-js": "^1.8.1"
   }
 }
