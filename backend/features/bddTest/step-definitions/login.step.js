@@ -19,12 +19,23 @@ module.exports = function () {
       callback();
     });
   });
-  this.Then(/^I am notified of successful login$/, function (callback) {
+  this.Then(/^I am notified about a "([^"]*)"$/, function (status, callback) {
     driver
-      .wait(until.elementLocated(by.className("Toastify__toast-body")))
+      .wait(until.elementLocated(by.className(`Toastify__toast--${status}`)))
       .then(() => {
-          //expect(driver.findElement(by.className("Toastify__toast-body")).getText()).to.equal("Successful Login!");
           callback();
       })
+  });
+  this.Then(/^I should be on the "([^"]*)" page$/, function (path, callback) {
+    driver.getCurrentUrl().then((url) => {
+      expect(url).to.include(path);
+      callback();
+    });
+  });
+  this.Then(/^I should NOT be on the "([^"]*)" page$/, function (path, callback) {
+    driver.getCurrentUrl().then((url) => {
+      expect(url).to.not.include(path);
+      callback();
+    });
   });
 };
