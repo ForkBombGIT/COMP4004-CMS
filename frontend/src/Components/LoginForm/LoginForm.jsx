@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Typography, Button } from "@material-ui/core/";
 import { notifySuccess, notifyFailure } from "Utils/";
-import { Client } from "Server/";
+import { useAuth } from "Utils/RouterAuth";
+import { useHistory } from "react-router-dom";
 import "./LoginForm.scss";
 
 const LoginPage = () => {
+  const auth = useAuth();
+  const history = useHistory();
   const [emailVal, setEmailVal] = useState();
   const [passVal, setPassVal] = useState();
 
@@ -16,26 +19,14 @@ const LoginPage = () => {
     setPassVal(event.target.value);
   };
 
-  const authenticateWithPassword = async (email, password) => {
-    try {
-      const client = await Client.authenticate({
-        strategy: "local",
-        email,
-        password,
-      });
-      return client;
-    } catch {
-      return null;
-    }
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const client = await authenticateWithPassword(emailVal, passVal);
-    if (client === null) notifyFailure("Invalid Login");
+    const client = await auth.signin(emailVal, passVal);
+    if (client === null) notifyFailure("Unsuccessful Login");
     else if (client.token !== null) {
       notifySuccess("Login Successful!");
+      history.push(client.user_role);
     }
   };
 
