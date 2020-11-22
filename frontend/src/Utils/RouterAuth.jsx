@@ -83,7 +83,8 @@ export const PrivateRoute = ({ children, ...rest }) => {
         {...rest}
         render={
           ({ location }) =>
-            auth.user && location.pathname.trim("/") === auth.user.user_role ? (
+            auth.user &&
+            location.pathname.replace("/", "") === auth.user.user_role ? (
               children
             ) : (
               <Redirect
