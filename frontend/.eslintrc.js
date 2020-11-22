@@ -29,5 +29,6 @@ module.exports = {
     "prettier/prettier": "warn",
     "react/prop-types": "off",
     "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": "off",
   },
 };

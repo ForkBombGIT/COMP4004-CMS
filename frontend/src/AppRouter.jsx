@@ -1,17 +1,31 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { RouterPaths } from "Utils/";
-import { LoginPage } from "Pages/";
+import { PrivateRoute, ProvideAuth } from "Utils/RouterAuth";
+import { NotFound } from "Components/";
+import { ProfPage, StudentPage, LoginPage, AdminPage } from "Pages/";
 
 function AppRouter() {
   return (
-    <Router>
-      <Switch>
-        <Route path={RouterPaths.LOGIN}>
-          <LoginPage />
-        </Route>
-      </Switch>
-    </Router>
+    <ProvideAuth>
+      <Router>
+        <Switch>
+          <Route exact path={RouterPaths.LOGIN}>
+            <LoginPage />
+          </Route>
+          <PrivateRoute path={RouterPaths.ADMINISTRATOR}>
+            <AdminPage />
+          </PrivateRoute>
+          <PrivateRoute path={RouterPaths.PROFESSOR}>
+            <ProfPage />
+          </PrivateRoute>
+          <PrivateRoute path={RouterPaths.STUDENT}>
+            <StudentPage />
+          </PrivateRoute>
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </ProvideAuth>
   );
 }
 
