@@ -6,6 +6,7 @@ const StudentPage = () => {
   return (
     <div id="content">
       <Container maxWidth="sm" />
+      <p>Student Page</p>
     </div>
   );
 };
