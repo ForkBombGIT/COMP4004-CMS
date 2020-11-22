@@ -1,6 +1,6 @@
 const RouterPaths = {
   LOGIN: "/",
-  ADMIN: "/admin",
+  ADMINISTRATOR: "/administrator",
   PROFESSOR: "/professor",
   STUDENT: "/student",
 };

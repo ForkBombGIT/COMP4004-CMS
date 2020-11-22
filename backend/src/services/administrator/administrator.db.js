@@ -16,9 +16,9 @@ module.exports = function (app) {
     underscored: true
   });
 
-  // administrator.associate = function(models) {
-
-  // };
+  administrator.associate = function(models) {
+    administrator.hasOne(models.loginCredential);
+  }
 
   return administrator;
 };

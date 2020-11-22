@@ -6,6 +6,7 @@ const AdminPage = () => {
   return (
     <div id="content">
       <Container maxWidth="sm" />
+      <p>Admin Page</p>
     </div>
   );
 };

@@ -2,6 +2,7 @@ const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const logger = require('./logger');
+const auth = require('./authentication');
 
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
@@ -37,6 +38,7 @@ app.configure(sequelize);
 
 // Configure other middleware (see `middleware/index.js`)
 //app.configure(middleware);
+app.configure(auth);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 // Set up event channels (see channels.js)

@@ -6,6 +6,7 @@ const ProfPage = () => {
   return (
     <div id="content">
       <Container maxWidth="sm" />
+      <p>Professor Page</p>
     </div>
   );
 };

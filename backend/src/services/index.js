@@ -10,6 +10,7 @@ const { service: professorService} = require('./professor');
 const { service: studentService} = require('./student');
 const { service: submitsService} = require('./submits');
 const { service: teachesService} = require('./teaches');
+const { service: loginCredentialService } = require('./loginCredential');
 
 const services = (app) => {
   app.configure(academicDeadlineService);
@@ -23,6 +24,7 @@ const services = (app) => {
   app.configure(studentService);
   app.configure(submitsService);
   app.configure(teachesService);
+  app.configure(loginCredentialService);
 };
 
 module.exports = {
