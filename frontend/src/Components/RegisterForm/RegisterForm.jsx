@@ -10,9 +10,14 @@ export const createApplication = (nameVar) => ({
 
 const RegisterForm = () => {
   const [studentName, setStudentName] = useState();
+  const [studentBirthDate, setStudentBirthDate] = useState();
 
   const handleStudentChange = (event) => {
     setStudentName(event.target.value);
+  };
+
+  const handleStudentBirthChange = (event) => {
+    setStudentBirthDate(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -20,7 +25,7 @@ const RegisterForm = () => {
 
     try {
       await Client.service("application").create(
-        createApplication(studentName)
+        createApplication(studentName, studentBirthDate)
       );
       notifySuccess("Application Created!");
     } catch (e) {
@@ -40,6 +45,17 @@ const RegisterForm = () => {
         variant="filled"
         value={studentName}
         onChange={handleStudentChange}
+      />
+      <TextField
+        id="student-birth-date"
+        label="birthday"
+        type="date"
+        variant="filled"
+        defaultValue="2020-05-24"
+        onChange={handleStudentBirthChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
       />
       <Button variant="contained" id="register-button" type="submit">
         SUBMIT

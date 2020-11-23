@@ -16,8 +16,9 @@ describe("Testing Register Form", () => {
   test("Create data for submission", () => {
     const data = {
       name: "Jamie",
+      birth_date: "2020/02/24",
     };
-    const generated = createApplication("Jamie");
+    const generated = createApplication("Jamie", "2020/02/24");
 
     expect(data).toEqual(generated);
   });
