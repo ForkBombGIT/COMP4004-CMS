@@ -23,6 +23,16 @@ module.exports = function () {
             }
           })
     });
+    this.Given(/^A professor is created with the name "([^"]*)" and email "([^"]*)"$/, function (n, e, callback) {
+        driver.findElement(by.className("MuiSelect-selectMenu")).click()
+        driver.findElement(by.name("professor")).click();
+        driver.findElement(by.name("name")).sendKeys(n);
+        driver.findElement(by.name("email")).sendKeys(e);
+        driver.findElement(by.name("create-button")).click();
+        driver.sleep(2000).then(() => {
+            callback();
+        });
+    });
     this.Given(/^I am logged in as "([^"]*)" with password "([^"]*)" and role "([^"]*)"$/, function (email,password,role,callback) {
         helpers.loadPage('http://localhost:3000/');
         driver.findElement(by.name("email")).sendKeys(email);

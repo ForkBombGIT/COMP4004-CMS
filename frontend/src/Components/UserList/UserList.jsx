@@ -14,7 +14,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import "./UserList.scss";
 
 const UserList = (props) => {
-  const { title, list, service } = props;
+  const { title, list, service, removeItem } = props;
   const [data, setData] = useState(list);
   useEffect(() => {
     setData(list);
@@ -30,10 +30,17 @@ const UserList = (props) => {
             <ListItem key={entry.id}>
               <ListItemText primary={entry.name} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="edit">
+                <IconButton name="edit-button" edge="end" aria-label="edit">
                   <EditIcon />
                 </IconButton>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton
+                  edge="end"
+                  name="delete-button"
+                  aria-label="delete"
+                  onClick={() => {
+                    removeItem(service, entry.id);
+                  }}
+                >
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
