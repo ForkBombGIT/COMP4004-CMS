@@ -11,16 +11,17 @@ import {
 } from "@material-ui/core/";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import "./UserList.scss";
+import AddIcon from "@material-ui/icons/Add";
+import "./ModelList.scss";
 
-const UserList = (props) => {
-  const { title, list, service, removeItem } = props;
+const ModelList = (props) => {
+  const { title, list, service, createItem, removeItem } = props;
   const [data, setData] = useState(list);
   useEffect(() => {
     setData(list);
   }, [list]);
   return (
-    <Card id="user-list">
+    <Card id="model-list">
       <CardContent>
         <Typography variant="h6" component="h2">
           {title}
@@ -30,9 +31,23 @@ const UserList = (props) => {
             <ListItem key={entry.id}>
               <ListItemText primary={entry.name} />
               <ListItemSecondaryAction>
-                <IconButton name="edit-button" edge="end" aria-label="edit">
-                  <EditIcon />
-                </IconButton>
+                {service === "application" && (
+                  <IconButton name="add-button" edge="end" aria-label="add">
+                    <AddIcon
+                      edge="end"
+                      name="add-button"
+                      aria-label="add"
+                      onClick={() => {
+                        createItem(service, entry);
+                      }}
+                    />
+                  </IconButton>
+                )}
+                {service !== "application" && (
+                  <IconButton name="edit-button" edge="end" aria-label="edit">
+                    <EditIcon />
+                  </IconButton>
+                )}
                 <IconButton
                   edge="end"
                   name="delete-button"
@@ -52,4 +67,4 @@ const UserList = (props) => {
   );
 };
 
-export default UserList;
+export default ModelList;
