@@ -18,21 +18,21 @@ module.exports = function () {
             callback();
         });
     });
-    this.Then(/^"([^"]*)" should be displayed in the "([^"]*)" list$/, function (n,m,callback) {
+    this.Then(/^"([^"]*)" should be displayed in the "([^"]*)" list$/, function (n,s,callback) {
         let textFound = false;
-        driver.findElement(by.id(`${m}-list`)).then((list) => {
+        driver.findElement(by.id(`${s}-list`)).then((list) => {
             list.findElements(by.className("MuiListItemText-primary")).then((elements) => {
                 elements.forEach(function (element) {
                     element.getText().then(function(text){
                         if (text === n) { 
                             textFound = true;
                         }
-                    });
+                    })
                 });
             })
         }).then(() => {
             if (textFound) {
-                const app = shared.app.api.service('professor');
+                const app = shared.app.api.service(s);
                 app.find({
                     query: {
                         name: n
