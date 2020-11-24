@@ -55,7 +55,7 @@ const ModelCreationForm = (props) => {
     Client.service(roleVal)
       .create(model)
       .then(() => {
-        notifySuccess("Successful creation!");
+        notifySuccess("Successful Creation!");
         updateLists();
         setNameVal("");
         setBirthVal("");
@@ -64,7 +64,7 @@ const ModelCreationForm = (props) => {
         setTimeVal("");
       })
       .catch((e) => {
-        notifyFailure("Unsuccessful creation!");
+        notifyFailure("Unsuccessful Creation!");
         // eslint-disable-next-line no-console
         console.log(e);
       });
