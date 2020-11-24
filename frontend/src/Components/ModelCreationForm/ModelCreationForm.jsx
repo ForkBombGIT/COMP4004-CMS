@@ -100,7 +100,8 @@ const ModelCreationForm = (props) => {
         />
         {roleVal === "student" && (
           <TextField
-            id="user-date"
+            id="user-birth"
+            name="birth"
             label="Birthday"
             type="date"
             variant="filled"
