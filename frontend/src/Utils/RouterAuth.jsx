@@ -22,7 +22,7 @@ const useProvideAuth = () => {
         return response.user;
       })
       .catch((e) => {
-        console.error(e);
+        console.error(`Couldn't be logged in ${e}`);
         return null;
       });
   };
@@ -34,16 +34,21 @@ const useProvideAuth = () => {
         return response.user;
       })
       .catch((e) => {
-        console.error(`Couldn't be re-authenticated${e}`);
+        console.error(`Couldn't be re-authenticated ${e}`);
         return null;
       });
   };
 
   const signout = () => {
-    return Client.logout().then((response) => {
-      setUser(response.user);
-      return response.user;
-    });
+    return Client.logout()
+      .then((response) => {
+        setUser(response.user);
+        return response.user;
+      })
+      .catch((e) => {
+        console.error(`Couldn't be logged out ${e}`);
+        return null;
+      });
   };
 
   useEffect(() => {

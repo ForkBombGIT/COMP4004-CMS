@@ -4,7 +4,8 @@
 
 #------- Boot and Delete development server -----#
 up:
-	docker-compose up --build
+	docker-compose build --parallel
+	docker-compose up 
 
 down:
 	docker-compose down -v
