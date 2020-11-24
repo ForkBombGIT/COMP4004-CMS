@@ -58,14 +58,19 @@ module.exports = function () {
               });
           })
     });
-    this.Then(/^I click on "([^"]*)" delete button in the "([^"]*)" list$/, function (n, s, callback) {
-        driver.findElement(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]/../../..//button[@name='delete-button']`)).then((e)=>{
+    this.Given(/^An application is created with name "([^"]*)"$/, function (n,callback) {
+        helpers.loadPage('http://localhost:3000/');
+        driver.findElement(By.id('student-name')).sendKeys(n);
+        driver.findElement(by.id("register-button")).click();
+        driver.sleep(1000).then(() => {
+            callback();
+        });
+    });
+    this.Then(/^I click on "([^"]*)" "([^"]*)" button in the "([^"]*)" list$/, function (n,b,s, callback) {
+        driver.findElement(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]/../../..//button[@name='${b}-button']`)).then((e)=>{
             driver.actions().mouseMove(e).click().perform().then(() => {
                 driver.sleep(2000).then(() => {
-                    driver.findElements(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]/../../..//button[@name='delete-button']`)).then((elements) => {
-                        expect(elements.length).to.equal(0);
-                        callback();
-                    })
+                    callback();
                 });
             });
         })
