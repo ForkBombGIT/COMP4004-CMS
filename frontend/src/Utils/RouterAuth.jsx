@@ -76,7 +76,6 @@ export const PrivateRoute = ({ children, ...rest }) => {
         setAuthenticating(false);
       });
   }, []);
-
   return (
     !authenticating && (
       <Route

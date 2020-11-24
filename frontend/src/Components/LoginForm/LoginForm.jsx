@@ -23,9 +23,9 @@ const LoginPage = () => {
     event.preventDefault();
 
     const client = await auth.signin(emailVal, passVal);
-    if (client === null) notifyFailure("Unsuccessful Login");
+    if (client === null) notifyFailure("Unsuccessful Login!");
     else if (client.token !== null) {
-      notifySuccess("Login Successful!");
+      notifySuccess("Successful Login!");
       history.push(client.user_role);
     }
   };

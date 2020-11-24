@@ -47,7 +47,7 @@ const ADMINISTRATOR = [
   }
 ];
 const ADMINISTRATOR_IDS = ADMINISTRATOR.map((val) => val.id);
-//const ADMINISTRATOR_IDS_BY_NAME = [...ADMINISTRATOR].reduce(keyIdByName, {});
+const ADMINISTRATOR_IDS_BY_NAME = [...ADMINISTRATOR].reduce(keyIdByName, {});
 
 const APPLICATION = [
   {
@@ -149,6 +149,16 @@ const LOGIN_CREDENTIAL = [
     user_role: 'professor',
     email: 'joslo@gmail.com',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '81cdcfd0-969a-4949-affe-dc999a07617b',
+    user_role: 'administrator',
+    email: 'jelog@gmail.com',
+    administrator_id: ADMINISTRATOR_IDS_BY_NAME['Jelog Yugislav'],
     //password = "supersecret"
     password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
     created_at: new Date(),
