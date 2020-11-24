@@ -29,6 +29,5 @@ describe('"loginCredential" service', () => {
 
     // Ensure the user has logged in successfully, and received a JWT token
     assert.ok(client.accessToken !== '');
-
   });
 }); 
