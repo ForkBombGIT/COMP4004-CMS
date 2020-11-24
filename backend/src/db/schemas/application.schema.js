@@ -9,5 +9,8 @@ module.exports = (DataTypes) => ({
   name: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  birth_date: {
+    type: DataTypes.DATE
   }
 });

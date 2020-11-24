@@ -31,6 +31,14 @@ const AdminPage = () => {
         setAdministrators(a);
       });
   };
+
+  const removeItem = (service, id) => {
+    Client.service(service)
+      .remove(id)
+      .then(() => {
+        getListData();
+      });
+  };
   useEffect(() => {
     getListData();
   }, []);
@@ -50,15 +58,22 @@ const AdminPage = () => {
               title="User Creation Form"
               updateLists={getListData}
             />
-            <UserList title="Students" service="student" list={students} />
+            <UserList
+              title="Students"
+              service="student"
+              removeItem={removeItem}
+              list={students}
+            />
             <UserList
               title="Professors"
               service="professor"
+              removeItem={removeItem}
               list={professors}
             />
             <UserList
               title="Administrators"
               service="administrator"
+              removeItem={removeItem}
               list={administrators}
             />
           </CardContent>

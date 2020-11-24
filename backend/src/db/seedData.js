@@ -53,6 +53,7 @@ const APPLICATION = [
   {
     id: '715db196-4669-4dd2-9212-1cb677b02473',
     name: 'Xelostrad kulio',
+    birth_date: new Date(),
     created_at: new Date(),
     updated_at: new Date()
   }
