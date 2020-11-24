@@ -13,13 +13,13 @@ const LogoutButton = () => {
     const client = await auth.signout();
     if (client === null) notifyFailure("Unsuccessful Logout");
     else if (client.token !== null) {
-      notifySuccess("Successfuly Logged Out");
+      notifySuccess("Logout Successfull!");
       history.push(RouterPaths.LOGIN);
     }
   };
 
   return (
-    <Button id="logout-button" onClick={handleLogout}>
+    <Button name="logout-button" onClick={handleLogout}>
       Logout
     </Button>
   );
