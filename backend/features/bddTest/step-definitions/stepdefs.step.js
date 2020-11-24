@@ -23,11 +23,22 @@ module.exports = function () {
             }
           })
     });
-    this.Given(/^A professor is created with the name "([^"]*)" and email "([^"]*)"$/, function (n, e, callback) {
+    this.Given(/^A "([^"]*)" is created with the name "([^"]*)" and email "([^"]*)"$/, function (s, n, e, callback) {
         driver.findElement(by.className("MuiSelect-selectMenu")).click()
-        driver.findElement(by.name("professor")).click();
+        driver.findElement(by.name(s)).click();
         driver.findElement(by.name("name")).sendKeys(n);
         driver.findElement(by.name("email")).sendKeys(e);
+        driver.findElement(by.name("create-button")).click();
+        driver.sleep(2000).then(() => {
+            callback();
+        });
+    });
+    this.Given(/^A student is created with the name "([^"]*)" and email "([^"]*)" and birthday "([^"]*)"$/, function (n, e, b, callback) {
+        driver.findElement(by.className("MuiSelect-selectMenu")).click()
+        driver.findElement(by.name("student")).click();
+        driver.findElement(by.name("name")).sendKeys(n);
+        driver.findElement(by.name("email")).sendKeys(e);
+        driver.findElement(by.name("birth")).sendKeys(b);
         driver.findElement(by.name("create-button")).click();
         driver.sleep(2000).then(() => {
             callback();
@@ -46,5 +57,17 @@ module.exports = function () {
                 callback();
               });
           })
+    });
+    this.Then(/^I click on "([^"]*)" delete button in the "([^"]*)" list$/, function (n, s, callback) {
+        driver.findElement(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]/../../..//button[@name='delete-button']`)).then((e)=>{
+            driver.actions().mouseMove(e).click().perform().then(() => {
+                driver.sleep(2000).then(() => {
+                    driver.findElements(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]/../../..//button[@name='delete-button']`)).then((elements) => {
+                        expect(elements.length).to.equal(0);
+                        callback();
+                    })
+                });
+            });
+        })
     });
 };
