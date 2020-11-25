@@ -6,7 +6,7 @@ import {
   Card,
   Divider,
 } from "@material-ui/core/";
-import { ModelList, ModelCreationForm } from "Components";
+import { ModelList, ModelCreationForm, LogoutButton } from "Components";
 import { Client } from "Server";
 import "./AdminPage.scss";
 
@@ -82,10 +82,11 @@ const AdminPage = () => {
     <div id="content">
       <Container maxWidth="lg">
         <Card>
-          <CardContent>
+          <CardContent className="card-title">
             <Typography variant="h5" component="h2">
               Model Management
             </Typography>
+            <LogoutButton />
           </CardContent>
           <Divider />
           <CardContent id="user-management">

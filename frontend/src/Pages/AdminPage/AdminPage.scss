@@ -1,4 +1,9 @@
 #content {
+  .card-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
   margin-top: 1em;
   MuiCardContent-root {
     padding-bottom: 0px !important;

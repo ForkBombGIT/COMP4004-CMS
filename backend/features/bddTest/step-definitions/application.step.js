@@ -13,22 +13,19 @@ module.exports = function () {
     });
   });
 
-  this.Then(/^the system displays an application has been submitted$/, function (callback) {
-    driver.wait(until.elementLocated(by.className('Toastify__toast-body'))).then(() => {
-      const app = shared.app.api.service('application');
-      app.find({
-          query: {
-            $limit: 1,
-            $sort: {
-              createdAt: -1
-            }
+  this.Then(/^the system creates my application$/, function (callback) {
+    const app = shared.app.api.service('application');
+    app.find({
+        query: {
+          $limit: 1,
+          $sort: {
+            createdAt: -1
           }
         }
-      ).then((record) => {
-        console.log(record)
-        app.remove(record[0].id);
-        callback()
-      })
-    });
-  });
-};
+      }
+    ).then((record) => {
+      app.remove(record[0].id);
+      callback()
+    })
+  })
+}

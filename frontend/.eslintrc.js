@@ -30,5 +30,6 @@ module.exports = {
     "react/prop-types": "off",
     "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",
+    "no-unused-vars": "warn",
   },
 };
