@@ -6,6 +6,9 @@ import "./RegisterForm.scss";
 
 export const createApplication = (nameVar) => ({
   name: nameVar,
+  query: {
+    hello: 1,
+  },
 });
 
 const RegisterForm = () => {

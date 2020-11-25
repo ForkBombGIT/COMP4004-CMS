@@ -9,7 +9,7 @@
       "freezeTableName": true
     }
   },
-  "local": {
+  "localMachine": {
     "username": "postgres",
     "password": "postgres",
     "database": "postgres",

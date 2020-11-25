@@ -9,13 +9,18 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core/";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import AddIcon from "@material-ui/icons/Add";
+import { MoreHoriz, Edit, Add, Delete } from "@material-ui/icons";
 import "./ModelList.scss";
 
 const ModelList = (props) => {
-  const { title, list, service, createItem, removeItem } = props;
+  const {
+    title,
+    list,
+    service,
+    createItem,
+    removeItem,
+    linkItem = () => {},
+  } = props;
   const [data, setData] = useState(list);
   useEffect(() => {
     setData(list);
@@ -33,7 +38,7 @@ const ModelList = (props) => {
               <ListItemSecondaryAction>
                 {service === "application" && (
                   <IconButton name="add-button" edge="end" aria-label="add">
-                    <AddIcon
+                    <Add
                       edge="end"
                       name="add-button"
                       aria-label="add"
@@ -45,7 +50,7 @@ const ModelList = (props) => {
                 )}
                 {service !== "application" && (
                   <IconButton name="edit-button" edge="end" aria-label="edit">
-                    <EditIcon />
+                    <Edit />
                   </IconButton>
                 )}
                 <IconButton
@@ -56,8 +61,20 @@ const ModelList = (props) => {
                     removeItem(service, entry.id);
                   }}
                 >
-                  <DeleteIcon />
+                  <Delete />
                 </IconButton>
+                {service === "course" && (
+                  <IconButton
+                    name="link-button"
+                    edge="end"
+                    aria-label="edit"
+                    onClick={() => {
+                      linkItem(entry.id);
+                    }}
+                  >
+                    <MoreHoriz />
+                  </IconButton>
+                )}
               </ListItemSecondaryAction>
             </ListItem>
           ))}

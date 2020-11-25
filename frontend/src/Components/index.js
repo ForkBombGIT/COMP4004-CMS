@@ -4,3 +4,4 @@ export { default as NotFound } from "./NotFound";
 export { default as ModelList } from "./ModelList";
 export { default as ModelCreationForm } from "./ModelCreationForm";
 export { default as LogoutButton } from "./LogoutButton";
+export { default as RegisterList } from "./RegisterList";

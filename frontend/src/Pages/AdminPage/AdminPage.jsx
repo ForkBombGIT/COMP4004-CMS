@@ -7,6 +7,8 @@ import {
   Divider,
 } from "@material-ui/core/";
 import { ModelList, ModelCreationForm, LogoutButton } from "Components";
+import { AdminCoursePage } from "Pages/";
+import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { Client } from "Server";
 import "./AdminPage.scss";
 
@@ -17,6 +19,9 @@ const AdminPage = () => {
   const [courses, setCourses] = useState([]);
   const [applications, setApplications] = useState([]);
   const [dbInteraction, setDbInteraction] = useState(false);
+  const history = useHistory();
+  const { path, url } = useRouteMatch();
+
   const getListData = () => {
     Client.service("student")
       .find()
@@ -74,71 +79,83 @@ const AdminPage = () => {
     }
   };
 
+  const linkItem = (id) => {
+    history.push(`${url}/${id}`);
+  };
+
   useEffect(() => {
     getListData();
   }, []);
 
   return (
-    <div id="content">
-      <Container maxWidth="lg">
-        <Card>
-          <CardContent className="card-title">
-            <Typography variant="h5" component="h2">
-              Model Management
-            </Typography>
-            <LogoutButton />
-          </CardContent>
-          <Divider />
-          <CardContent id="user-management">
-            <ModelCreationForm
-              title="Model Creation Form"
-              updateLists={getListData}
-            />
-            <div id="lists">
-              <div>
-                <ModelList
-                  title="Students"
-                  service="student"
-                  createItem={createItem}
-                  removeItem={removeItem}
-                  list={students}
+    <Switch>
+      <Route exact path={path}>
+        <div id="content">
+          <Container maxWidth="lg">
+            <Card>
+              <CardContent className="card-title">
+                <Typography variant="h5" component="h2">
+                  Model Management
+                </Typography>
+                <LogoutButton />
+              </CardContent>
+              <Divider />
+              <CardContent id="user-management">
+                <ModelCreationForm
+                  title="Model Creation Form"
+                  updateLists={getListData}
                 />
-                <ModelList
-                  title="Professors"
-                  service="professor"
-                  createItem={createItem}
-                  removeItem={removeItem}
-                  list={professors}
-                />
-                <ModelList
-                  title="Administrators"
-                  service="administrator"
-                  createItem={createItem}
-                  removeItem={removeItem}
-                  list={administrators}
-                />
-              </div>
-              <div>
-                <ModelList
-                  title="Courses"
-                  service="course"
-                  createItem={createItem}
-                  removeItem={removeItem}
-                  list={courses}
-                />
-                <ModelList
-                  title="Student Applications"
-                  service="application"
-                  createItem={createItem}
-                  removeItem={removeItem}
-                  list={applications}
-                />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </Container>
-    </div>
+                <div id="lists">
+                  <div>
+                    <ModelList
+                      title="Students"
+                      service="student"
+                      createItem={createItem}
+                      removeItem={removeItem}
+                      list={students}
+                    />
+                    <ModelList
+                      title="Professors"
+                      service="professor"
+                      createItem={createItem}
+                      removeItem={removeItem}
+                      list={professors}
+                    />
+                    <ModelList
+                      title="Administrators"
+                      service="administrator"
+                      createItem={createItem}
+                      removeItem={removeItem}
+                      list={administrators}
+                    />
+                  </div>
+                  <div>
+                    <ModelList
+                      title="Courses"
+                      service="course"
+                      createItem={createItem}
+                      removeItem={removeItem}
+                      linkItem={linkItem}
+                      list={courses}
+                    />
+                    <ModelList
+                      title="Student Applications"
+                      service="application"
+                      createItem={createItem}
+                      removeItem={removeItem}
+                      list={applications}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </Container>
+        </div>
+      </Route>
+      <Route path={`${path}/:courseId`}>
+        <AdminCoursePage />
+      </Route>
+    </Switch>
   );
 };
 
