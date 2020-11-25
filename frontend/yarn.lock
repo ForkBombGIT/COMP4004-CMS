@@ -1075,6 +1075,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@feathers-plus/batch-loader@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@feathers-plus/batch-loader/-/batch-loader-0.3.6.tgz#1e096e95fcdffb83fb1a65468e6ef80b416f7d98"
+  integrity sha512-r+n31iZ/B5Rl1mLkC9/S20UI445MdkZvE3VBmjupep2t8OuyTYHPkFEgR25HY6khH+RothK1VL3B5eumk9N2QQ==
+
 "@feathersjs/authentication-client@^4.5.10":
   version "4.5.10"
   resolved "https://registry.yarnpkg.com/@feathersjs/authentication-client/-/authentication-client-4.5.10.tgz#4f80cb6764fc6105793e82b61ff6b8f33a2e4b4b"
@@ -1106,19 +1111,19 @@
   resolved "https://registry.yarnpkg.com/@feathersjs/client/-/client-4.5.10.tgz#ca62dc71b3f365313d928626022d6405dc03f149"
   integrity sha512-VMuzCmePNzBd6Eh54b0JwK5i2J+NMqzV4y/SBH7qsPe7ukxzV7D8vIb7Ip3GSyFszvTFQvDKDWm7M0hTdSFoOw==
 
-"@feathersjs/commons@^4.5.10":
+"@feathersjs/commons@^4.5.10", "@feathersjs/commons@^4.5.8":
   version "4.5.10"
   resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.5.10.tgz#e2dc526ce44f8e32c88fbb7bc3b89670e2781622"
   integrity sha512-3d6HaknbSY3fuA+BIrIxQhxGlA7EKCmH4YK3KR+f2cg7vZYHNEl+Cf5XC2fP2V7kWrdVgLy2AeB3t6oxCIFGtQ==
 
-"@feathersjs/errors@^4.5.10":
+"@feathersjs/errors@^4.5.10", "@feathersjs/errors@^4.5.8":
   version "4.5.10"
   resolved "https://registry.yarnpkg.com/@feathersjs/errors/-/errors-4.5.10.tgz#d85a485aec7aaab0a62b05d4f292c09836d93a3f"
   integrity sha512-IhPOpvKuyv2qEQG/A62MLbciRxZnjcshX5fgHRUUlPusWsBj/XU/TtVgakZVQiJ6SvprIi/IsGzAAHyquPQMuQ==
   dependencies:
     debug "^4.2.0"
 
-"@feathersjs/feathers@^4.5.10":
+"@feathersjs/feathers@^4.5.10", "@feathersjs/feathers@^4.5.8":
   version "4.5.10"
   resolved "https://registry.yarnpkg.com/@feathersjs/feathers/-/feathers-4.5.10.tgz#bef3b9a2362503b23ca8292426c494725f2192fa"
   integrity sha512-7NURB+Rc/CeoBmPFaCc6BCAlgxrJUbvhBYDzG4+koLaw9kAabbqhEOfb/KyqVQodbIWDFQjWS/IXYxjNYlrWeg==
@@ -5252,6 +5257,22 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
+feathers-hooks-common@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/feathers-hooks-common/-/feathers-hooks-common-5.0.4.tgz#1c525e54211ebf9c33ffa1ffc20b6d68b7e1eb8a"
+  integrity sha512-FSRUUQZBz8UegHha4uEuP0lfknXvL/BqHqeXS6BfPZ7z/oREdWKvi8hZ1qBeD2pYpwR0zWcGBAeGoVZ9p6MuJQ==
+  dependencies:
+    "@feathers-plus/batch-loader" "^0.3.6"
+    "@feathersjs/commons" "^4.5.8"
+    "@feathersjs/errors" "^4.5.8"
+    "@feathersjs/feathers" "^4.5.8"
+    ajv "^6.12.4"
+    debug "^4.1.1"
+    graphql "^15.3.0"
+    lodash "^4.17.20"
+    process "0.11.10"
+    traverse "^0.6.6"
+
 figgy-pudding@^3.5.1:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/figgy-pudding/-/figgy-pudding-3.5.2.tgz#b4eee8148abb01dcf1d1ac34367d59e12fa61d6e"
@@ -5682,6 +5703,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
+
+graphql@^15.3.0:
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.4.0.tgz#e459dea1150da5a106486ba7276518b5295a4347"
+  integrity sha512-EB3zgGchcabbsU9cFe1j+yxdzKQKAbGUWRb13DsrsMN1yyfmmIq+2+L5MqVWcDCE4V89R5AyUOi7sMOGxdsYtA==
 
 growly@^1.3.0:
   version "1.3.0"
@@ -9446,7 +9472,7 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-process@^0.11.10:
+process@0.11.10, process@^0.11.10:
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
   integrity sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
@@ -11436,6 +11462,11 @@ tr46@^2.0.2:
   integrity sha512-3n1qG+/5kg+jrbTzwAykB5yRYtQCTqOGKq5U5PE3b0a1/mzo6snDhjGS0zJVJunO0NrT3Dg1MLy5TjWP/UJppg==
   dependencies:
     punycode "^2.1.1"
+
+traverse@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
+  integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
 tryer@^1.0.1:
   version "1.0.1"

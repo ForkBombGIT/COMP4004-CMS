@@ -3,9 +3,22 @@ const keyIdByName = (acc, obj) => {
   return acc;
 };
 
+
+const PROFESSOR = [
+  {
+    id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
+    name: 'Joslo Fredrickson',
+    created_at: new Date(),
+    updated_at: new Date()
+  }
+];
+const PROFESSOR_IDS = PROFESSOR.map((val) => val.id);
+const PROFESSOR_IDS_BY_NAME = [...PROFESSOR].reduce(keyIdByName, {});
+
 const COURSE = [
   {
     id: '63b804de-c0fd-47c2-a391-5d14999c27a1',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
     name: 'COMP4004',
     time_slot: 'Friday at noon',
     capacity: 59,
@@ -15,6 +28,7 @@ const COURSE = [
   },
   {
     id: 'e21cd32c-900a-42fe-bd86-b3f554aeebcc',
+    professor_id: null,
     name: 'COMP3004',
     time_slot: 'Friday at noon',
     capacity: 58,
@@ -60,22 +74,19 @@ const APPLICATION = [
 ];
 const APPLICATION_IDS = APPLICATION.map((val) => val.id);
 
-const PROFESSOR = [
-  {
-    id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
-    name: 'Joslo Fredrickson',
-    created_at: new Date(),
-    updated_at: new Date()
-  }
-];
-const PROFESSOR_IDS = PROFESSOR.map((val) => val.id);
-const PROFESSOR_IDS_BY_NAME = [...PROFESSOR].reduce(keyIdByName, {});
-
 const STUDENT = [
   {
     id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
     name: 'Josh Gorman',
     student_number: '101052915',
+    birth_date: new Date(),
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: 'df88f9b9-64bb-457c-a888-8efedd1295c3',
+    name: 'Eros Dipede',
+    student_number: '101512915',
     birth_date: new Date(),
     created_at: new Date(),
     updated_at: new Date()
@@ -106,7 +117,7 @@ const ENROLLED = [
     course_id: COURSE_IDS_BY_NAME['COMP4004'],
     created_at: new Date(),
     updated_at: new Date()
-  }
+  },
 ];
 const ENROLLED_IDS = ENROLLED.map((val) => val.id);
 
@@ -124,6 +135,7 @@ const SUBMITS = [
   {
     id: '5e9fb958-9881-4895-8033-1467d15b116a',
     grade: 50,
+    submission: 'Hello my name is Jeremy',
     deliverable_id: DELIVERABLE_IDS_BY_NAME['assignment 2'],
     student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
     created_at: new Date(),
@@ -131,17 +143,6 @@ const SUBMITS = [
   }
 ];
 const SUBMITS_IDS = SUBMITS.map((val) => val.id);
-
-const TEACHES = [
-  {
-    id: '5e9fb958-9881-4895-8033-1467d15b116a',
-    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
-    course_id: COURSE_IDS_BY_NAME['COMP4004'],
-    created_at: new Date(),
-    updated_at: new Date()
-  }
-];
-const TEACHES_IDS = TEACHES.map((val) => val.id);
 
 const LOGIN_CREDENTIAL = [
   {
@@ -188,8 +189,6 @@ module.exports = {
   STUDENT_IDS,
   SUBMITS,
   SUBMITS_IDS,
-  TEACHES,
-  TEACHES_IDS,
   LOGIN_CREDENTIAL,
   LOGIN_CREDENTIAL_IDS
 };

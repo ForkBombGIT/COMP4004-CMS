@@ -9,6 +9,5 @@ module.exports = {
   PROFESSOR: 'professor',
   STUDENT: 'student',
   SUBMITS: 'submits',
-  TEACHES: 'teaches',
   LOGIN_CREDENTIAL: 'loginCredential'
 };
