@@ -5,7 +5,7 @@
 #------- Boot and Delete development server -----#
 up:
 	docker-compose build --parallel
-	docker-compose up 
+	COMPOSE_HTTP_TIMEOUT=200 docker-compose up 
 
 down:
 	docker-compose down -v

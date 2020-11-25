@@ -8,5 +8,8 @@ module.exports = (DataTypes) => ({
   },
   grade: {
     type: DataTypes.INTEGER
+  },
+  submission: {
+    type: DataTypes.STRING
   }
 });
