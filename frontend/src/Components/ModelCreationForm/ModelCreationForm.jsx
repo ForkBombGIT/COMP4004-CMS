@@ -10,9 +10,19 @@ import { notifySuccess, notifyFailure } from "Utils/";
 import "./ModelCreationForm.scss";
 import { Client } from "Server";
 
-export const createModel = (roleVal, nameVal, birthVal = "") => ({
+export const createModel = (
+  roleVal,
+  nameVal,
+  birthVal = undefined,
+  capVal = undefined,
+  timeVal = undefined,
+  status = undefined
+) => ({
   name: nameVal === "" ? null : nameVal,
   birth_date: roleVal === "student" ? birthVal : undefined,
+  capacity: roleVal === "course" ? capVal : undefined,
+  time_slot: roleVal === "course" ? timeVal : undefined,
+  status: roleVal === "course" ? status : undefined,
 });
 
 const ModelCreationForm = (props) => {
@@ -24,6 +34,7 @@ const ModelCreationForm = (props) => {
   const [birthVal, setBirthVal] = useState();
   const [capVal, setCapVal] = useState(0);
   const [timeVal, setTimeVal] = useState();
+  const [statusVal, setStatusVal] = useState();
 
   const handleRoleVal = (event) => {
     setRoleVal(event.target.value);
@@ -49,6 +60,10 @@ const ModelCreationForm = (props) => {
     setTimeVal(event.target.value);
   };
 
+  const handleStatusChange = (event) => {
+    setStatusVal(event.target.value);
+  };
+
   const handleModelCreation = (event) => {
     event.preventDefault();
     const model = createModel(roleVal, nameVal, birthVal);
@@ -62,6 +77,7 @@ const ModelCreationForm = (props) => {
         setEmailVal("");
         setCapVal(0);
         setTimeVal("");
+        setStatusVal("");
       })
       .catch((e) => {
         notifyFailure("Unsuccessful Creation!");
@@ -139,12 +155,16 @@ const ModelCreationForm = (props) => {
               name="time"
               label="Time"
               variant="filled"
-              type="time"
               value={timeVal}
               onChange={handleTimeChange}
-              InputLabelProps={{
-                shrink: true,
-              }}
+            />
+            <TextField
+              id="course-status"
+              name="status"
+              label="Status"
+              variant="filled"
+              value={statusVal}
+              onChange={handleStatusChange}
             />
           </>
         )}
