@@ -44,6 +44,17 @@ module.exports = function () {
             callback();
         });
     });
+    this.Given(/^A course is created with the name "([^"]*)" and capacity (\d+) and time "([^"]*)"$/, function (n, c, d, callback) {
+        driver.findElement(by.className("MuiSelect-selectMenu")).click()
+        driver.findElement(by.name("course")).click();
+        driver.findElement(by.name("name")).sendKeys(n);
+        driver.findElement(by.name("capacity")).sendKeys(c);
+        driver.findElement(by.name("time")).sendKeys(d);
+        driver.findElement(by.name("create-button")).click();
+        driver.sleep(2000).then(() => {
+            callback();
+        });
+    });
     this.Given(/^I am logged in as "([^"]*)" with password "([^"]*)" and role "([^"]*)"$/, function (email,password,role,callback) {
         helpers.loadPage('http://localhost:3000/');
         driver.findElement(by.name("email")).sendKeys(email);
