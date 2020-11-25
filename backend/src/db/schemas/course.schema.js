@@ -18,6 +18,7 @@ module.exports = (DataTypes) => ({
     type: DataTypes.INTEGER
   },
   status: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    defaultValue: 'IN SESSION'
   },
 });
