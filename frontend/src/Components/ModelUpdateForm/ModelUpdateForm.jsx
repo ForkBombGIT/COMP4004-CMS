@@ -27,6 +27,9 @@ const ModelUpdateForm = (props) => {
   const [birthVal, setBirthVal] = useState(
     model.service === "student" ? model.birth_date.split("T")[0] : null
   );
+  const [capVal, setCapVal] = useState(model.capacity);
+  const [timeVal, setTimeVal] = useState(model.time_slot);
+  const [statusVal, setStatusVal] = useState(model.status);
 
   const handleNameChange = (event) => {
     setNameVal(event.target.value);
@@ -40,10 +43,31 @@ const ModelUpdateForm = (props) => {
     setBirthVal(event.target.value);
   };
 
+
+  const handleCapacityChange = (event) => {
+    setCapVal(event.target.value);
+  };
+
+  const handleTimeChange = (event) => {
+    setTimeVal(event.target.value);
+  };
+
+  const handleStatusChange = (event) => {
+    setStatusVal(event.target.value);
+  };
+
   const handleModelUpdate = (event) => {
     event.preventDefault();
     Client.service(model.service)
-      .patch(model.id, createModel(model.service, nameVal, birthVal))
+      .patch(
+        model.id,
+        createModel(
+          model.service,
+          nameVal,
+          birthVal,
+          capVal,
+          timeVal,
+          statusVal))
       .then(() => {
         notifySuccess("Successful Update!");
         setDisplay(false);
@@ -96,6 +120,36 @@ const ModelUpdateForm = (props) => {
             value={emailVal}
             onChange={handleEmailChange}
           />
+        )}
+        {model.service === "course" && (
+          <>
+            <TextField
+              id="modal-course-capacity"
+              name="modal-capacity"
+              label="Capacity"
+              variant="filled"
+              type="number"
+              InputProps={{ inputProps: { min: 0 } }}
+              value={capVal}
+              onChange={handleCapacityChange}
+            />
+            <TextField
+              id="modal-course-time"
+              name="modal-time"
+              label="Time"
+              variant="filled"
+              value={timeVal}
+              onChange={handleTimeChange}
+            />
+            <TextField
+              id="modal-course-status"
+              name="modal-status"
+              label="Status"
+              variant="filled"
+              value={statusVal}
+              onChange={handleStatusChange}
+            />
+          </>
         )}
         <Button variant="contained" name="update-button" type="submit">
           UPDATE
