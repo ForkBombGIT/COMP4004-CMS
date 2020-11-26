@@ -1,8 +1,86 @@
 const app = require('app');
+const { checkObjectContains } = require('utils/helpers.js');
 
 describe('"administrator" service', () => {
-  it('registered the service', () => {
-    const service = app.service('administrator');
+  let service;
+
+  beforeAll(() => {
+    service = app.service('administrator');
+  });
+
+  it('registered the service', ()=> {
     expect(service).toBeTruthy();
+  });
+  it('creates an administrator', async () => {
+    // Remove record if it exists
+
+    const testAdministrator = {
+      id: '99d21763-f1e1-4bba-b163-b4a56dba5257',
+      name: 'james'
+    };
+
+    try { 
+      await service.remove(testAdministrator.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let createdRecord = await service.create(testAdministrator);
+
+    expect(checkObjectContains(createdRecord, testAdministrator)).toBeTruthy();
+  });
+
+  it('update a administrator', async () => {
+    // Remove record if it exists
+
+    const testAdministrator = {
+      id: '99d21763-f1e1-4bba-b163-b4a56dba5257',
+      name: 'james'
+    };
+
+    try { 
+      await service.remove(testAdministrator.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let createdRecord = await service.create(testAdministrator);
+
+    expect(checkObjectContains(createdRecord, testAdministrator)).toBeTruthy();
+    
+    const updateAdministrator = {
+      id: '99d21763-f1e1-4bba-b163-b4a56dba5257',
+      name: 'billy',
+    };
+    
+    let updatedRecord = await service.patch(updateAdministrator.id,updateAdministrator);
+    expect(updatedRecord.name != createdRecord.name).toBeTruthy();
+
+    try { 
+      await service.remove(updateAdministrator.id);
+    } catch (e) {console.log('No record to remove');}
+  });
+
+  it('removes a administrator', async () => {
+    // Remove record if it exists
+
+    const testAdministrator = {
+      id: '99d21763-f1e1-4bba-b163-b4a56dba5257',
+      name: 'james'
+    };
+
+    try { 
+      await service.remove(testAdministrator.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let createdRecord = await service.create(testAdministrator);
+
+    expect(checkObjectContains(createdRecord, testAdministrator)).toBeTruthy();
+
+    try { 
+      await service.remove(testAdministrator.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let admin = await service.find({
+      query: {id: testAdministrator.id}}
+    );
+    expect(admin.length).toBe(0);
+
   });
 });
