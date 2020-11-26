@@ -1,0 +1,12 @@
+#creation-form {
+    min-width: 300px;
+    max-width: 500px;
+    text-align: left;
+    h2 {
+      margin-bottom: 0.5em;
+    }
+    .MuiTextField-root, .MuiInputBase-root.MuiInput-root.MuiInput-underline {
+        width: 90%;
+        margin-bottom: 0.5em;
+    }
+}

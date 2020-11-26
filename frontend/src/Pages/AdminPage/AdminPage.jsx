@@ -6,22 +6,29 @@ import {
   Card,
   Divider,
 } from "@material-ui/core/";
-import { ModelList, ModelCreationForm, LogoutButton } from "Components";
+import {
+  ModelList,
+  ModelCreationForm,
+  LogoutButton,
+  ModelDetailModal,
+} from "Components";
+import { notifySuccess, notifyFailure } from "Utils/";
 import { AdminCoursePage } from "Pages/";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { Client } from "Server";
 import "./AdminPage.scss";
 
 const AdminPage = () => {
+  const history = useHistory();
+  const { path, url } = useRouteMatch();
   const [students, setStudents] = useState([]);
   const [professors, setProfessors] = useState([]);
   const [administrators, setAdministrators] = useState([]);
   const [courses, setCourses] = useState([]);
   const [applications, setApplications] = useState([]);
   const [dbInteraction, setDbInteraction] = useState(false);
-  const history = useHistory();
-  const { path, url } = useRouteMatch();
-
+  const [displayModal, setDisplayModal] = useState(false);
+  const [modalModel, setModalModel] = useState({});
   const getListData = () => {
     Client.service("student")
       .find()
@@ -58,8 +65,19 @@ const AdminPage = () => {
         .then(() => {
           setDbInteraction(false);
           getListData();
+          if (s !== "application") notifySuccess("Successful Deletion");
+        })
+        .catch(() => {
+          notifyFailure("Unsuccessful Creation");
         });
     }
+  };
+
+  const editItem = (s, item) => {
+    setDisplayModal(true);
+    const modelForModal = item;
+    modelForModal.service = s;
+    setModalModel(modelForModal);
   };
 
   const createItem = (s, item) => {
@@ -75,6 +93,10 @@ const AdminPage = () => {
           } else {
             getListData();
           }
+          notifySuccess("Successful Creation");
+        })
+        .catch(() => {
+          notifyFailure("Unsuccessful Creation");
         });
     }
   };
@@ -110,21 +132,21 @@ const AdminPage = () => {
                     <ModelList
                       title="Students"
                       service="student"
-                      createItem={createItem}
+                      editItem={editItem}
                       removeItem={removeItem}
                       list={students}
                     />
                     <ModelList
                       title="Professors"
                       service="professor"
-                      createItem={createItem}
+                      editItem={editItem}
                       removeItem={removeItem}
                       list={professors}
                     />
                     <ModelList
                       title="Administrators"
                       service="administrator"
-                      createItem={createItem}
+                      editItem={editItem}
                       removeItem={removeItem}
                       list={administrators}
                     />
@@ -134,6 +156,7 @@ const AdminPage = () => {
                       title="Courses"
                       service="course"
                       createItem={createItem}
+                      editItem={editItem}
                       removeItem={removeItem}
                       linkItem={linkItem}
                       list={courses}
@@ -149,6 +172,12 @@ const AdminPage = () => {
                 </div>
               </CardContent>
             </Card>
+            <ModelDetailModal
+              display={displayModal}
+              setDisplay={setDisplayModal}
+              model={modalModel}
+              getListData={getListData}
+            />
           </Container>
         </div>
       </Route>
