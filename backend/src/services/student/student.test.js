@@ -27,6 +27,36 @@ describe('"student" service', () => {
 
     expect(checkObjectContains(createdRecord, testStudent)).toBeTruthy();
   });
+  
+  it('update a student', async () => {
+    // Remove record if it exists
+
+    const testStudent = {
+      id: '99d21763-f1e1-4bba-b163-a4a56dba4257',
+      name: 'james',
+    };
+
+    try { 
+      await service.remove(testStudent.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let createdRecord = await service.create(testStudent);
+
+    expect(checkObjectContains(createdRecord, testStudent)).toBeTruthy();
+    
+    const updateStudent = {
+      id: '99d21763-f1e1-4bba-b163-a4a56dba4257',
+      name: 'billy',
+    };
+    
+    let updatedRecord = await service.patch(updateStudent.id,updateStudent);
+    expect(updatedRecord.name != createdRecord.name).toBeTruthy();
+
+    try { 
+      await service.remove(testStudent.id);
+    } catch (e) {console.log('No record to remove');}
+  });
+
   it('removes a student', async () => {
     // Remove record if it exists
 
@@ -47,10 +77,10 @@ describe('"student" service', () => {
       await service.remove(testStudent.id);
     } catch (e) {console.log('No record to remove');}
 
-    let professor = await service.find({
+    let student = await service.find({
       query: {id: testStudent.id}}
     );
-    expect(professor.length).toBe(0);
+    expect(student.length).toBe(0);
 
   });
 });
