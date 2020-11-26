@@ -48,7 +48,8 @@ module.exports = function () {
         driver.findElement(by.className("MuiSelect-selectMenu")).click()
         driver.findElement(by.name("course")).click();
         driver.findElement(by.name("name")).sendKeys(n);
-        driver.findElement(by.name("capacity")).sendKeys(c);
+        driver.findElement(by.id("course-capacity")).sendKeys(selenium.Key.CONTROL + "a");
+        driver.findElement(by.id("course-capacity")).sendKeys(c);
         driver.findElement(by.name("time")).sendKeys(d);
         driver.findElement(by.name("create-button")).click();
         driver.sleep(2000).then(() => {
@@ -156,5 +157,17 @@ module.exports = function () {
               }
             }
         );
+    });
+    this.Then(/^I update the model "([^"]*)" to "([^"]*)"$/, function (field, value, callback) {
+        const elem = driver.findElement(by.name(field));
+        elem.sendKeys(selenium.Key.CONTROL + "a");
+        elem.sendKeys(value);
+        callback();
+      });
+    this.When(/^I update the model$/, function (callback) {
+        driver.findElement(by.name("update-button")).click();
+        driver.sleep(1000).then(() => {
+            callback();
+        });
     });
 };
