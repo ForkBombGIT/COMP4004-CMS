@@ -21,4 +21,22 @@ describe("Testing Model Creation Form", () => {
 
     expect(data).toEqual(generated);
   });
+  test("Admin Data Creation", () => {
+    const data = {
+      name: "Jamie",
+      birth_date: undefined,
+    };
+    const generated = createModel("administrator", "Jamie");
+
+    expect(data).toEqual(generated);
+  });
+  test("Professor Data Creation", () => {
+    const data = {
+      name: "Jamie",
+      birth_date: undefined,
+    };
+    const generated = createModel("professor", "Jamie");
+
+    expect(data).toEqual(generated);
+  });
 });

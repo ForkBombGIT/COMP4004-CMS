@@ -27,6 +27,36 @@ describe('"professor" service', () => {
 
     expect(checkObjectContains(createdRecord, testProfessor)).toBeTruthy();
   });
+
+  it('update a professor', async () => {
+    // Remove record if it exists
+
+    const testProfessor = {
+      id: '99d21763-f1e1-4bba-b163-a4a56dba5257',
+      name: 'james'
+    };
+
+    try { 
+      await service.remove(testProfessor.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let createdRecord = await service.create(testProfessor);
+
+    expect(checkObjectContains(createdRecord, testProfessor)).toBeTruthy();
+    
+    const updateProfessor = {
+      id: '99d21763-f1e1-4bba-b163-a4a56dba5257',
+      name: 'billy',
+    };
+    
+    let updatedRecord = await service.patch(updateProfessor.id,updateProfessor);
+    expect(updatedRecord.name != createdRecord.name).toBeTruthy();
+
+    try { 
+      await service.remove(testProfessor.id);
+    } catch (e) {console.log('No record to remove');}
+  });
+
   it('removes a professor', async () => {
     // Remove record if it exists
 
