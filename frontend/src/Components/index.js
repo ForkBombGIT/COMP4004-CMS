@@ -3,5 +3,7 @@ export { default as RegisterForm } from "./RegisterForm";
 export { default as NotFound } from "./NotFound";
 export { default as ModelList } from "./ModelList";
 export { default as ModelCreationForm } from "./ModelCreationForm";
+export { default as ModelUpdateForm } from "./ModelUpdateForm";
+export { default as ModelDetailModal } from "./ModelDetailModal";
 export { default as LogoutButton } from "./LogoutButton";
 export { default as RegisterList } from "./RegisterList";

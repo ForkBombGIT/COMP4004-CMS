@@ -18,6 +18,7 @@ const ModelList = (props) => {
     list,
     service,
     createItem,
+    editItem,
     removeItem,
     linkItem = () => {},
   } = props;
@@ -49,7 +50,14 @@ const ModelList = (props) => {
                   </IconButton>
                 )}
                 {service !== "application" && (
-                  <IconButton name="edit-button" edge="end" aria-label="edit">
+                  <IconButton
+                    name="edit-button"
+                    edge="end"
+                    aria-label="edit"
+                    onClick={() => {
+                      editItem(service, entry);
+                    }}
+                  >
                     <Edit />
                   </IconButton>
                 )}

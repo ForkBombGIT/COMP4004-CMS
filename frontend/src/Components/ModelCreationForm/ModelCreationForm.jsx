@@ -66,7 +66,14 @@ const ModelCreationForm = (props) => {
 
   const handleModelCreation = (event) => {
     event.preventDefault();
-    const model = createModel(roleVal, nameVal, birthVal);
+    const model = createModel(
+      roleVal,
+      nameVal,
+      birthVal,
+      capVal,
+      timeVal,
+      statusVal
+    );
     Client.service(roleVal)
       .create(model)
       .then(() => {
