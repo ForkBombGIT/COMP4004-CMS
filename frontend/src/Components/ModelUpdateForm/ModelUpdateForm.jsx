@@ -1,5 +1,12 @@
 import React, { useState, useRef } from "react";
-import { TextField, Button, FormControl, InputLabel, MenuItem, Select } from "@material-ui/core/";
+import {
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@material-ui/core/";
 import { notifySuccess, notifyFailure } from "Utils/";
 import "./ModelUpdateForm.scss";
 import { Client } from "Server";
@@ -20,7 +27,7 @@ export const createModel = (
 });
 
 const ModelUpdateForm = (props) => {
-  const { setDisplay, model, getListData } = props;
+  const { setDisplay, model } = props;
   const formRef = useRef();
   const [nameVal, setNameVal] = useState(model.name);
   const [emailVal, setEmailVal] = useState();
@@ -42,7 +49,6 @@ const ModelUpdateForm = (props) => {
   const handleBirthChange = (event) => {
     setBirthVal(event.target.value);
   };
-
 
   const handleCapacityChange = (event) => {
     setCapVal(event.target.value);
@@ -67,11 +73,12 @@ const ModelUpdateForm = (props) => {
           birthVal,
           capVal,
           timeVal,
-          statusVal))
+          statusVal
+        )
+      )
       .then(() => {
         notifySuccess("Successful Update!");
         setDisplay(false);
-        getListData();
         setNameVal("");
         setBirthVal("");
         setEmailVal("");
