@@ -161,6 +161,7 @@ module.exports = function () {
     this.Then(/^I update the model "([^"]*)" to "([^"]*)"$/, function (field, value, callback) {
         const elem = driver.findElement(by.name(field));
         elem.sendKeys(selenium.Key.CONTROL + "a");
+        elem.sendKeys(selenium.Key.DELETE);
         elem.sendKeys(value);
         callback();
       });
@@ -168,6 +169,14 @@ module.exports = function () {
         driver.findElement(by.name("update-button")).click();
         driver.sleep(1000).then(() => {
             callback();
+        });
+    });
+    this.Then(/^Element named "([^"]*)" should be equal to "([^"]*)"$/, function (name,expectedValue,callback) {
+        const elem = driver.findElement(by.name(name));
+        elem.getAttribute("value").then((v)=>{
+            if (v === expectedValue) {
+                callback();
+            }
         });
     });
 };

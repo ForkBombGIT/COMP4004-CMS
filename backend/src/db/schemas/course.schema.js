@@ -15,10 +15,11 @@ module.exports = (DataTypes) => ({
     type: DataTypes.STRING
   },
   capacity: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    defaultValue: 0
   },
   status: {
     type: DataTypes.STRING,
-    defaultValue: 'IN SESSION'
+    defaultValue: 'unscheduled'
   },
 });

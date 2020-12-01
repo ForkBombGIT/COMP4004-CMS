@@ -32,7 +32,7 @@ const COURSE = [
     name: 'COMP3004',
     time_slot: 'Friday at noon',
     capacity: 58,
-    status: 'running',
+    status: 'inprogress',
     created_at: new Date(),
     updated_at: new Date()
   }
