@@ -37,7 +37,7 @@ const ModelList = (props) => {
             <ListItem key={entry.id}>
               <ListItemText primary={entry.name} />
               <ListItemSecondaryAction>
-                {service === "application" && (
+                {service === "application" && createItem !== undefined && (
                   <IconButton name="add-button" edge="end" aria-label="add">
                     <Add
                       edge="end"
@@ -49,7 +49,7 @@ const ModelList = (props) => {
                     />
                   </IconButton>
                 )}
-                {service !== "application" && (
+                {service !== "application" && editItem !== undefined && (
                   <IconButton
                     name="edit-button"
                     edge="end"
@@ -61,16 +61,18 @@ const ModelList = (props) => {
                     <Edit />
                   </IconButton>
                 )}
-                <IconButton
-                  edge="end"
-                  name="delete-button"
-                  aria-label="delete"
-                  onClick={() => {
-                    removeItem(service, entry.id);
-                  }}
-                >
-                  <Delete />
-                </IconButton>
+                {removeItem !== undefined && (
+                  <IconButton
+                    edge="end"
+                    name="delete-button"
+                    aria-label="delete"
+                    onClick={() => {
+                      removeItem(service, entry.id);
+                    }}
+                  >
+                    <Delete />
+                  </IconButton>
+                )}
                 {service === "course" && (
                   <IconButton
                     name="link-button"
