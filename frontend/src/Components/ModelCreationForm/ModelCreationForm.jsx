@@ -5,6 +5,8 @@ import {
   Select,
   MenuItem,
   Button,
+  FormControl,
+  InputLabel,
 } from "@material-ui/core/";
 import { notifySuccess, notifyFailure } from "Utils/";
 import "./ModelCreationForm.scss";
@@ -99,20 +101,23 @@ const ModelCreationForm = (props) => {
         {title}
       </Typography>
       <form ref={formRef} onSubmit={handleModelCreation}>
-        <Select name="model-select" value={roleVal} onChange={handleRoleVal}>
-          <MenuItem name="student" value="student">
-            Student
-          </MenuItem>
-          <MenuItem name="professor" value="professor">
-            Professor
-          </MenuItem>
-          <MenuItem name="administrator" value="administrator">
-            Administrator
-          </MenuItem>
-          <MenuItem name="course" value="course">
-            Course
-          </MenuItem>
-        </Select>
+        <FormControl variant="filled">
+          <InputLabel>Role</InputLabel>
+          <Select name="model-select" value={roleVal} onChange={handleRoleVal}>
+            <MenuItem name="student" value="student">
+              Student
+            </MenuItem>
+            <MenuItem name="professor" value="professor">
+              Professor
+            </MenuItem>
+            <MenuItem name="administrator" value="administrator">
+              Administrator
+            </MenuItem>
+            <MenuItem name="course" value="course">
+              Course
+            </MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           id="user-name"
           name="name"
@@ -165,14 +170,23 @@ const ModelCreationForm = (props) => {
               value={timeVal}
               onChange={handleTimeChange}
             />
-            <TextField
-              id="course-status"
-              name="status"
-              label="Status"
-              variant="filled"
-              value={statusVal}
-              onChange={handleStatusChange}
-            />
+            <FormControl variant="filled">
+              <InputLabel>Status</InputLabel>
+              <Select name="course-status-select" value={statusVal} onChange={handleStatusChange}>
+                <MenuItem name="inprogress" value="inprogress">
+                  IN PROGRESS
+                </MenuItem>
+                <MenuItem name="cancelled" value="cancelled">
+                  CANCELLED
+                </MenuItem>
+                <MenuItem name="unscheduled" value="unscheduled">
+                  UNSCHEDULED
+                </MenuItem>
+                <MenuItem name="completed" value="completed">
+                  COMPLETED
+                </MenuItem>
+              </Select>
+            </FormControl>
           </>
         )}
         <Button variant="contained" name="create-button" type="submit">

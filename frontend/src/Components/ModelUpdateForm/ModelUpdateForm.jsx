@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { TextField, Button } from "@material-ui/core/";
+import { TextField, Button, FormControl, InputLabel, MenuItem, Select } from "@material-ui/core/";
 import { notifySuccess, notifyFailure } from "Utils/";
 import "./ModelUpdateForm.scss";
 import { Client } from "Server";
@@ -87,7 +87,7 @@ const ModelUpdateForm = (props) => {
   };
 
   return (
-    <div id="creation-form">
+    <div id="update-form">
       <form ref={formRef} onSubmit={handleModelUpdate}>
         <TextField
           id="modal-user-name"
@@ -141,14 +141,27 @@ const ModelUpdateForm = (props) => {
               value={timeVal}
               onChange={handleTimeChange}
             />
-            <TextField
-              id="modal-course-status"
-              name="modal-status"
-              label="Status"
-              variant="filled"
-              value={statusVal}
-              onChange={handleStatusChange}
-            />
+            <FormControl variant="filled">
+              <InputLabel>Status</InputLabel>
+              <Select
+                name="modal-course-status-select"
+                value={statusVal}
+                onChange={handleStatusChange}
+              >
+                <MenuItem name="inprogress" value="inprogress">
+                  IN PROGRESS
+                </MenuItem>
+                <MenuItem name="cancelled" value="cancelled">
+                  CANCELLED
+                </MenuItem>
+                <MenuItem name="unscheduled" value="unscheduled">
+                  UNSCHEDULED
+                </MenuItem>
+                <MenuItem name="completed" value="completed">
+                  COMPLETED
+                </MenuItem>
+              </Select>
+            </FormControl>
           </>
         )}
         <Button variant="contained" name="update-button" type="submit">
