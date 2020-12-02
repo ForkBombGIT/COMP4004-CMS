@@ -54,7 +54,6 @@ const AdminPage = () => {
 
   const createItem = (s, item) => {
     if (!dbInteraction) {
-      console.log(item);
       setDbInteraction(true);
       const service = s === "application" ? "student" : s;
       Client.service(service)
@@ -65,9 +64,10 @@ const AdminPage = () => {
           }
           notifySuccess("Successful Creation");
         })
-        .catch((e) => {
+        .catch(() => {
           notifyFailure("Unsuccessful Creation");
-        }).finally(() => {
+        })
+        .finally(() => {
           setDbInteraction(false);
         });
     }
@@ -123,31 +123,6 @@ const AdminPage = () => {
       {},
       setCourses
     );
-    Client.service("student")
-      .find()
-      .then((s) => {
-        setStudents(s);
-      });
-    Client.service("professor")
-      .find()
-      .then((p) => {
-        setProfessors(p);
-      });
-    Client.service("administrator")
-      .find()
-      .then((a) => {
-        setAdministrators(a);
-      });
-    Client.service("course")
-      .find()
-      .then((c) => {
-        setCourses(c);
-      });
-    Client.service("application")
-      .find()
-      .then((a) => {
-        setApplications(a);
-      });
   }, []);
 
   return (
