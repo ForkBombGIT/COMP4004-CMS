@@ -1,0 +1,17 @@
+#content {
+  margin-top: 1em;
+  #header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  MuiCardContent-root {
+    padding-bottom: 0px !important;
+  }
+  h2 {
+    text-align: left !important;
+  }
+  #user-management {
+    display: flex;
+  }
+}

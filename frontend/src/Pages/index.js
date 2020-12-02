@@ -3,3 +3,4 @@ export { default as AdminPage } from "./AdminPage";
 export { default as ProfPage } from "./ProfPage";
 export { default as StudentPage } from "./StudentPage";
 export { default as AdminCoursePage } from "./AdminCoursePage";
+export { default as ProfCoursesPage } from "./ProfCoursesPage";

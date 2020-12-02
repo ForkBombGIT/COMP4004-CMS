@@ -102,7 +102,7 @@ const ModelCreationForm = (props) => {
       </Typography>
       <form ref={formRef} onSubmit={handleModelCreation}>
         <FormControl variant="filled">
-          <InputLabel>Role</InputLabel>
+          <InputLabel>Model</InputLabel>
           <Select name="model-select" value={roleVal} onChange={handleRoleVal}>
             <MenuItem name="student" value="student">
               Student
