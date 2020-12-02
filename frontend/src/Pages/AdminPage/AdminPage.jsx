@@ -54,12 +54,12 @@ const AdminPage = () => {
 
   const createItem = (s, item) => {
     if (!dbInteraction) {
+      console.log(item);
       setDbInteraction(true);
       const service = s === "application" ? "student" : s;
       Client.service(service)
         .create(item)
         .then(() => {
-          setDbInteraction(false);
           if (s === "application") {
             removeItem(s, item.id);
           }
@@ -67,6 +67,8 @@ const AdminPage = () => {
         })
         .catch((e) => {
           notifyFailure("Unsuccessful Creation");
+        }).finally(() => {
+          setDbInteraction(false);
         });
     }
   };

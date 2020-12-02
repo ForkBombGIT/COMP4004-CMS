@@ -4,16 +4,14 @@ import { Client } from "Server/";
 import { notifySuccess, notifyFailure } from "Utils/";
 import "./RegisterForm.scss";
 
-export const createApplication = (nameVar) => ({
+export const createApplication = (nameVar, birthVar) => ({
   name: nameVar,
-  query: {
-    hello: 1,
-  },
+  birth_date: birthVar,
 });
 
 const RegisterForm = () => {
   const [studentName, setStudentName] = useState();
-  const [studentBirthDate, setStudentBirthDate] = useState();
+  const [studentBirthDate, setStudentBirthDate] = useState("2020-05-24");
 
   const handleStudentChange = (event) => {
     setStudentName(event.target.value);
@@ -25,12 +23,13 @@ const RegisterForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       await Client.service("application").create(
         createApplication(studentName, studentBirthDate)
       );
       notifySuccess("Application Created!");
+      setStudentName("");
+      setStudentBirthDate("");
     } catch (e) {
       notifyFailure("Application Creation Failed");
     }
@@ -54,7 +53,7 @@ const RegisterForm = () => {
         label="birthday"
         type="date"
         variant="filled"
-        defaultValue="2020-05-24"
+        value={studentBirthDate}
         onChange={handleStudentBirthChange}
         InputLabelProps={{
           shrink: true,

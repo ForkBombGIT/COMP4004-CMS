@@ -11,6 +11,7 @@ module.exports = (DataTypes) => ({
     allowNull: false
   },
   birth_date: {
-    type: DataTypes.DATE
+    type: DataTypes.DATE,
+    allowNull: false
   }
 });
