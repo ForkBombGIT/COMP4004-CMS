@@ -7,7 +7,13 @@ import {
   Card,
   Divider,
 } from "@material-ui/core/";
-import { LogoutButton, NotFound } from "Components";
+import {
+  LogoutButton,
+  NotFound,
+  ModelList,
+  ModelCreationForm,
+} from "Components";
+import { subscribeToService } from "Utils/";
 import { Client } from "Server";
 
 import "./ProfCoursesPage.scss";
@@ -21,6 +27,7 @@ const ProfCoursesPage = () => {
     capacity: "",
   });
   const [professor, setProfessor] = useState([]);
+  const [deliverables, setDeliverables] = useState([]);
 
   /* ------------------------------------ Data manipulation functions --------------------------*/
   const setCurrentProfessor = (id) => {
@@ -49,6 +56,19 @@ const ProfCoursesPage = () => {
           });
       });
     });
+    subscribeToService(
+      ["deliverable"],
+      "deliverable",
+      (data) => {
+        return data;
+      },
+      {
+        query: {
+          courseId,
+        },
+      },
+      setDeliverables
+    );
     /* ------------------------------------ Initial loading --------------------------*/
     Client.service("course")
       .get(courseId)
@@ -58,8 +78,8 @@ const ProfCoursesPage = () => {
       })
       .catch(() => {
         setCourseData(null);
-    });
-  });
+      });
+  }, []);
 
   /* ------------------------------------ render--------------------------*/
   return (
@@ -83,7 +103,20 @@ const ProfCoursesPage = () => {
               <LogoutButton />
             </CardContent>
             <Divider />
-            <CardContent id="course-management" />
+            <CardContent id="course-management">
+              <ModelCreationForm
+                title="Deliverable Creation Form"
+                service="deliverable"
+                relatedModelId={courseId}
+              />
+              <div>
+                <ModelList
+                  title="Deliverables"
+                  service="deliverable"
+                  list={deliverables}
+                />
+              </div>
+            </CardContent>
           </Card>
         </Container>
       ) : (
