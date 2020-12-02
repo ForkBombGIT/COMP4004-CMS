@@ -30,4 +30,57 @@ describe("Testing Model Creation Form", () => {
 
     expect(data).toEqual(generated);
   });
+  test("Professor Data Creation", () => {
+    const data = {
+      name: "Jamie",
+      birth_date: undefined,
+    };
+    const generated = createModel("professor", "Jamie");
+
+    expect(data).toEqual(generated);
+  });
+  test("Course Data Creation", () => {
+    const data = {
+      name: "Jamie",
+      birth_date: undefined,
+      capacity: 10,
+      time_slot: "Friday at Noon",
+      status: "inprogress",
+    };
+    const generated = createModel(
+      "course",
+      "Jamie",
+      undefined,
+      10,
+      "Friday at Noon",
+      "inprogress"
+    );
+
+    expect(data).toEqual(generated);
+  });
+  test("Deliverable Data Creation", () => {
+    const data = {
+      name: "Jamie",
+      birth_date: undefined,
+      capacity: undefined,
+      time_slot: undefined,
+      status: undefined,
+      weight: 10,
+      due_date: "Friday at Noon",
+      courseId: "1",
+    };
+    const generated = createModel(
+      "deliverable",
+      "Jamie",
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      "Friday at Noon",
+      10,
+      "1"
+    );
+
+    expect(data).toEqual(generated);
+  });
 });

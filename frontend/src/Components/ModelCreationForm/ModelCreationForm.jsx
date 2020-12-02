@@ -13,33 +13,43 @@ import "./ModelCreationForm.scss";
 import { Client } from "Server";
 
 export const createModel = (
-  roleVal,
-  nameVal,
-  birthVal = undefined,
-  capVal = undefined,
-  timeVal = undefined,
-  status = undefined
+  model,
+  name,
+  birth = undefined,
+  cap = undefined,
+  time = undefined,
+  status = undefined,
+  due = undefined,
+  weight = undefined,
+  relatedModelId = undefined
 ) => ({
-  name: nameVal === "" ? null : nameVal,
-  birth_date: roleVal === "student" ? birthVal : undefined,
-  capacity: roleVal === "course" ? capVal : undefined,
-  time_slot: roleVal === "course" ? timeVal : undefined,
-  status: roleVal === "course" ? status : undefined,
+  name: name === "" ? undefined : name,
+  birth_date: model === "student" ? birth : undefined,
+  capacity: model === "course" ? cap : undefined,
+  time_slot: model === "course" ? time : undefined,
+  status: model === "course" ? status : undefined,
+  weight: model === "deliverable" ? weight : undefined,
+  due_date: model === "deliverable" ? due : undefined,
+  courseId: model === "deliverable" ? relatedModelId : undefined,
 });
 
 const ModelCreationForm = (props) => {
-  const { title } = props;
+  const { title, service, relatedModelId } = props;
   const formRef = useRef();
-  const [roleVal, setRoleVal] = useState("student");
+  const [modelVal, setModelVal] = useState(
+    service === undefined ? "student" : service
+  );
   const [nameVal, setNameVal] = useState("");
   const [emailVal, setEmailVal] = useState("");
   const [birthVal, setBirthVal] = useState();
   const [capVal, setCapVal] = useState(0);
-  const [timeVal, setTimeVal] = useState();
-  const [statusVal, setStatusVal] = useState();
+  const [timeVal, setTimeVal] = useState("");
+  const [statusVal, setStatusVal] = useState("");
+  const [dueDateVal, setDueDateVal] = useState("");
+  const [weightVal, setWeightVal] = useState(0);
 
-  const handleRoleVal = (event) => {
-    setRoleVal(event.target.value);
+  const handleModelVal = (event) => {
+    setModelVal(event.target.value);
   };
 
   const handleNameChange = (event) => {
@@ -66,19 +76,29 @@ const ModelCreationForm = (props) => {
     setStatusVal(event.target.value);
   };
 
+  const handleDueDateChange = (event) => {
+    setDueDateVal(event.target.value);
+  };
+
+  const handleWeightChange = (event) => {
+    setWeightVal(event.target.value);
+  };
+
   const handleModelCreation = (event) => {
     event.preventDefault();
-    console.log(roleVal);
-    const model = createModel(
-      roleVal,
+    const createdModel = createModel(
+      modelVal,
       nameVal,
       birthVal,
       capVal,
       timeVal,
-      statusVal
+      statusVal,
+      dueDateVal,
+      weightVal,
+      relatedModelId
     );
-    Client.service(roleVal)
-      .create(model)
+    Client.service(modelVal)
+      .create(createdModel)
       .then(() => {
         notifySuccess("Successful Creation!");
         setNameVal("");
@@ -87,6 +107,8 @@ const ModelCreationForm = (props) => {
         setCapVal(0);
         setTimeVal("");
         setStatusVal("");
+        setDueDateVal("");
+        setWeightVal(0);
       })
       .catch((e) => {
         notifyFailure("Unsuccessful Creation!");
@@ -101,23 +123,29 @@ const ModelCreationForm = (props) => {
         {title}
       </Typography>
       <form ref={formRef} onSubmit={handleModelCreation}>
-        <FormControl variant="filled">
-          <InputLabel>Model</InputLabel>
-          <Select name="model-select" value={roleVal} onChange={handleRoleVal}>
-            <MenuItem name="student" value="student">
-              Student
-            </MenuItem>
-            <MenuItem name="professor" value="professor">
-              Professor
-            </MenuItem>
-            <MenuItem name="administrator" value="administrator">
-              Administrator
-            </MenuItem>
-            <MenuItem name="course" value="course">
-              Course
-            </MenuItem>
-          </Select>
-        </FormControl>
+        {modelVal !== "deliverable" && (
+          <FormControl variant="filled">
+            <InputLabel>Model</InputLabel>
+            <Select
+              name="model-select"
+              value={modelVal}
+              onChange={handleModelVal}
+            >
+              <MenuItem name="student" value="student">
+                Student
+              </MenuItem>
+              <MenuItem name="professor" value="professor">
+                Professor
+              </MenuItem>
+              <MenuItem name="administrator" value="administrator">
+                Administrator
+              </MenuItem>
+              <MenuItem name="course" value="course">
+                Course
+              </MenuItem>
+            </Select>
+          </FormControl>
+        )}
         <TextField
           id="user-name"
           name="name"
@@ -126,7 +154,7 @@ const ModelCreationForm = (props) => {
           value={nameVal}
           onChange={handleNameChange}
         />
-        {roleVal === "student" && (
+        {modelVal === "student" && (
           <TextField
             id="user-birth"
             name="birth"
@@ -140,7 +168,7 @@ const ModelCreationForm = (props) => {
             }}
           />
         )}
-        {roleVal !== "course" && (
+        {modelVal !== "course" && modelVal !== "deliverable" && (
           <TextField
             id="user-email"
             name="email"
@@ -150,7 +178,7 @@ const ModelCreationForm = (props) => {
             onChange={handleEmailChange}
           />
         )}
-        {roleVal === "course" && (
+        {modelVal === "course" && (
           <>
             <TextField
               id="course-capacity"
@@ -191,6 +219,27 @@ const ModelCreationForm = (props) => {
                 </MenuItem>
               </Select>
             </FormControl>
+          </>
+        )}
+        {modelVal === "deliverable" && (
+          <>
+            <TextField
+              id="deliverable-weight"
+              name="weight"
+              label="Weight"
+              variant="filled"
+              type="number"
+              value={weightVal}
+              onChange={handleWeightChange}
+            />
+            <TextField
+              id="deliverable-due-date"
+              name="due"
+              label="Due Date"
+              variant="filled"
+              value={dueDateVal}
+              onChange={handleDueDateChange}
+            />
           </>
         )}
         <Button variant="contained" name="create-button" type="submit">
