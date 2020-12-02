@@ -11,7 +11,6 @@ describe('"course" service', () => {
   });
   it('create a course', async () => {
     // Remove record if it exists
-
     const testCourse = {
       id: '99d21763-f1e1-4bba-b163-a4a56dba4257',
       name: 'testcourse',
