@@ -12,7 +12,7 @@ import {
   LogoutButton,
   ModelDetailModal,
 } from "Components";
-import { notifySuccess, notifyFailure } from "Utils/";
+import { notifySuccess, notifyFailure, subscribeToService } from "Utils/";
 import { AdminCoursePage } from "Pages/";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { Client } from "Server";
@@ -29,33 +29,6 @@ const AdminPage = () => {
   const [dbInteraction, setDbInteraction] = useState(false);
   const [displayModal, setDisplayModal] = useState(false);
   const [modalModel, setModalModel] = useState({});
-  const getListData = () => {
-    Client.service("student")
-      .find()
-      .then((s) => {
-        setStudents(s);
-      });
-    Client.service("professor")
-      .find()
-      .then((p) => {
-        setProfessors(p);
-      });
-    Client.service("administrator")
-      .find()
-      .then((a) => {
-        setAdministrators(a);
-      });
-    Client.service("course")
-      .find()
-      .then((c) => {
-        setCourses(c);
-      });
-    Client.service("application")
-      .find()
-      .then((a) => {
-        setApplications(a);
-      });
-  };
 
   const removeItem = (s, id) => {
     if (!dbInteraction) {
@@ -64,7 +37,6 @@ const AdminPage = () => {
         .remove(id)
         .then(() => {
           setDbInteraction(false);
-          getListData();
           if (s !== "application") notifySuccess("Successful Deletion");
         })
         .catch(() => {
@@ -87,16 +59,16 @@ const AdminPage = () => {
       Client.service(service)
         .create(item)
         .then(() => {
-          setDbInteraction(false);
           if (s === "application") {
             removeItem(s, item.id);
-          } else {
-            getListData();
           }
           notifySuccess("Successful Creation");
         })
         .catch(() => {
           notifyFailure("Unsuccessful Creation");
+        })
+        .finally(() => {
+          setDbInteraction(false);
         });
     }
   };
@@ -106,7 +78,51 @@ const AdminPage = () => {
   };
 
   useEffect(() => {
-    getListData();
+    subscribeToService(
+      ["student"],
+      "student",
+      (data) => {
+        return data;
+      },
+      {},
+      setStudents
+    );
+    subscribeToService(
+      ["professor"],
+      "professor",
+      (data) => {
+        return data;
+      },
+      {},
+      setProfessors
+    );
+    subscribeToService(
+      ["administrator"],
+      "administrator",
+      (data) => {
+        return data;
+      },
+      {},
+      setAdministrators
+    );
+    subscribeToService(
+      ["application"],
+      "application",
+      (data) => {
+        return data;
+      },
+      {},
+      setApplications
+    );
+    subscribeToService(
+      ["course"],
+      "course",
+      (data) => {
+        return data;
+      },
+      {},
+      setCourses
+    );
   }, []);
 
   return (
@@ -123,10 +139,7 @@ const AdminPage = () => {
               </CardContent>
               <Divider />
               <CardContent id="user-management">
-                <ModelCreationForm
-                  title="Model Creation Form"
-                  updateLists={getListData}
-                />
+                <ModelCreationForm title="Model Creation Form" />
                 <div id="lists">
                   <div>
                     <ModelList
@@ -176,7 +189,6 @@ const AdminPage = () => {
               display={displayModal}
               setDisplay={setDisplayModal}
               model={modalModel}
-              getListData={getListData}
             />
           </Container>
         </div>

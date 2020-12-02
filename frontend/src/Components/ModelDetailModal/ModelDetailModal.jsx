@@ -4,11 +4,10 @@ import { ModelUpdateForm } from "Components";
 import "./ModelDetailModal.scss";
 
 const ModelDetailModal = (props) => {
-  const { display, setDisplay, model, getListData } = props;
+  const { display, setDisplay, model } = props;
 
   const handleClose = () => {
     setDisplay(false);
-    getListData();
   };
   return (
     <Modal id="model-modal" open={display} onClose={handleClose}>
@@ -21,11 +20,7 @@ const ModelDetailModal = (props) => {
                   model.service.charAt(0).toUpperCase() + model.service.slice(1)
                 } Details`}
               </Typography>
-              <ModelUpdateForm
-                setDisplay={setDisplay}
-                model={model}
-                getListData={getListData}
-              />
+              <ModelUpdateForm setDisplay={setDisplay} model={model} />
             </div>
           )}
         </CardContent>

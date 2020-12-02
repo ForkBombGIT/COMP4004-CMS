@@ -28,7 +28,7 @@ export const createModel = (
 });
 
 const ModelCreationForm = (props) => {
-  const { title, updateLists } = props;
+  const { title } = props;
   const formRef = useRef();
   const [roleVal, setRoleVal] = useState("student");
   const [nameVal, setNameVal] = useState("");
@@ -68,6 +68,7 @@ const ModelCreationForm = (props) => {
 
   const handleModelCreation = (event) => {
     event.preventDefault();
+    console.log(roleVal);
     const model = createModel(
       roleVal,
       nameVal,
@@ -80,7 +81,6 @@ const ModelCreationForm = (props) => {
       .create(model)
       .then(() => {
         notifySuccess("Successful Creation!");
-        updateLists();
         setNameVal("");
         setBirthVal("");
         setEmailVal("");
@@ -172,7 +172,11 @@ const ModelCreationForm = (props) => {
             />
             <FormControl variant="filled">
               <InputLabel>Status</InputLabel>
-              <Select name="course-status-select" value={statusVal} onChange={handleStatusChange}>
+              <Select
+                name="course-status-select"
+                value={statusVal}
+                onChange={handleStatusChange}
+              >
                 <MenuItem name="inprogress" value="inprogress">
                   IN PROGRESS
                 </MenuItem>

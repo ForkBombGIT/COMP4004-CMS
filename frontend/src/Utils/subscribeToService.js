@@ -20,6 +20,7 @@ const subscribeToService = (
       Client.service(listenedService).on(event, setServiceData);
     });
   });
+  setServiceData();
 };
 
 export default subscribeToService;
