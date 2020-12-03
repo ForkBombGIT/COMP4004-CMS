@@ -87,8 +87,6 @@ const ModelUpdateForm = (props) => {
       })
       .catch((e) => {
         notifyFailure("Unsuccessful Update!");
-        // eslint-disable-next-line no-console
-        console.log(e);
       });
   };
 

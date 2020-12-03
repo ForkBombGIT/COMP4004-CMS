@@ -21,7 +21,6 @@ const StudentPage = () => {
   const [courses, setCourses] = useState([]);
   const [registeredCourses, setRegisteredCourses] = useState([]);
   const auth = useAuth();
-  const courseId = "1";
 
   const linkItem = (id) => {
     history.push(`${url}/${id}`);
@@ -58,25 +57,29 @@ const StudentPage = () => {
   /* ---------- Set Data Functions ------------- */
   const registerCourse = (service, id) => {
     Client.service(service)
-      .create({ courseId, studentId: id })
-      .then(() => {
+      .create({ studentId: auth.user.studentId, courseId: id })
+      .then((e) => {
         notifySuccess("Success, student added!");
       })
-      .catch(() => {
-        notifyFailure("Failed to add student");
+      .catch((e) => {
+        notifyFailure(e.message);
       });
   };
 
   const unRegisterCourse = (service, id) => {
     Client.service(service)
       .remove(null, {
-        query: { courseId, studentId: id },
+        query: { studentId: auth.user.studentId, courseId: id },
       })
-      .then(() => {
-        notifySuccess("Success, student removed!");
+      .then((e) => {
+        if (e.message) {
+          notifySuccess(e.message);
+        } else {
+          notifySuccess("Success, student removed!");
+        }
       })
-      .catch(() => {
-        notifyFailure("Failed to remove student");
+      .catch((e) => {
+        notifyFailure(e.message);
       });
   };
 
@@ -145,6 +148,7 @@ const StudentPage = () => {
                     registerItem={registerCourse}
                     list={courses}
                     dataService="enrolled"
+                    deadlines
                   />
                   <ModelList
                     title="My Courses"
@@ -153,6 +157,7 @@ const StudentPage = () => {
                     linkItem={linkItem}
                     list={registeredCourses}
                     dataService="enrolled"
+                    deadlines
                   />
                 </div>
               </CardContent>

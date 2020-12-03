@@ -2,8 +2,8 @@ import { toast } from "react-toastify";
 
 export const notifySuccess = (message) =>
   toast.success(message, {
-    position: "bottom-left",
-    autoClose: 3000,
+    position: "top-left",
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -13,8 +13,8 @@ export const notifySuccess = (message) =>
 
 export const notifyFailure = (message) =>
   toast.error(message, {
-    position: "bottom-left",
-    autoClose: 3000,
+    position: "top-left",
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

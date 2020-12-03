@@ -57,7 +57,6 @@ module.exports = function () {
                     name:arg1
                 }
             }).then((student) => {
-            console.log(student);
                 app3.create({ studentId: student[0].id, courseId: course[0].id }).then(() => {
                     callback()
                 });

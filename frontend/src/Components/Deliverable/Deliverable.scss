@@ -10,6 +10,11 @@
   .deliverable-text {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    div {
+      padding: 0px 30px;
+    }
   }
 
   .deliverable-text-area {
