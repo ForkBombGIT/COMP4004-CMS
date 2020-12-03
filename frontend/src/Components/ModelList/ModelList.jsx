@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Deadlines } from "Components/";
 import {
   List,
   ListItem,
@@ -24,6 +25,7 @@ const ModelList = (props) => {
     registerItem,
     unRegisterItem,
     dataService,
+    deadlines,
   } = props;
   const [data, setData] = useState(list);
   useEffect(() => {
@@ -38,7 +40,10 @@ const ModelList = (props) => {
         <List id={`${service}-list`} dense>
           {data.map((entry) => (
             <ListItem key={entry.id}>
-              <ListItemText primary={entry.name} />
+              <ListItemText className="list-item" primary={entry.name} />
+              {deadlines && (
+                <Deadlines status={entry.status} courseId={entry.id} />
+              )}
               <ListItemSecondaryAction>
                 {createItem && (
                   <IconButton name="add-button" edge="end" aria-label="add">

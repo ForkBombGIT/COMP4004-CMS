@@ -73,7 +73,7 @@ const Deliverable = (props) => {
         <ListItemText primary={`Assignment Name: ${entry.name}`} />
         <ListItemText primary={`Assignment Weight: ${entry.weight}`} />
         <ListItemText
-          primary={`Assignment Due_Date: ${
+          primary={`Assignment Due Date: ${
             entry.due_date ? dateConv(entry.due_date) : "null"
           }`}
         />

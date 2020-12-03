@@ -22,22 +22,19 @@ const PROFESSOR = [
     name: 'Joslo Fredrickson',
     created_at: new Date(),
     updated_at: new Date()
+  },
+  {
+    id: 'a95c4a15-4b91-4def-b68e-a59a60855087',
+    name: 'Gull Johnson',
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const PROFESSOR_IDS = PROFESSOR.map((val) => val.id);
 const PROFESSOR_IDS_BY_NAME = [...PROFESSOR].reduce(keyIdByName, {});
 
 const COURSE = [
-  {
-    id: '49cf69de-266b-47f0-983c-99d7c22bf801',
-    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
-    name: 'BIOL4004',
-    time_slot: 'Friday at noon',
-    capacity: 59,
-    status: 'inprogress',
-    created_at: new Date(),
-    updated_at: new Date()
-  },
+  // Used for test academic deadlin3
   {
     id: '1cc2a365-ee09-42ab-ab16-b3b760cb2780',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
@@ -48,6 +45,7 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for test academic deadlin3
   {
     id: '3520f4be-c8eb-4cf9-b8df-038e3ce1aecd',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
@@ -59,6 +57,17 @@ const COURSE = [
     updated_at: new Date()
   },
   {
+    id: '853a3fbb-48fc-450d-bab8-b36cd8b8ee1c',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    name: 'BIOL1004',
+    time_slot: 'Friday at noon',
+    capacity: 59,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for test student/prof registration
+  {
     id: '63b804de-c0fd-47c2-a391-5d14999c27a1',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
     name: 'COMP4004',
@@ -68,6 +77,7 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for test student/prof registration
   {
     id: 'e21cd32c-900a-42fe-bd86-b3f554aeebcc',
     professor_id: null,
@@ -78,6 +88,7 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for test capacity 0 registraion
   {
     id: '94939c98-8433-47fb-af07-e6bfa6349d75',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
@@ -88,20 +99,35 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for test deliverable submission
   {
-    id: '3bfe873a-2516-4ddb-9fb8-e2be95b85746',
+    id: '41b037cb-3e6e-429d-880a-0ecdd54f4833',
     professor_id: null,
-    name: 'COMP1004',
+    name: 'COMP1104',
     time_slot: 'Friday at noon',
     capacity: 58,
     status: 'inprogress',
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for test prerequisites
+  // Used for add professor to course test
   {
-    id: '41b037cb-3e6e-429d-880a-0ecdd54f4833',
+    id: '8ea5d497-e0a4-4f7d-9dc4-624f73f30e51',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    name: 'JAPA1004',
+    time_slot: 'Friday at noon',
+    capacity: 58,
+    status: 'complete',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for test prerequisites
+  // Used for add professor to course test
+  {
+    id: '6050a53e-2b0b-45e6-b581-795ead3837b1',
     professor_id: null,
-    name: 'COMP1104',
+    name: 'JAPA2004',
     time_slot: 'Friday at noon',
     capacity: 58,
     status: 'inprogress',
@@ -117,12 +143,35 @@ const COURSE = [
     status: 'inprogress',
     created_at: new Date(),
     updated_at: new Date()
-  }
+  },
+  // Used for test prerequisites
+  {
+    id: '6680e3b7-7782-461a-a634-9927048f864b',
+    professor_id: null,
+    name: 'JAPA3004',
+    time_slot: 'Friday at noon',
+    capacity: 58,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for test prerequisites
+  {
+    id: '6c31443b-a967-4c92-ad74-061d31dd6529',
+    professor_id: null,
+    name: 'JAPA4004',
+    time_slot: 'Friday at noon',
+    capacity: 58,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
 ];
 const COURSE_IDS = COURSE.map((val) => val.id);
 const COURSE_IDS_BY_NAME = [...COURSE].reduce(keyIdByName, {});
 
 const ACADEMIC_DEADLINE = [
+  // used for test 'registered: invalid path after deadline'
   {
     id: '7583ccee-266b-4387-8f40-e53d411b4482',
     type: 'registration',
@@ -131,11 +180,21 @@ const ACADEMIC_DEADLINE = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // used for test 'dropped with W'
   {
     id: '622d895e-9e43-474b-9539-05bfb46d5d8b',
     type: 'withdraw',
     due_date: lastYear,
     course_id: COURSE_IDS_BY_NAME['BIOL2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // used for test 'dropped with DR'
+  {
+    id: '7e95e635-ad49-45e2-b0ef-a80ca217328b',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['BIOL1004'],
     created_at: new Date(),
     updated_at: new Date()
   },
@@ -220,6 +279,7 @@ const DELIVERABLE_IDS = DELIVERABLE.map((val) => val.id);
 const DELIVERABLE_IDS_BY_NAME = [...DELIVERABLE].reduce(keyIdByName, {});
 
 const ENROLLED = [
+  // Used for test 'unregister student'
   {
     id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
     grade: 20,
@@ -239,14 +299,64 @@ const ENROLLED = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for prerequisite test
+  // Used for unRegister test
+  {
+    id: '173db109-d8f7-4e11-ac5e-f68baa13fbdf',
+    grade: 10,
+    status: 'complete',
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    course_id: COURSE_IDS_BY_NAME['JAPA1004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for prerequisite test
+  {
+    id: 'd03e49d5-578e-45f5-be61-dacad806ec05',
+    grade: 10,
+    status: 'inprogress',
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    course_id: COURSE_IDS_BY_NAME['JAPA3004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for unRegister test
+  {
+    id: 'eb490735-944a-4f4b-9c1e-37750971371d',
+    grade: 10,
+    status: 'inprogress',
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    course_id: COURSE_IDS_BY_NAME['BIOL1004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for unRegister test
+  {
+    id: '4ea81ab8-c221-40f1-aa7c-7f5699cebe89',
+    grade: 10,
+    status: 'inprogress',
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    course_id: COURSE_IDS_BY_NAME['BIOL2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
 ];
 const ENROLLED_IDS = ENROLLED.map((val) => val.id);
 
 const PREREQUISITE = [
   {
     id: 'd59e0654-3cdb-4d68-b8ac-a3a370c773a4',
-    course_id: COURSE_IDS_BY_NAME['BIOL4004'],
-    prerequisite_course_id: COURSE_IDS_BY_NAME['BIOL3004'],
+    course_id: COURSE_IDS_BY_NAME['JAPA4004'],
+    prerequisite_course_id: COURSE_IDS_BY_NAME['JAPA3004'],
+    prerequisite_course_name: 'JAPA3004',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '25de889b-0c4d-4e68-82a3-652f0f38fa3c',
+    course_id: COURSE_IDS_BY_NAME['JAPA2004'],
+    prerequisite_course_id: COURSE_IDS_BY_NAME['JAPA1004'],
+    prerequisite_course_name: 'JAPA1004',
     created_at: new Date(),
     updated_at: new Date()
   }

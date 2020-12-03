@@ -27,26 +27,12 @@ uninstall:
 
 #--------- Test code for repo standards ---------#
 # Requires containers to be up:
-cucumber:
-	docker-compose exec backend yarn bdd
+testAcceptance:
+	yarn --cwd backend bdd 
 
-test:
-	yarn run --cwd frontend test
-	yarn run --cwd backend test
+testFrontend: 
+	yarn --cwd frontend test 
 
-test-frontend: 
-	yarn run --cwd frontend test 
+testBackend: 
+	yarn --cwd backend testLocal
 
-test-backend: 
-	yarn run --cwd backend test 
-
-#--- Required code linting for repo standards --#
-lint: 
-	yarn run --cwd frontend lint
-	yarn run --cwd backend lint
-
-lint-frontend: 
-	yarn run --cwd frontend lint
-
-lint-backend: 
-	yarn run --cwd backend lint

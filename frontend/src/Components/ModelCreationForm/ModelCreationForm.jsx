@@ -92,7 +92,6 @@ const ModelCreationForm = (props) => {
       .catch((e) => {
         notifyFailure("Unsuccessful Creation!");
         // eslint-disable-next-line no-console
-        console.log(e);
       });
   };
 

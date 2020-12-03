@@ -11,8 +11,8 @@ function App() {
       <ToastContainer
         className="z-30"
         transition={Slide}
-        position="bottom-left"
-        autoClose={3000}
+        position="top-left"
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

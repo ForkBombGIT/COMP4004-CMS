@@ -124,6 +124,9 @@ const StudentCoursePage = () => {
               <Typography variant="subtitle2" component="h2">
                 {`Course Grade: ${courseData.enrolled.grade}`}
               </Typography>
+              <Typography variant="subtitle2" component="h2">
+                {`Student status: ${courseData.enrolled.status}`}
+              </Typography>
               <LogoutButton />
             </CardContent>
             <Divider />

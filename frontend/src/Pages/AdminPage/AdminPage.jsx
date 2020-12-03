@@ -141,7 +141,7 @@ const AdminPage = () => {
               <CardContent id="user-management">
                 <ModelCreationForm title="Model Creation Form" />
                 <div id="lists">
-                  <div>
+                  <div className="list-div">
                     <ModelList
                       title="Students"
                       service="student"
@@ -164,7 +164,7 @@ const AdminPage = () => {
                       list={administrators}
                     />
                   </div>
-                  <div>
+                  <div className="list-div">
                     <ModelList
                       title="Courses"
                       service="course"

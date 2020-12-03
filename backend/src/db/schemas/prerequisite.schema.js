@@ -12,5 +12,8 @@ module.exports = (DataTypes) => ({
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     autoIncrement: false
+  },
+  prerequisite_course_name: {
+    type: DataTypes.STRING,
   }
 });

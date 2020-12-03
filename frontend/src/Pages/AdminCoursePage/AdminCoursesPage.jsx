@@ -88,7 +88,9 @@ const AdminCoursePage = () => {
           notifyFailure("Failed to add professor");
         });
     } else {
-      notifyFailure("Another Professor is already registered for this course.");
+      notifyFailure(
+        "Failure, Another Professor is already registered for this course!"
+      );
     }
   };
 
@@ -127,7 +129,7 @@ const AdminCoursePage = () => {
           notifyFailure("Failed to remove professor");
         });
     } else {
-      notifyFailure("No professor is registered in this course!");
+      notifyFailure("Failure, no professor is registered in this course!");
     }
   };
 

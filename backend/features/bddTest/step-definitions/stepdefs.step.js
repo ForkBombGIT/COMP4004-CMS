@@ -74,12 +74,14 @@ module.exports = function () {
         });
     });
     this.Then(/^I click on "([^"]*)" "([^"]*)" button in the "([^"]*)" list$/, function (n,b,s, callback) {
-        driver.findElement(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]/../../..//button[@name='${b}-button']`)).then((e)=>{
-            driver.actions().mouseMove(e).click().perform().then(() => {
-                driver.sleep(2000).then(() => {
-                    callback();
+        driver.sleep(500).then(() => {
+            driver.findElement(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]/../../..//button[@name='${b}-button']`)).then((e) => {
+                driver.actions().mouseMove(e).click().perform().then(() => {
+                    driver.sleep(2000).then(() => {
+                        callback();
+                    });
                 });
-            });
+            })
         })
     });
     this.Then(/^I click the model select and choose "([^"]*)"$/, function (m,callback) {
@@ -120,6 +122,10 @@ module.exports = function () {
                 callback()
             })
         })
+    });
+
+    this.When(/^The system validates input$/, function (callback) {
+        callback();
     });
 
     this.Then(/^"([^"]*)" should NOT be displayed in the "([^"]*)" list$/, function (n,s,callback) {

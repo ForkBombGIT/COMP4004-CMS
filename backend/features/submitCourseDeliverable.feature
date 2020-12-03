@@ -5,6 +5,7 @@ Scenario: Successful Submission
     Then I should be on the "student/41b037cb-3e6e-429d-880a-0ecdd54f483" page
     Then I set the submission text on "deliverable assignment 1" to "Hello"
     When I click the submit button on "deliverable assignment 1"
+    When The system validates input
     Then I am notified about a "success" with message "Success, deliverable submitted!"
 
 Scenario: Invalid Path A: Input contains empty fields 
@@ -13,6 +14,7 @@ Scenario: Invalid Path A: Input contains empty fields
     Then I should be on the "student/41b037cb-3e6e-429d-880a-0ecdd54f483" page
     Then I set the submission text on "deliverable assignment 1" to empty 
     When I click the submit button on "deliverable assignment 1"
+    When The system validates input
     Then I am notified about a "error" with message "Failure, empty fields!"
 
 Scenario: Invalid Path B: Invalid fields for course due date
@@ -21,4 +23,5 @@ Scenario: Invalid Path B: Invalid fields for course due date
     Then I should be on the "student/41b037cb-3e6e-429d-880a-0ecdd54f483" page
     Then I set the submission text on "deliverable assignment 2" to "no"
     When I click the submit button on "deliverable assignment 2"
+    When The system validates input
     Then I am notified about a "error" with message "Failure, past due date!"
