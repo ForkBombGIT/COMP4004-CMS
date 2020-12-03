@@ -34,8 +34,8 @@ const Deliverable = (props) => {
       .then(() => {
         notifySuccess("Success, deliverable submitted!");
       })
-      .catch(() => {
-        notifyFailure("Failure, deliverable not submitted");
+      .catch((e) => {
+        notifyFailure(e.message);
       });
   };
 

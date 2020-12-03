@@ -4,24 +4,9 @@ module.exports = function () {
         callback();
     });
     this.Then(/^I am notified about a "([^"]*)" with message "([^"]*)"$/, function (status, message, callback) {
-        let messageFound = false;
-        driver
-          .wait(until.elementLocated(by.className(`Toastify__toast--${status}`)))
-          .then(() => {
-              driver.findElements(by.className(`Toastify__toast--${status}`)).then((elements) => {
-                  elements.forEach((element) => {
-                      element.getText().then((text)=>{
-                          if (text === message) {
-                              messageFound = true;
-                          }
-                      })
-                  })
-              })
-          }).then(() => {
-            if (messageFound) {
-                callback();
-            }
-          })
+        driver.wait(until.elementLocated(by.xpath(`//div[contains(@class, 'Toastify__toast--${status}')]//div[contains(text(), '${message}')]`))).then((e) => {
+            callback()
+        })
     });
     this.Given(/^A "([^"]*)" is created with the name "([^"]*)" and email "([^"]*)"$/, function (s, n, e, callback) {
         driver.findElement(by.className("MuiSelect-selectMenu")).click()
@@ -121,53 +106,30 @@ module.exports = function () {
         });
     });
     this.Then(/^"([^"]*)" should be displayed in the "([^"]*)" list$/, function (n,s,callback) {
-        let textFound = false;
-        driver.findElement(by.id(`${s}-list`)).then((list) => {
-            list.findElements(by.className("MuiListItemText-primary")).then((elements) => {
-                elements.forEach(function (element) {
-                    element.getText().then(function(text){
-                        if (text === n) { 
-                            textFound = true;
-                        }
-                    })
-                });
+        driver.findElement(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]`)).then((e)=>{
+            const app = shared.app.api.service(s);
+            app.find({
+                query: {
+                    name: n
+                }
+                }
+            ).then((records) => {
+                for (var i = 0; i < records.length; i++) {
+                app.remove(records[i].id);
+                }
+                callback()
             })
-        }).then(() => {
-            if (textFound) {
-                const app = shared.app.api.service(s);
-                app.find({
-                    query: {
-                        name: n
-                    }
-                  }
-                ).then((records) => {
-                  for (var i = 0; i < records.length; i++) {
-                    app.remove(records[i].id);
-                  }
-                  callback()
-                })
-            }
-        });
+        })
     });
-    this.Then(/^"([^"]*)" should NOT be displayed in the "([^"]*)" list$/, function (n,m,callback) {
-        let textFound = false;
-        driver.findElement(by.id(`${m}-list`)).then((list) => {
-            list.findElements(by.className("MuiListItemText-primary")).then((elements) => {
-                elements.forEach(function (element) {
-                    element.getText().then(function(text){
-                        if (text === n) { 
-                            textFound = true;
-                        }
-                    });
-                });
-            })
-        }).then(() => {
-            if (!(textFound)) {
-                callback();
-              }
-            }
-        );
+
+    this.Then(/^"([^"]*)" should NOT be displayed in the "([^"]*)" list$/, function (n,s,callback) {
+        driver.findElement(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]`)).then((data) => {
+            driver.quite()
+        }).catch(() => {
+            callback()
+        })
     });
+
     this.Then(/^I update the model "([^"]*)" to "([^"]*)"$/, function (field, value, callback) {
         const elem = driver.findElement(by.name(field));
         elem.sendKeys(selenium.Key.CONTROL + "a");
@@ -176,9 +138,11 @@ module.exports = function () {
         callback();
       });
     this.When(/^I update the model$/, function (callback) {
-        driver.findElement(by.name("update-button")).click();
-        driver.sleep(1000).then(() => {
-            callback();
+        driver.sleep(500).then(() => {
+            driver.findElement(by.name("update-button")).click();
+            driver.sleep(1000).then(() => {
+                callback();
+            });
         });
     });
     this.Then(/^Element named "([^"]*)" should be equal to "([^"]*)"$/, function (name,expectedValue,callback) {

@@ -1,4 +1,4 @@
-// const {authenticate} = require("@feathersjs/authentication").hooks;
+const errors = require('@feathersjs/errors');
 
 const upsert = () => async (context) => {
   const {data, service} = context;
@@ -29,12 +29,30 @@ const upsert = () => async (context) => {
   return context;
 };
 
+const validateSubmission = () => async (context) => {
+
+  Object.values(context.data).map((field) => {
+
+    if (!field.length) {
+      throw new errors.GeneralError('Failure, empty fields!');
+    }
+  });
+
+  const response = await context.app.service('deliverable').get(context.data.deliverableId);
+
+  if (new Date() > new Date(response.due_date)) {
+    throw new errors.GeneralError('Failure, past due date!');
+  }
+
+  return context;
+};
+
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [upsert()],
+    create: [validateSubmission(), upsert()],
     update: [],
     patch: [],
     remove: []

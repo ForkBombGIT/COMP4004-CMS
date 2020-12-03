@@ -4,6 +4,12 @@ const lastYear = (() => {
   return date;
 })();
 
+const nextYear = (() => {
+  const date = new Date();
+  date.setDate(date.getDate() + 365);
+  return date;
+})();
+
 const keyIdByName = (acc, obj) => {
   acc[obj.name] = obj.id;
   return acc;
@@ -91,6 +97,16 @@ const COURSE = [
     status: 'inprogress',
     created_at: new Date(),
     updated_at: new Date()
+  },
+  {
+    id: '41b037cb-3e6e-429d-880a-0ecdd54f4833',
+    professor_id: null,
+    name: 'COMP1104',
+    time_slot: 'Friday at noon',
+    capacity: 58,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const COURSE_IDS = COURSE.map((val) => val.id);
@@ -164,8 +180,28 @@ const DELIVERABLE = [
     id: '520471c9-d12d-4582-9491-098011100558',
     name: 'assignment 2',
     weight: 0.2,
-    due_date: new Date(),
+    due_date: nextYear,
     course_id: COURSE_IDS_BY_NAME['COMP4004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for test 'deliverable submission'
+  {
+    id: 'a011eb9c-2646-4b15-8869-a1c186680aaa',
+    name: 'deliverable assignment 1',
+    weight: 0.2,
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP1104'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for test 'deliverable submission'
+  {
+    id: '75adfb49-8516-417c-ad8c-d0d9aa1cf781',
+    name: 'deliverable assignment 2',
+    weight: 0.2,
+    due_date: lastYear,
+    course_id: COURSE_IDS_BY_NAME['COMP1104'],
     created_at: new Date(),
     updated_at: new Date()
   }
@@ -180,6 +216,16 @@ const ENROLLED = [
     status: 'inprogress',
     student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
     course_id: COURSE_IDS_BY_NAME['COMP4004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for test 'deliverable submissions'
+  {
+    id: '4aa4793f-5bea-493e-896b-8152c648f97d',
+    grade: 10,
+    status: 'inprogress',
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    course_id: COURSE_IDS_BY_NAME['COMP1104'],
     created_at: new Date(),
     updated_at: new Date()
   },

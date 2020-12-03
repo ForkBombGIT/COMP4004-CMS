@@ -26,9 +26,11 @@
     "dev": "NODE_PATH=src/ nodemon src/",
     "start": "NODE_PATH=src/ nodemon src/",
     "jest": "jest --watchAll",
-    "bdd": "NODE_ENV=localMachine NODE_PATH=src/ sequelize db:seed:undo:all && NODE_ENV=localMachine NODE_PATH=src/ sequelize db:seed:all && NODE_ENV=localMachine NODE_PATH=src/ node ./node_modules/selenium-cucumber-js/index.js",
+    "bdd": "NODE_ENV=localMachine NODE_PATH=src/ sequelize db:migrate:undo:all && NODE_ENV=localMachine NODE_PATH=src/ sequelize db:migrate && NODE_ENV=localMachine NODE_PATH=src/ sequelize db:seed:all && NODE_ENV=localMachine NODE_PATH=src/ node ./node_modules/selenium-cucumber-js/index.js",
     "bddInDocker": "NODE_PATH=src/ node ./node_modules/selenium-cucumber-js/index.js",
-    "db:seed": "NODE_PATH=src/ sequelize db:seed:all",
+    "db:re-seed": "yarn db:undo && yarn db:seed",
+    "db:undo": "NODE_ENV=localMachine NODE_PATH=src/ sequelize db:seed:undo:all",
+    "db:seed": "NODE_ENV=localMachine NODE_PATH=src/ sequelize db:seed:all",
     "db:migrate": "NODE_PATH=src/ sequelize db:migrate",
     "db:retryable-migrate": "sh ./scripts/db-migrate.sh"
   },
