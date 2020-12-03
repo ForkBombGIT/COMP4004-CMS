@@ -1,4 +1,5 @@
 # COMP4004 Final Project
+<img src="landing-page.png" width="100%" />
 
 ## Table of Contents
 - [About the Repo](#about-the-repo)
@@ -20,6 +21,13 @@ Despite being available on github, this repository is intended as a read-only re
 Running this code requires some dependencies:
 - [Docker](https://www.docker.com/)
 - [NPM](https://nodejs.org/en/)
+- [Make](http://gnuwin32.sourceforge.net/packages/make.htm)
+
+This code's development environment was setup using linux, as such it may not required to install make, if make is not functional steps inside the root directories Makefile can be run in sequence to achieve the same effects.
+
+_If you are running docker using windows you may find unexpected errors_
+
+#### Install steps
 
 After cloning the repo to your local machine enter the root directory and run `make install`.
 
@@ -45,16 +53,17 @@ Enter the `frontend/` directory and run the command `npm run test`
 ### Backend
 Start the project by running  a shell in the root directory of the project and running `make up`
 
-Once the project is running, enter the `backend/` directory and run the command `npm run testLocal`
+Once the project is running, open a new shell, enter the `backend/` directory and run the command `npm run testLocal`
 
 ### Acceptance tests
+*Feature files can  be found in the directory `backend/features`*
+
+*This code is ran using `selenium` and as such, the test suite requires a viewable browser window. While running the test suite ensure adequate space on your monitor for selenium to interact.*
+
 Start the project by running  a shell in the root directory of the project and running `make up`
 
-Once the project is running, enter the `backend/` directory and run the command `npm run bdd`
-
-_Feature files can  be found in the directory backend/features_
-  
-
+Once the project is running, open a new shell, enter the `backend/` directory and run the command `npm run bdd`
+ 
 ## Code Structure
 Explained here are the most important points of the code structure, where to find configs, etc.
 ```
