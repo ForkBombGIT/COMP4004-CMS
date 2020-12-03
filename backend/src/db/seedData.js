@@ -1,3 +1,9 @@
+const lastYear = (() => {
+  const date = new Date();
+  date.setDate(date.getDate() - 365);
+  return date;
+})();
+
 const keyIdByName = (acc, obj) => {
   acc[obj.name] = obj.id;
   return acc;
@@ -17,12 +23,42 @@ const PROFESSOR_IDS_BY_NAME = [...PROFESSOR].reduce(keyIdByName, {});
 
 const COURSE = [
   {
+    id: '49cf69de-266b-47f0-983c-99d7c22bf801',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    name: 'BIOL4004',
+    time_slot: 'Friday at noon',
+    capacity: 59,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1cc2a365-ee09-42ab-ab16-b3b760cb2780',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    name: 'BIOL3004',
+    time_slot: 'Friday at noon',
+    capacity: 59,
+    status: 'complete',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '3520f4be-c8eb-4cf9-b8df-038e3ce1aecd',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    name: 'BIOL2004',
+    time_slot: 'Friday at noon',
+    capacity: 59,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
     id: '63b804de-c0fd-47c2-a391-5d14999c27a1',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
     name: 'COMP4004',
     time_slot: 'Friday at noon',
     capacity: 59,
-    status: 'cancelled',
+    status: 'inprogress',
     created_at: new Date(),
     updated_at: new Date()
   },
@@ -30,6 +66,26 @@ const COURSE = [
     id: 'e21cd32c-900a-42fe-bd86-b3f554aeebcc',
     professor_id: null,
     name: 'COMP3004',
+    time_slot: 'Friday at noon',
+    capacity: 58,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '94939c98-8433-47fb-af07-e6bfa6349d75',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    name: 'COMP2004',
+    time_slot: 'Friday at noon',
+    capacity: 0,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '3bfe873a-2516-4ddb-9fb8-e2be95b85746',
+    professor_id: null,
+    name: 'COMP1004',
     time_slot: 'Friday at noon',
     capacity: 58,
     status: 'inprogress',
@@ -43,12 +99,20 @@ const COURSE_IDS_BY_NAME = [...COURSE].reduce(keyIdByName, {});
 const ACADEMIC_DEADLINE = [
   {
     id: '7583ccee-266b-4387-8f40-e53d411b4482',
-    type: 'Registration',
-    due_date: new Date(),
-    course_id: COURSE_IDS_BY_NAME['COMP4004'],
+    type: 'registration',
+    due_date: lastYear,
+    course_id: COURSE_IDS_BY_NAME['BIOL3004'],
     created_at: new Date(),
     updated_at: new Date()
-  }
+  },
+  {
+    id: '622d895e-9e43-474b-9539-05bfb46d5d8b',
+    type: 'withdraw',
+    due_date: lastYear,
+    course_id: COURSE_IDS_BY_NAME['BIOL2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
 ];
 const ACADEMIC_DEADLINE_IDS = ACADEMIC_DEADLINE.map((val) => val.id);
 
@@ -113,6 +177,7 @@ const ENROLLED = [
   {
     id: '2108b4e7-daf1-438f-9ad7-7612ef034bd4',
     grade: 20,
+    status: 'inprogress',
     student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
     course_id: COURSE_IDS_BY_NAME['COMP4004'],
     created_at: new Date(),
@@ -124,7 +189,8 @@ const ENROLLED_IDS = ENROLLED.map((val) => val.id);
 const PREREQUISITE = [
   {
     id: 'd59e0654-3cdb-4d68-b8ac-a3a370c773a4',
-    prerequisite_course_id: COURSE_IDS_BY_NAME['COMP3004'],
+    course_id: COURSE_IDS_BY_NAME['BIOL4004'],
+    prerequisite_course_id: COURSE_IDS_BY_NAME['BIOL3004'],
     created_at: new Date(),
     updated_at: new Date()
   }
@@ -160,6 +226,16 @@ const LOGIN_CREDENTIAL = [
     user_role: 'administrator',
     email: 'jelog@gmail.com',
     administrator_id: ADMINISTRATOR_IDS_BY_NAME['Jelog Yugislav'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '9e3978ca-9921-45d1-8171-78db4090e0b6',
+    user_role: 'student',
+    email: 'josh@gmail.com',
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
     //password = "supersecret"
     password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
     created_at: new Date(),

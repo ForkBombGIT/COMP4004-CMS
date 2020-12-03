@@ -1,16 +1,30 @@
 // const {authenticate} = require("@feathersjs/authentication").hooks;
 const { paramsFromClient } = require('feathers-hooks-common');
 
-// GET /my-service?name=John&include=1
 const includeCourse = () => (context) => {
-  console.log(context.params.models);
   if (context.params.models && context.params.models.includes('course')) {
     const courseModel = context.app.services.course.Model;
 
     context.params.sequelize = {
       raw: false,
       include: [{
-        model: courseModel
+        model: courseModel,
+        where: { id: '63b804de-c0fd-47c2-a391-5d14999c27a1' }
+      }],
+    };
+  }
+  return context;
+};
+
+const includeCourseWithQuery = () => (context) => {
+  if (context.params.models && context.params.models.includes('courseWithQuery')) {
+    const courseModel = context.app.services.course.Model;
+
+    context.params.sequelize = {
+      raw: false,
+      include: [{
+        model: courseModel,
+        where: { id: context.params.data }
       }],
     };
   }
@@ -20,8 +34,8 @@ const includeCourse = () => (context) => {
 module.exports = {
   before: {
     all: [paramsFromClient('models','data')],
-    find: [includeCourse()],
-    get: [],
+    find: [includeCourse(), ],
+    get: [includeCourseWithQuery()],
     create: [],
     update: [],
     patch: [],

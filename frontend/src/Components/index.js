@@ -7,3 +7,5 @@ export { default as ModelUpdateForm } from "./ModelUpdateForm";
 export { default as ModelDetailModal } from "./ModelDetailModal";
 export { default as LogoutButton } from "./LogoutButton";
 export { default as RegisterList } from "./RegisterList";
+export { default as DeliverableList } from "./DeliverableList";
+export { default as Deliverable } from "./Deliverable";

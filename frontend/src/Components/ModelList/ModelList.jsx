@@ -20,7 +20,10 @@ const ModelList = (props) => {
     createItem,
     editItem,
     removeItem,
-    linkItem = () => {},
+    linkItem,
+    registerItem,
+    unRegisterItem,
+    dataService,
   } = props;
   const [data, setData] = useState(list);
   useEffect(() => {
@@ -37,7 +40,7 @@ const ModelList = (props) => {
             <ListItem key={entry.id}>
               <ListItemText primary={entry.name} />
               <ListItemSecondaryAction>
-                {service === "application" && createItem !== undefined && (
+                {createItem && (
                   <IconButton name="add-button" edge="end" aria-label="add">
                     <Add
                       edge="end"
@@ -49,7 +52,7 @@ const ModelList = (props) => {
                     />
                   </IconButton>
                 )}
-                {service !== "application" && editItem !== undefined && (
+                {editItem && (
                   <IconButton
                     name="edit-button"
                     edge="end"
@@ -61,7 +64,7 @@ const ModelList = (props) => {
                     <Edit />
                   </IconButton>
                 )}
-                {removeItem !== undefined && (
+                {removeItem && (
                   <IconButton
                     edge="end"
                     name="delete-button"
@@ -73,7 +76,7 @@ const ModelList = (props) => {
                     <Delete />
                   </IconButton>
                 )}
-                {service === "course" && (
+                {linkItem && (
                   <IconButton
                     name="link-button"
                     edge="end"
@@ -83,6 +86,30 @@ const ModelList = (props) => {
                     }}
                   >
                     <MoreHoriz />
+                  </IconButton>
+                )}
+                {registerItem && (
+                  <IconButton
+                    name="register-button"
+                    edge="end"
+                    aria-label="register"
+                    onClick={() => {
+                      registerItem(dataService, entry.id);
+                    }}
+                  >
+                    <Add />
+                  </IconButton>
+                )}
+                {unRegisterItem && (
+                  <IconButton
+                    name="unregister-button"
+                    edge="end"
+                    aria-label="unregister"
+                    onClick={() => {
+                      unRegisterItem(dataService, entry.id);
+                    }}
+                  >
+                    <Delete />
                   </IconButton>
                 )}
               </ListItemSecondaryAction>
