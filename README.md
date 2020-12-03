@@ -1,5 +1,5 @@
 # COMP4004 Final Project
-<img src="landing-page.png" width="100%" />
+<img src="landing-image.png" width="100%" />
 
 ## Table of Contents
 - [About the Repo](#about-the-repo)
