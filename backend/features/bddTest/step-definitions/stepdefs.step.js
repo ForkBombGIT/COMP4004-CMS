@@ -56,6 +56,16 @@ module.exports = function () {
             callback();
         });
     });
+    this.Given(/^A deliverable is created with the name "([^"]*)" and weight (\d+) and due on "([^"]*)"$/, function (n, w, d, callback) {
+        driver.findElement(by.name("name")).sendKeys(n);
+        driver.findElement(by.id("deliverable-weight")).sendKeys(selenium.Key.CONTROL + "a");
+        driver.findElement(by.id("deliverable-weight")).sendKeys(w);
+        driver.findElement(by.name("due")).sendKeys(d);
+        driver.findElement(by.name("create-button")).click();
+        driver.sleep(2000).then(() => {
+            callback();
+        });
+    });
     this.Given(/^I am logged in as "([^"]*)" with password "([^"]*)" and role "([^"]*)"$/, function (email,password,role,callback) {
         helpers.loadPage('http://localhost:3000/');
         driver.findElement(by.name("email")).sendKeys(email);
@@ -179,4 +189,5 @@ module.exports = function () {
             }
         });
     });
+
 };
