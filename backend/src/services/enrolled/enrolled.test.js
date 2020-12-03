@@ -15,7 +15,8 @@ describe('"enrolled" service', () => {
       name: 'TEST_COURSE'
     };
     const student = {
-      name: 'TEST_NAME'
+      name: 'TEST_NAME',
+      birth_date: '2020-01-01',
     };
 
     const c = await courseSservice.create(course);

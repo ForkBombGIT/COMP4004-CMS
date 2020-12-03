@@ -17,6 +17,7 @@ describe('"student" service', () => {
     const testStudent = {
       id: '99d21763-f1e1-4bba-b163-a4a56dba4257',
       name: 'james',
+      birth_date: '2020-01-01',
     };
 
     try { 
@@ -34,6 +35,7 @@ describe('"student" service', () => {
     const testStudent = {
       id: '99d21763-f1e1-4bba-b163-a4a56dba4257',
       name: 'james',
+      birth_date: '2020-01-01',
     };
 
     try { 
@@ -47,6 +49,7 @@ describe('"student" service', () => {
     const updateStudent = {
       id: '99d21763-f1e1-4bba-b163-a4a56dba4257',
       name: 'billy',
+      birth_date: '2020-01-01',
     };
     
     let updatedRecord = await service.patch(updateStudent.id,updateStudent);
@@ -63,6 +66,7 @@ describe('"student" service', () => {
     const testStudent = {
       id: '99d21763-f1e1-4bba-b163-a4a56dba4257',
       name: 'james',
+      birth_date: '2020-01-01',
     };
 
     try { 
