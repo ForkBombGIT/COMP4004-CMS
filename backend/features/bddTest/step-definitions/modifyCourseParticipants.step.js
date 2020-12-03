@@ -35,8 +35,6 @@ module.exports = function () {
             }
         }
         ).then((record) => {
-            console.log("stuff: ")
-            console.log(record)
             app.patch(record[0].id, { professorId: null }).then(() => {
                 callback()
             });
@@ -60,8 +58,7 @@ module.exports = function () {
                 }
             }).then((student) => {
             console.log(student);
-                app3.create({ studentId: student[0].id, courseId: course[0].id }).then((e) => {
-                    console.log(e)
+                app3.create({ studentId: student[0].id, courseId: course[0].id }).then(() => {
                     callback()
                 });
             })
