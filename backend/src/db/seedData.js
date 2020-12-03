@@ -107,6 +107,16 @@ const COURSE = [
     status: 'inprogress',
     created_at: new Date(),
     updated_at: new Date()
+  },
+  {
+    id: 'a11cd32c-900a-42fe-bd86-b3f554aeebcc',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    name: 'COMP2406',
+    time_slot: 'Tuesday at noon',
+    capacity: 108,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const COURSE_IDS = COURSE.map((val) => val.id);
