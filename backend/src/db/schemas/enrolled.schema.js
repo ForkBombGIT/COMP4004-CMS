@@ -9,4 +9,8 @@ module.exports = (DataTypes) => ({
   grade: {
     type: DataTypes.INTEGER
   },
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: 'inprogress'
+  }
 });

@@ -168,7 +168,6 @@ const AdminPage = () => {
                     <ModelList
                       title="Courses"
                       service="course"
-                      createItem={createItem}
                       editItem={editItem}
                       removeItem={removeItem}
                       linkItem={linkItem}

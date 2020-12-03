@@ -10,6 +10,7 @@ module.exports = (DataTypes) => ({
     type: DataTypes.INTEGER
   },
   submission: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    defaultValue: ''
   }
 });

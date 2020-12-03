@@ -1,0 +1,24 @@
+.deliverable-item {
+  border: 1px solid #c7c7c7;
+  border-radius: 2px;
+  padding: 10px;
+  margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  .deliverable-text {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .deliverable-text-area {
+    width: 100%;
+  }
+
+  .submit-button {
+    align-self: center;
+    width: 200px;
+    margin: 10px;
+  }
+}
