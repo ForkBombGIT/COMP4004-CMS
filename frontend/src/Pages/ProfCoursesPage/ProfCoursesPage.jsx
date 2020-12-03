@@ -12,6 +12,7 @@ import {
   NotFound,
   ModelList,
   ModelCreationForm,
+  ModelDetailModal,
 } from "Components";
 import { notifySuccess, notifyFailure, subscribeToService } from "Utils/";
 import { Client } from "Server";
@@ -29,6 +30,8 @@ const ProfCoursesPage = () => {
   const [dbInteraction, setDbInteraction] = useState(false);
   const [professor, setProfessor] = useState([]);
   const [deliverables, setDeliverables] = useState([]);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [modalModel, setModalModel] = useState({});
 
   /* ------------------------------------ Data manipulation functions --------------------------*/
   const setCurrentProfessor = (id) => {
@@ -40,6 +43,13 @@ const ProfCoursesPage = () => {
       .catch(() => {
         setProfessor("No professor");
       });
+  };
+
+  const editItem = (s, item) => {
+    setDisplayModal(true);
+    const modelForModal = item;
+    modelForModal.service = s;
+    setModalModel(modelForModal);
   };
 
   const removeItem = (s, id) => {
@@ -130,11 +140,18 @@ const ProfCoursesPage = () => {
                   title="Deliverables"
                   service="deliverable"
                   list={deliverables}
+                  editItem={editItem}
                   removeItem={removeItem}
                 />
               </div>
             </CardContent>
           </Card>
+          <ModelDetailModal
+            display={displayModal}
+            setDisplay={setDisplayModal}
+            model={modalModel}
+            relatedModelId={courseId}
+          />
         </Container>
       ) : (
         <Route component={NotFound} />
