@@ -7,27 +7,12 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core/";
-import { notifySuccess, notifyFailure } from "Utils/";
+import { notifySuccess, notifyFailure, createModel } from "Utils/";
 import "./ModelUpdateForm.scss";
 import { Client } from "Server";
 
-export const createModel = (
-  roleVal,
-  nameVal,
-  birthVal = undefined,
-  capVal = undefined,
-  timeVal = undefined,
-  status = undefined
-) => ({
-  name: nameVal === "" ? null : nameVal,
-  birth_date: roleVal === "student" ? birthVal : undefined,
-  capacity: roleVal === "course" ? capVal : undefined,
-  time_slot: roleVal === "course" ? timeVal : undefined,
-  status: roleVal === "course" ? status : undefined,
-});
-
 const ModelUpdateForm = (props) => {
-  const { setDisplay, model } = props;
+  const { setDisplay, model, relatedModelId } = props;
   const formRef = useRef();
   const [nameVal, setNameVal] = useState(model.name);
   const [emailVal, setEmailVal] = useState();
@@ -37,6 +22,8 @@ const ModelUpdateForm = (props) => {
   const [capVal, setCapVal] = useState(model.capacity);
   const [timeVal, setTimeVal] = useState(model.time_slot);
   const [statusVal, setStatusVal] = useState(model.status);
+  const [dueDateVal, setDueDateVal] = useState(model.due_date);
+  const [weightVal, setWeightVal] = useState(model.weight);
 
   const handleNameChange = (event) => {
     setNameVal(event.target.value);
@@ -62,20 +49,30 @@ const ModelUpdateForm = (props) => {
     setStatusVal(event.target.value);
   };
 
+  const handleDueDateChange = (event) => {
+    setDueDateVal(event.target.value);
+  };
+
+  const handleWeightChange = (event) => {
+    setWeightVal(event.target.value);
+  };
+
   const handleModelUpdate = (event) => {
     event.preventDefault();
+    const createdModel = createModel(
+      model.service,
+      nameVal,
+      birthVal,
+      capVal,
+      timeVal,
+      statusVal,
+      dueDateVal,
+      weightVal,
+      relatedModelId
+    );
+    console.log(createdModel);
     Client.service(model.service)
-      .patch(
-        model.id,
-        createModel(
-          model.service,
-          nameVal,
-          birthVal,
-          capVal,
-          timeVal,
-          statusVal
-        )
-      )
+      .patch(model.id, createdModel)
       .then(() => {
         notifySuccess("Successful Update!");
         setDisplay(false);
@@ -85,6 +82,8 @@ const ModelUpdateForm = (props) => {
         setCapVal(0);
         setTimeVal("");
         setStatusVal("");
+        setDueDateVal("");
+        setWeightVal(0);
       })
       .catch((e) => {
         notifyFailure("Unsuccessful Update!");
@@ -118,7 +117,7 @@ const ModelUpdateForm = (props) => {
             }}
           />
         )}
-        {model.service !== "course" && (
+        {(model.service !== "course" && model.service !== "deliverable") && (
           <TextField
             id="modal-user-email"
             name="modal-email"
@@ -171,7 +170,28 @@ const ModelUpdateForm = (props) => {
             </FormControl>
           </>
         )}
-        <Button variant="contained" name="update-button" type="submit">
+        {model.service === "deliverable" && (
+          <>
+            <TextField
+              id="modal-deliverable-weight"
+              name="modal-weight"
+              label="Weight"
+              variant="filled"
+              type="number"
+              value={weightVal}
+              onChange={handleWeightChange}
+            />
+            <TextField
+              id="modal-deliverable-due-date"
+              name="modal-due"
+              label="Due Date"
+              variant="filled"
+              value={dueDateVal}
+              onChange={handleDueDateChange}
+            />
+          </>
+        )}
+        <Button variant="contained" id="update-button" type="submit">
           UPDATE
         </Button>
       </form>

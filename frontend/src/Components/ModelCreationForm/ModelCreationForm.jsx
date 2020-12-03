@@ -8,30 +8,9 @@ import {
   FormControl,
   InputLabel,
 } from "@material-ui/core/";
-import { notifySuccess, notifyFailure } from "Utils/";
+import { notifySuccess, notifyFailure, createModel } from "Utils/";
 import "./ModelCreationForm.scss";
 import { Client } from "Server";
-
-export const createModel = (
-  model,
-  name,
-  birth = undefined,
-  cap = undefined,
-  time = undefined,
-  status = undefined,
-  due = undefined,
-  weight = undefined,
-  relatedModelId = undefined
-) => ({
-  name: name === "" ? undefined : name,
-  birth_date: model === "student" ? birth : undefined,
-  capacity: model === "course" ? cap : undefined,
-  time_slot: model === "course" ? time : undefined,
-  status: model === "course" ? status : undefined,
-  weight: model === "deliverable" ? weight : undefined,
-  due_date: model === "deliverable" ? due : undefined,
-  courseId: model === "deliverable" ? relatedModelId : undefined,
-});
 
 const ModelCreationForm = (props) => {
   const { title, service, relatedModelId } = props;

@@ -139,7 +139,7 @@ module.exports = function () {
       });
     this.When(/^I update the model$/, function (callback) {
         driver.sleep(500).then(() => {
-            driver.findElement(by.name("update-button")).click();
+            driver.findElement(by.id("update-button")).click();
             driver.sleep(1000).then(() => {
                 callback();
             });

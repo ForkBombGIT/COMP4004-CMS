@@ -16,7 +16,7 @@ services:
       context: ./backend
       args:
         - ENV=development
-    command: sh -c "yarn db:retryable-migrate && yarn db:seed"
+    command: sh -c "yarn db:retryable-migrate && yarn db:seed:docker"
     depends_on:
       - db
     image: backend
