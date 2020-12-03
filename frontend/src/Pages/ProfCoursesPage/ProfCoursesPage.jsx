@@ -13,7 +13,7 @@ import {
   ModelList,
   ModelCreationForm,
 } from "Components";
-import { subscribeToService } from "Utils/";
+import { notifySuccess, notifyFailure, subscribeToService } from "Utils/";
 import { Client } from "Server";
 
 import "./ProfCoursesPage.scss";
@@ -26,6 +26,7 @@ const ProfCoursesPage = () => {
     time_slot: "",
     capacity: "",
   });
+  const [dbInteraction, setDbInteraction] = useState(false);
   const [professor, setProfessor] = useState([]);
   const [deliverables, setDeliverables] = useState([]);
 
@@ -39,6 +40,21 @@ const ProfCoursesPage = () => {
       .catch(() => {
         setProfessor("No professor");
       });
+  };
+
+  const removeItem = (s, id) => {
+    if (!dbInteraction) {
+      setDbInteraction(true);
+      Client.service(s)
+        .remove(id)
+        .then(() => {
+          setDbInteraction(false);
+          notifySuccess("Successful Deletion");
+        })
+        .catch(() => {
+          notifyFailure("Unsuccessful Creation");
+        });
+    }
   };
 
   /* ------------------------------------ Event listener setup --------------------------*/
@@ -114,6 +130,7 @@ const ProfCoursesPage = () => {
                   title="Deliverables"
                   service="deliverable"
                   list={deliverables}
+                  removeItem={removeItem}
                 />
               </div>
             </CardContent>
