@@ -1,4 +1,4 @@
-Feature: As an administrator I want to be able to delete a student
+Feature: As an administrator I want to be able to delete a deliverable
 Scenario: Successful Deletion
     Given I am logged in as "joslo@gmail.com" with password "supersecret" and role "professor"
     Then I click on "COMP4004" "link" button in the "course" list
