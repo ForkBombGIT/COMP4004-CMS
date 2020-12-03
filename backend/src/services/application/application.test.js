@@ -16,7 +16,8 @@ describe('"application" service', () => {
 
     const testApplication = {
       id: '99d21763-f1e1-4bba-b163-a4a56dba5257',
-      name: 'james'
+      name: 'james',
+      birth_date: '2020-01-01',
     };
 
     try { 
@@ -24,10 +25,9 @@ describe('"application" service', () => {
     } catch (e) {console.log('No record to remove');}
 
     let createdRecord = await service.create(testApplication);
+    console.log(createdRecord);
 
     expect(checkObjectContains(createdRecord, testApplication)).toBeTruthy();
   });
-
-  
 
 });
