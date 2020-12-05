@@ -85,10 +85,10 @@ const ProfCoursesPage = () => {
         .remove(id)
         .then(() => {
           setDbInteraction(false);
-          notifySuccess("Successful Deletion");
+          notifySuccess("Successful Deletion!");
         })
         .catch(() => {
-          notifyFailure("Unsuccessful Creation");
+          notifyFailure("Unsuccessful Creation!");
         });
     }
   };

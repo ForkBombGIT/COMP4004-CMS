@@ -1,4 +1,4 @@
-Feature: As an administrator I want to be able to remove a student to a course
+Feature: As an administrator I want to be able to remove a student from a course
 Scenario: Remove successfully
   Given I am logged in as "jelog@gmail.com" with password "supersecret" and role "administrator"
   Then I click on "COMP4004" "link" button in the "course" list

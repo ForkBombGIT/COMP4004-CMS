@@ -1,7 +1,6 @@
 Feature: As an administrator I want to be able to delete a administrator
-Scenario: Successful Deletion
+Scenario: Delete admin successfully
     Given I am logged in as "jelog@gmail.com" with password "supersecret" and role "administrator"
-    Given A "administrator" is created with the name "TESTADM" and email "TESTADM@gmail.com"
-    Then I am notified about a "success" with message "Successful Creation!"
-    Then I click on "TESTADM" "delete" button in the "administrator" list
-    Then "TESTADM" should NOT be displayed in the "administrator" list
+    Then I click on "Calvin Cordozar Broadus Jr." "delete" button in the "administrator" list
+    Then I am notified about a "success" with message "Successful Deletion!"
+    Then "Calvin Cordozar Broadus Jr." should NOT be displayed in the "administrator" list

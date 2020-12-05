@@ -13,7 +13,7 @@ module.exports = function () {
         driver.findElement(by.name(s)).click();
         driver.findElement(by.name("name")).sendKeys(n);
         driver.findElement(by.name("email")).sendKeys(e);
-        driver.findElement(by.name("create-button")).click();
+        driver.findElement(by.id("create-button")).click();
         driver.sleep(2000).then(() => {
             callback();
         });
@@ -24,7 +24,7 @@ module.exports = function () {
         driver.findElement(by.name("name")).sendKeys(n);
         driver.findElement(by.name("email")).sendKeys(e);
         driver.findElement(by.name("birth")).sendKeys(b);
-        driver.findElement(by.name("create-button")).click();
+        driver.findElement(by.id("create-button")).click();
         driver.sleep(2000).then(() => {
             callback();
         });
@@ -36,7 +36,7 @@ module.exports = function () {
         driver.findElement(by.id("course-capacity")).sendKeys(selenium.Key.CONTROL + "a");
         driver.findElement(by.id("course-capacity")).sendKeys(c);
         driver.findElement(by.name("time")).sendKeys(d);
-        driver.findElement(by.name("create-button")).click();
+        driver.findElement(by.id("create-button")).click();
         driver.sleep(2000).then(() => {
             callback();
         });
@@ -46,7 +46,7 @@ module.exports = function () {
         driver.findElement(by.id("deliverable-weight")).sendKeys(selenium.Key.CONTROL + "a");
         driver.findElement(by.id("deliverable-weight")).sendKeys(w);
         driver.findElement(by.name("due")).sendKeys(d);
-        driver.findElement(by.name("create-button")).click();
+        driver.findElement(by.id("create-button")).click();
         driver.sleep(2000).then(() => {
             callback();
         });
@@ -102,25 +102,14 @@ module.exports = function () {
         callback();
     });
     this.When(/^I create the model$/, function (callback) {
-        driver.findElement(by.name("create-button")).click();
+        driver.findElement(by.id("create-button")).click();
         driver.sleep(1000).then(() => {
             callback();
         });
     });
     this.Then(/^"([^"]*)" should be displayed in the "([^"]*)" list$/, function (n,s,callback) {
         driver.findElement(by.xpath(`//ul[@id='${s}-list']//*[contains(text(),'${n}')]`)).then((e)=>{
-            const app = shared.app.api.service(s);
-            app.find({
-                query: {
-                    name: n
-                }
-                }
-            ).then((records) => {
-                for (var i = 0; i < records.length; i++) {
-                app.remove(records[i].id);
-                }
-                callback()
-            })
+            callback();
         })
     });
 
@@ -142,7 +131,16 @@ module.exports = function () {
         elem.sendKeys(selenium.Key.DELETE);
         elem.sendKeys(value);
         callback();
-      });
+    });
+
+    this.Then(/^I update the model "([^"]*)" to (\d+)$/, function (field, value, callback) {
+        const elem = driver.findElement(by.name(field));
+        elem.sendKeys(selenium.Key.CONTROL + "a");
+        elem.sendKeys(selenium.Key.DELETE);
+        elem.sendKeys(value);
+        callback();
+    });
+
     this.When(/^I update the model$/, function (callback) {
         driver.sleep(500).then(() => {
             driver.findElement(by.id("update-button")).click();

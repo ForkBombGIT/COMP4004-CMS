@@ -8,7 +8,7 @@ module.exports = function () {
 
   this.When(/^I click the register button$/, function (callback) {
     driver.findElement(By.id('register-button')).click();
-    driver.sleep(1000).then(() => {
+    driver.sleep(500).then(() => {
       callback();
     });
   });
