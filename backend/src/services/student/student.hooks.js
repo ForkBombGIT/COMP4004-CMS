@@ -9,7 +9,6 @@ const includeCourse = () => (context) => {
       raw: false,
       include: [{
         model: courseModel,
-        where: { id: '63b804de-c0fd-47c2-a391-5d14999c27a1' }
       }],
     };
   }

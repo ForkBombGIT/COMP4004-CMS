@@ -102,6 +102,14 @@ const validateRemoval = () => async (context) => {
   });
 };
 
+const validateGradeSubmit= () => async (context) => {
+  if (context.data.grade && !context.data.grade.match('^[1-9][0-9]?$|^100$')) {
+    throw new errors.GeneralError('Failure, grade must be between 0-100!');
+  }
+
+  return context;
+};
+
 module.exports = {
   before: {
     all: [],
@@ -109,7 +117,7 @@ module.exports = {
     get: [],
     create: [validateSubmission()],
     update: [],
-    patch: [],
+    patch: [validateGradeSubmit()],
     remove: [validateRemoval()]
   },
 
