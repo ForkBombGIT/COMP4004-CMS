@@ -37,10 +37,10 @@ const AdminPage = () => {
         .remove(id)
         .then(() => {
           setDbInteraction(false);
-          if (s !== "application") notifySuccess("Successful Deletion");
+          if (s !== "application") notifySuccess("Successful Deletion!");
         })
         .catch(() => {
-          notifyFailure("Unsuccessful Creation");
+          notifyFailure("Unsuccessful Creation!");
         });
     }
   };
@@ -62,10 +62,10 @@ const AdminPage = () => {
           if (s === "application") {
             removeItem(s, item.id);
           }
-          notifySuccess("Successful Creation");
+          notifySuccess("Successful Creation!");
         })
         .catch(() => {
-          notifyFailure("Unsuccessful Creation");
+          notifyFailure("Unsuccessful Creation!");
         })
         .finally(() => {
           setDbInteraction(false);

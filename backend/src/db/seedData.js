@@ -28,13 +28,27 @@ const PROFESSOR = [
     name: 'Gull Johnson',
     created_at: new Date(),
     updated_at: new Date()
+  },
+  // Used for professor delete scenario
+  {
+    id: 'a95c4a15-4b91-4def-b68e-a59a60855086',
+    name: 'Feta Porta',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for professor update scenario
+  {
+    id: 'a95c4a15-4b91-4def-b68e-a69a60855086',
+    name: 'Jermaine Cole',
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const PROFESSOR_IDS = PROFESSOR.map((val) => val.id);
 const PROFESSOR_IDS_BY_NAME = [...PROFESSOR].reduce(keyIdByName, {});
 
 const COURSE = [
-  // Used for test academic deadlin3
+  // Used for test academic deadline
   {
     id: '1cc2a365-ee09-42ab-ab16-b3b760cb2780',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
@@ -45,7 +59,7 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
-  // Used for test academic deadlin3
+  // Used for test academic deadline
   {
     id: '3520f4be-c8eb-4cf9-b8df-038e3ce1aecd',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
@@ -134,6 +148,7 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for professor deliverable tests, and failure paths
   {
     id: 'a11cd32c-900a-42fe-bd86-b3f554aeebcc',
     professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
@@ -162,6 +177,27 @@ const COURSE = [
     name: 'JAPA4004',
     time_slot: 'Friday at noon',
     capacity: 58,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for updateCourse scenario
+  {
+    id: '6c31443b-a967-4c92-ad74-061d31ed6529',
+    professor_id: null,
+    name: 'BUSI2503',
+    time_slot: 'Friday at noon',
+    capacity: 100,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '6c31443b-a967-5c92-ad74-061d31ed6529',
+    professor_id: null,
+    name: 'BUSI3119',
+    time_slot: 'Friday at noon',
+    capacity: 100,
     status: 'inprogress',
     created_at: new Date(),
     updated_at: new Date()
@@ -207,6 +243,20 @@ const ADMINISTRATOR = [
     name: 'Jelog Yugislav',
     created_at: new Date(),
     updated_at: new Date()
+  },
+  // Used for delete admin test
+  {
+    id: 'c5f20a34-66ab-4872-bc7c-2d29693105bc',
+    name: 'Calvin Cordozar Broadus Jr.',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for update admin test
+  {
+    id: 'c5f20a34-66ab-4872-bc7c-1e29693105bd',
+    name: 'Andre Romelle Young',
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const ADMINISTRATOR_IDS = ADMINISTRATOR.map((val) => val.id);
@@ -234,8 +284,24 @@ const STUDENT = [
   },
   {
     id: 'df88f9b9-64bb-457c-a888-8efedd1295c3',
-    name: 'Eros Dipede',
+    name: 'Eros Di Pede',
     student_number: '101512915',
+    birth_date: new Date(),
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: 'df88f9b8-64bb-457c-a888-2efedd1295c3',
+    name: 'Wesley Peckinghem',
+    student_number: '10103500',
+    birth_date: new Date(),
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: 'df88f9b9-64bb-457c-a888-2efedd1295c3',
+    name: 'Jarold Patinkin',
+    student_number: '10103500',
     birth_date: new Date(),
     created_at: new Date(),
     updated_at: new Date()
@@ -271,6 +337,36 @@ const DELIVERABLE = [
     weight: 0.2,
     due_date: lastYear,
     course_id: COURSE_IDS_BY_NAME['COMP1104'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // used in Update deliverable success test
+  {
+    id: '75adfb49-8516-417c-ad8c-d0d9aa1cf772',
+    name: 'deliverable assignment 4',
+    weight: 0.2,
+    due_date: lastYear,
+    course_id: COURSE_IDS_BY_NAME['COMP2406'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for update deliverable invalid path a
+  {
+    id: '75adfb49-8516-417c-ad8c-d0d8aa1cf772',
+    name: 'deliverable assignment 1',
+    weight: 0.2,
+    due_date: lastYear,
+    course_id: COURSE_IDS_BY_NAME['COMP2406'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // Used for delete deliverable invalid path a
+  {
+    id: '75adfb49-8516-417d-ad8c-d0d8aa1cf772',
+    name: 'deliverable assignment 2',
+    weight: 0.2,
+    due_date: lastYear,
+    course_id: COURSE_IDS_BY_NAME['COMP2406'],
     created_at: new Date(),
     updated_at: new Date()
   }

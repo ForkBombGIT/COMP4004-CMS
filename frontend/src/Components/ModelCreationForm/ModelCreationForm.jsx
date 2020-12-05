@@ -220,7 +220,7 @@ const ModelCreationForm = (props) => {
             />
           </>
         )}
-        <Button variant="contained" name="create-button" type="submit">
+        <Button variant="contained" id="create-button" type="submit">
           CREATE
         </Button>
       </form>

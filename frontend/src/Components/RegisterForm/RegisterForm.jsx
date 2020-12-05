@@ -31,7 +31,7 @@ const RegisterForm = () => {
       setStudentName("");
       setStudentBirthDate("");
     } catch (e) {
-      notifyFailure("Application Creation Failed");
+      notifyFailure("Application Creation Failed!");
     }
   };
 

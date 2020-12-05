@@ -11,7 +11,7 @@ const LogoutButton = () => {
     event.preventDefault();
 
     const client = await auth.signout();
-    if (client === null) notifyFailure("Unsuccessful Logout");
+    if (client === null) notifyFailure("Unsuccessful Logout!");
     else if (client.token !== null) {
       notifySuccess("Logout Successfull!");
       history.push(RouterPaths.LOGIN);
