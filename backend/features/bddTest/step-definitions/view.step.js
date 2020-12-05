@@ -13,6 +13,20 @@ module.exports = function () {
         })
       });
 
+    this.Then(/^I should see the students deliverables$/, function (callback) {
+        driver.findElements(by.id("deliverable-list")).then((elements)=>{
+            expect(elements.length).to.gte(1);
+            callback();
+        })
+      });
+
+    this.Then(/^I should see students in my course$/, function (callback) {
+        driver.findElements(by.id("registered-students-list")).then((elements)=>{
+            expect(elements.length).to.gte(1);
+            callback();
+        })
+      });
+
     this.Then(/^I should see deliverables my course has$/, function (callback) {
         driver.findElements(by.id("deliverable-list")).then((elements)=>{
             expect(elements.length).to.gte(1);

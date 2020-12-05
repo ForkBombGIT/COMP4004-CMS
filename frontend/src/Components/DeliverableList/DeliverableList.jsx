@@ -16,7 +16,7 @@ import { Client } from "Server";
 import "./DeliverableList.scss";
 
 const DeliverableList = (props) => {
-  const { title, service, studentId, list } = props;
+  const { title, service, studentId, list, professorId } = props;
   const [data, setData] = useState(list);
   useEffect(() => {
     setData(list);
@@ -30,7 +30,11 @@ const DeliverableList = (props) => {
         </Typography>
         <List id={`${service}-list`} dense>
           {data.map((entry) => (
-            <Deliverable studentId={studentId} deliverable={entry} />
+            <Deliverable
+              studentId={studentId}
+              professorId={professorId}
+              deliverable={entry}
+            />
           ))}
         </List>
       </CardContent>

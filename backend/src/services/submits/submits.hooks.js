@@ -30,7 +30,6 @@ const upsert = () => async (context) => {
 };
 
 const validateSubmission = () => async (context) => {
-
   Object.values(context.data).map((field) => {
 
     if (!field.length) {
@@ -42,6 +41,10 @@ const validateSubmission = () => async (context) => {
 
   if (new Date() > new Date(response.due_date)) {
     throw new errors.GeneralError('Failure, past due date!');
+  }
+
+  if (context.data.grade && !context.data.grade.match('^[1-9][0-9]?$|^100$')) {
+    throw new errors.GeneralError('Failure, grade must be between 0-100!');
   }
 
   return context;
