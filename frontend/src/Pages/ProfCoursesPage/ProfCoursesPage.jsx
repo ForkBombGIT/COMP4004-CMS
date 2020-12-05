@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Route } from "react-router-dom";
+import { paramsForServer } from "feathers-hooks-common";
 import {
   CardContent,
   Container,
@@ -7,6 +7,14 @@ import {
   Card,
   Divider,
 } from "@material-ui/core/";
+import {
+  useParams,
+  Switch,
+  Route,
+  useRouteMatch,
+  useHistory,
+} from "react-router-dom";
+import { ProfStudentPage } from "Pages/";
 import {
   LogoutButton,
   NotFound,
@@ -22,6 +30,7 @@ import "./ProfCoursesPage.scss";
 const ProfCoursesPage = () => {
   /* ------------------------------------ State setters --------------------------*/
   const { courseId } = useParams();
+  const history = useHistory();
   const [courseData, setCourseData] = useState({
     name: "",
     time_slot: "",
@@ -31,7 +40,13 @@ const ProfCoursesPage = () => {
   const [professor, setProfessor] = useState([]);
   const [deliverables, setDeliverables] = useState([]);
   const [displayModal, setDisplayModal] = useState(false);
+  const [registeredStudents, setRegisteredStudents] = useState([]);
   const [modalModel, setModalModel] = useState({});
+  const { path, url } = useRouteMatch();
+
+  const linkItem = (id) => {
+    history.push(`${url}/${id}`);
+  };
 
   /* ------------------------------------ Data manipulation functions --------------------------*/
   const setCurrentProfessor = (id) => {
@@ -43,6 +58,17 @@ const ProfCoursesPage = () => {
       .catch(() => {
         setProfessor("No professor");
       });
+  };
+
+  const removeUnRegistered = (data) => {
+    return data.filter((student) => {
+      return student.courses.reduce((acc, course) => {
+        if (acc === true || courseId === course.enrolled.courseId) {
+          return true;
+        }
+        return false;
+      }, false);
+    });
   };
 
   const editItem = (s, item) => {
@@ -95,7 +121,27 @@ const ProfCoursesPage = () => {
       },
       setDeliverables
     );
+    subscribeToService(
+      ["enrolled", "student"],
+      "student",
+      removeUnRegistered,
+      paramsForServer({
+        query: {},
+        models: ["course"],
+      }),
+      setRegisteredStudents
+    );
     /* ------------------------------------ Initial loading --------------------------*/
+    Client.service("student")
+      .find(
+        paramsForServer({
+          query: {},
+          models: ["course"],
+        })
+      )
+      .then((data) => {
+        setRegisteredStudents(removeUnRegistered(data));
+      });
     Client.service("course")
       .get(courseId)
       .then((data) => {
@@ -109,54 +155,67 @@ const ProfCoursesPage = () => {
 
   /* ------------------------------------ render--------------------------*/
   return (
-    <div id="content">
-      {courseData ? (
-        <Container maxWidth="lg">
-          <Card>
-            <CardContent id="header">
-              <Typography variant="h6" component="h2">
-                {`Course: ${courseData.name}`}
-              </Typography>
-              <Typography variant="h6" component="h2">
-                {`Time slot: ${courseData.time_slot}`}
-              </Typography>
-              <Typography variant="h6" component="h2">
-                {`Capacity: ${courseData.capacity}`}
-              </Typography>
-              <Typography variant="h6" component="h2">
-                {`Registered Professor: ${professor}`}
-              </Typography>
-              <LogoutButton />
-            </CardContent>
-            <Divider />
-            <CardContent id="course-management">
-              <ModelCreationForm
-                title="Deliverable Creation Form"
-                service="deliverable"
+    <Switch>
+      <Route exact path={path}>
+        <div id="content">
+          {courseData ? (
+            <Container maxWidth="lg">
+              <Card>
+                <CardContent id="header">
+                  <Typography variant="h6" component="h2">
+                    {`Course: ${courseData.name}`}
+                  </Typography>
+                  <Typography variant="h6" component="h2">
+                    {`Time slot: ${courseData.time_slot}`}
+                  </Typography>
+                  <Typography variant="h6" component="h2">
+                    {`Capacity: ${courseData.capacity}`}
+                  </Typography>
+                  <Typography variant="h6" component="h2">
+                    {`Registered Professor: ${professor}`}
+                  </Typography>
+                  <LogoutButton />
+                </CardContent>
+                <Divider />
+                <CardContent id="course-management">
+                  <ModelCreationForm
+                    title="Deliverable Creation Form"
+                    service="deliverable"
+                    relatedModelId={courseId}
+                  />
+                  <div>
+                    <ModelList
+                      title="Deliverables"
+                      service="deliverable"
+                      list={deliverables}
+                      editItem={editItem}
+                      removeItem={removeItem}
+                    />
+                    <ModelList
+                      title="Registered Students"
+                      service="registered-students"
+                      list={registeredStudents}
+                      linkItem={linkItem}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+              <ModelDetailModal
+                display={displayModal}
+                setDisplay={setDisplayModal}
+                model={modalModel}
                 relatedModelId={courseId}
               />
-              <div>
-                <ModelList
-                  title="Deliverables"
-                  service="deliverable"
-                  list={deliverables}
-                  editItem={editItem}
-                  removeItem={removeItem}
-                />
-              </div>
-            </CardContent>
-          </Card>
-          <ModelDetailModal
-            display={displayModal}
-            setDisplay={setDisplayModal}
-            model={modalModel}
-            relatedModelId={courseId}
-          />
-        </Container>
-      ) : (
-        <Route component={NotFound} />
-      )}
-    </div>
+            </Container>
+          ) : (
+            <Route component={NotFound} />
+          )}
+        </div>
+      </Route>
+      <Route path={`${path}/:studentId`}>
+        <ProfStudentPage />
+      </Route>
+    </Switch>
   );
 };
 

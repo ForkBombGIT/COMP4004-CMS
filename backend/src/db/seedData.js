@@ -202,6 +202,17 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for test submit deliverable 
+  {
+    id: '6c01cec4-7247-471c-bf6a-90a5dcf1dc86',
+    professor_id: PROFESSOR_IDS_BY_NAME['Joslo Fredrickson'],
+    name: 'FREN1000',
+    time_slot: 'Friday at noon',
+    capacity: 58,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
 ];
 const COURSE_IDS = COURSE.map((val) => val.id);
 const COURSE_IDS_BY_NAME = [...COURSE].reduce(keyIdByName, {});
@@ -369,6 +380,15 @@ const DELIVERABLE = [
     course_id: COURSE_IDS_BY_NAME['COMP2406'],
     created_at: new Date(),
     updated_at: new Date()
+  },
+  {
+    id: '5a2ed1b7-6052-40b0-80ff-86a0f6da2d80',
+    name: 'assignment 1: french practice',
+    weight: 0.2,
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['FREN1000'],
+    created_at: new Date(),
+    updated_at: new Date()
   }
 ];
 const DELIVERABLE_IDS = DELIVERABLE.map((val) => val.id);
@@ -436,6 +456,16 @@ const ENROLLED = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used for submit deliverable test
+  {
+    id: 'd634052b-b08a-4b56-92a6-8a71d1f308f7',
+    grade: 0,
+    status: 'inprogress',
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    course_id: COURSE_IDS_BY_NAME['FREN1000'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
 ];
 const ENROLLED_IDS = ENROLLED.map((val) => val.id);
 
@@ -465,6 +495,15 @@ const SUBMITS = [
     grade: 50,
     submission: 'Hello my name is Jeremy',
     deliverable_id: DELIVERABLE_IDS_BY_NAME['assignment 2'],
+    student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: 'b1551947-21cb-4142-a0c5-6a97de62d52e',
+    grade: 50,
+    submission: 'This is my french assignment',
+    deliverable_id: DELIVERABLE_IDS_BY_NAME['assignment 1: french practice'],
     student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
     created_at: new Date(),
     updated_at: new Date()

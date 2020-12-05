@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
-import useDeepCompareEffect from "use-deep-compare-effect";
-import {
-  ListItem,
-  ListItemText,
-  TextareaAutosize,
-  Button,
-} from "@material-ui/core/";
+import { ListItem, ListItemText, TextField, Button } from "@material-ui/core/";
 import { notifySuccess, notifyFailure } from "Utils/";
 import { Client } from "Server";
 import "./Deliverable.scss";
 
 const Deliverable = (props) => {
-  const { deliverable, studentId } = props;
+  const { deliverable, studentId, professorId } = props;
   const [entry, setEntry] = useState(deliverable);
   const [deliverableText, setDeliverableText] = useState("");
+  const [grade, setGrade] = useState("");
   const [submitsData, setSubmitsData] = useState(null);
 
   const handleTextAreaChange = (event) => {
     setDeliverableText(event.target.value);
+  };
+
+  const handleGradeChange = (event) => {
+    setGrade(event.target.value);
   };
 
   const createDeliverable = () => ({
@@ -25,6 +24,25 @@ const Deliverable = (props) => {
     deliverableId: entry.id,
     submission: deliverableText,
   });
+
+  const createDeliverableGrade = () => ({
+    studentId,
+    deliverableId: entry.id,
+    grade,
+  });
+
+  const handleGradeSubmit = (event) => {
+    event.preventDefault();
+
+    Client.service("submits")
+      .create(createDeliverableGrade())
+      .then(() => {
+        notifySuccess("Success, deliverable grade submitted!");
+      })
+      .catch((e) => {
+        notifyFailure(e.message);
+      });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -77,6 +95,7 @@ const Deliverable = (props) => {
             entry.due_date ? dateConv(entry.due_date) : "null"
           }`}
         />
+        {!submitsData && <ListItemText primary="No submission" />}
         {submitsData && (
           <>
             <ListItemText primary="Assignment Submitted" />
@@ -89,22 +108,49 @@ const Deliverable = (props) => {
         )}
       </div>
       <div id="deliverable-text-area">
-        <TextareaAutosize
+        <textarea
           value={deliverableText}
           onChange={handleTextAreaChange}
-          rowsMin={5}
-          class="deliverable-text-area"
+          rows={5}
+          className="deliverable-text-area"
+          readOnly={!!professorId}
         />
       </div>
-      <Button
-        className="submit-button"
-        variant="contained"
-        name="submit-button"
-        type="submit"
-        onClick={handleSubmit}
-      >
-        SUBMIT
-      </Button>
+      {!professorId && (
+        <Button
+          className="submit-button"
+          variant="contained"
+          name="submit-button"
+          type="submit"
+          onClick={handleSubmit}
+        >
+          SUBMIT
+        </Button>
+      )}
+      {professorId && submitsData && (
+        <div className="grade-submission">
+          <TextField
+            id="standard-number"
+            label="Grade"
+            value={grade}
+            onChange={handleGradeChange}
+            inputProps={{
+              inputmode: "numeric",
+              maxlength: "3",
+              pattern: "^[1-9][0-9]?$|^100$",
+            }}
+          />
+          <Button
+            className="submit-button-grade"
+            variant="contained"
+            name="submit-button-grade"
+            type="submit"
+            onClick={handleGradeSubmit}
+          >
+            SUBMIT
+          </Button>
+        </div>
+      )}
     </ListItem>
   );
 };

@@ -135,7 +135,7 @@ const AdminCoursePage = () => {
 
   /* ------------------------------------ Evenet listener setup --------------------------*/
   useEffect(() => {
-    ["updated", "patched"].forEach((event) => {
+    ["removed", "updated", "patched"].forEach((event) => {
       Client.service("course").on(event, () => {
         Client.service("course")
           .get(courseId)
