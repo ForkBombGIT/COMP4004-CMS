@@ -1,8 +1,10 @@
 const app = require('app');
 const { checkObjectContains } = require('utils/helpers.js');
+const { paramsForServer } = require('feathers-hooks-common');
 
 describe('"student" service', () => {
   let service;
+  const email = 'james@gmail.com';
 
   beforeAll(() => {
     service = app.service('student');
@@ -24,7 +26,11 @@ describe('"student" service', () => {
       await service.remove(testStudent.id);
     } catch (e) {console.log('No record to remove');}
 
-    let createdRecord = await service.create(testStudent);
+    let createdRecord = await service.create(testStudent, paramsForServer({
+      data:{
+        email
+      }
+    }));
 
     expect(checkObjectContains(createdRecord, testStudent)).toBeTruthy();
   });
@@ -42,7 +48,11 @@ describe('"student" service', () => {
       await service.remove(testStudent.id);
     } catch (e) {console.log('No record to remove');}
 
-    let createdRecord = await service.create(testStudent);
+    let createdRecord = await service.create(testStudent, paramsForServer({
+      data:{
+        email
+      }
+    }));
 
     expect(checkObjectContains(createdRecord, testStudent)).toBeTruthy();
     
@@ -73,7 +83,11 @@ describe('"student" service', () => {
       await service.remove(testStudent.id);
     } catch (e) {console.log('No record to remove');}
 
-    let createdRecord = await service.create(testStudent);
+    let createdRecord = await service.create(testStudent, paramsForServer({
+      data:{
+        email
+      }
+    }));
 
     expect(checkObjectContains(createdRecord, testStudent)).toBeTruthy();
 

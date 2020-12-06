@@ -1,4 +1,5 @@
 const app = require('app');
+const { paramsForServer } = require('feathers-hooks-common');
 
 describe('"enrolled" service', () => {
   it('registered the service', () => {
@@ -18,9 +19,14 @@ describe('"enrolled" service', () => {
       name: 'TEST_NAME',
       birth_date: '2020-01-01',
     };
+    const email = 'test@gmail.com';
 
     const c = await courseSservice.create(course);
-    const s = await studentService.create(student);
+    const s = await studentService.create(student, paramsForServer({
+      data:{
+        email
+      }
+    }));
     const e = await enrolledService.create({ studentId: s.id, courseId: c.id });
 
     await courseSservice.remove(c.id);

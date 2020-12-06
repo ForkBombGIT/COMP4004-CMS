@@ -18,6 +18,7 @@ describe('"application" service', () => {
       id: '99d21763-f1e1-4bba-b163-a4a56dba5257',
       name: 'james',
       birth_date: '2020-01-01',
+      email: 'james@gmail.com'
     };
 
     try { 
