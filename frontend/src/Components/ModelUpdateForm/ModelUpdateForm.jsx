@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -8,87 +8,110 @@ import {
   Select,
 } from "@material-ui/core/";
 import { notifySuccess, notifyFailure, createModel } from "Utils/";
+import { paramsForServer } from "feathers-hooks-common";
 import "./ModelUpdateForm.scss";
 import { Client } from "Server";
 
 const ModelUpdateForm = (props) => {
   const { setDisplay, model, relatedModelId } = props;
   const formRef = useRef();
-  const [nameVal, setNameVal] = useState(model.name);
-  const [emailVal, setEmailVal] = useState();
-  const [birthVal, setBirthVal] = useState(
+  const [name, setName] = useState(model.name);
+  const [email, setEmail] = useState();
+  const [birth, setBirth] = useState(
     model.service === "student" ? model.birth_date.split("T")[0] : null
   );
-  const [capVal, setCapVal] = useState(model.capacity);
-  const [timeVal, setTimeVal] = useState(model.time_slot);
-  const [statusVal, setStatusVal] = useState(model.status);
-  const [dueDateVal, setDueDateVal] = useState(model.due_date);
-  const [weightVal, setWeightVal] = useState(model.weight);
+  const [cap, setCap] = useState(model.capacity);
+  const [time, setTime] = useState(model.time_slot);
+  const [status, setStatus] = useState(model.status);
+  const [dueDate, setDueDate] = useState(model.due_date);
+  const [weight, setWeight] = useState(model.weight);
 
   const handleNameChange = (event) => {
-    setNameVal(event.target.value);
+    setName(event.target.value);
   };
 
   const handleEmailChange = (event) => {
-    setEmailVal(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handleBirthChange = (event) => {
-    setBirthVal(event.target.value);
+    setBirth(event.target.value);
   };
 
   const handleCapacityChange = (event) => {
-    setCapVal(event.target.value);
+    setCap(event.target.value);
   };
 
   const handleTimeChange = (event) => {
-    setTimeVal(event.target.value);
+    setTime(event.target.value);
   };
 
   const handleStatusChange = (event) => {
-    setStatusVal(event.target.value);
+    setStatus(event.target.value);
   };
 
   const handleDueDateChange = (event) => {
-    setDueDateVal(event.target.value);
+    setDueDate(event.target.value);
   };
 
   const handleWeightChange = (event) => {
-    setWeightVal(event.target.value);
+    setWeight(event.target.value);
   };
 
   const handleModelUpdate = (event) => {
     event.preventDefault();
     const createdModel = createModel(
       model.service,
-      nameVal,
-      birthVal,
-      capVal,
-      timeVal,
-      statusVal,
-      dueDateVal,
-      weightVal,
+      name,
+      birth,
+      cap,
+      time,
+      status,
+      dueDate,
+      weight,
       relatedModelId
     );
-    console.log(createdModel);
     Client.service(model.service)
-      .patch(model.id, createdModel)
+      .patch(
+        model.id,
+        createdModel,
+        model.service !== "course" && model.service !== "deliverable"
+          ? paramsForServer({
+              data: {
+                email,
+              },
+            })
+          : null
+      )
       .then(() => {
         notifySuccess("Successful Update!");
         setDisplay(false);
-        setNameVal("");
-        setBirthVal("");
-        setEmailVal("");
-        setCapVal(0);
-        setTimeVal("");
-        setStatusVal("");
-        setDueDateVal("");
-        setWeightVal(0);
+        setName("");
+        setBirth("");
+        setEmail("");
+        setCap(0);
+        setTime("");
+        setStatus("");
+        setDueDate("");
+        setWeight(0);
       })
       .catch((e) => {
         notifyFailure("Unsuccessful Update!");
       });
   };
+
+  useEffect(() => {
+    if (model.service !== "course" && model.service !== "deliverable") {
+      const query = {};
+      query[`${model.service}Id`] = model.id;
+      query.user_role = model.service;
+      Client.service("loginCredential")
+        .find({ query })
+        .then((cred) => {
+          setEmail(cred[0].email);
+        });
+    }
+  }, []);
 
   return (
     <div id="update-form">
@@ -98,7 +121,7 @@ const ModelUpdateForm = (props) => {
           name="modal-name"
           label="Name"
           variant="filled"
-          value={nameVal}
+          value={name}
           onChange={handleNameChange}
         />
         {model.service === "student" && (
@@ -108,20 +131,20 @@ const ModelUpdateForm = (props) => {
             label="Birthday"
             type="date"
             variant="filled"
-            value={birthVal}
+            value={birth}
             onChange={handleBirthChange}
             InputLabelProps={{
               shrink: true,
             }}
           />
         )}
-        {(model.service !== "course" && model.service !== "deliverable") && (
+        {model.service !== "course" && model.service !== "deliverable" && (
           <TextField
             id="modal-user-email"
             name="modal-email"
             label="Email"
             variant="filled"
-            value={emailVal}
+            value={email}
             onChange={handleEmailChange}
           />
         )}
@@ -134,7 +157,7 @@ const ModelUpdateForm = (props) => {
               variant="filled"
               type="number"
               InputProps={{ inputProps: { min: 0 } }}
-              value={capVal}
+              value={cap}
               onChange={handleCapacityChange}
             />
             <TextField
@@ -142,14 +165,14 @@ const ModelUpdateForm = (props) => {
               name="modal-time"
               label="Time"
               variant="filled"
-              value={timeVal}
+              value={time}
               onChange={handleTimeChange}
             />
             <FormControl variant="filled">
               <InputLabel>Status</InputLabel>
               <Select
                 name="modal-course-status-select"
-                value={statusVal}
+                value={status}
                 onChange={handleStatusChange}
               >
                 <MenuItem name="inprogress" value="inprogress">
@@ -176,7 +199,7 @@ const ModelUpdateForm = (props) => {
               label="Weight"
               variant="filled"
               type="number"
-              value={weightVal}
+              value={weight}
               onChange={handleWeightChange}
             />
             <TextField
@@ -184,7 +207,7 @@ const ModelUpdateForm = (props) => {
               name="modal-due"
               label="Due Date"
               variant="filled"
-              value={dueDateVal}
+              value={dueDate}
               onChange={handleDueDateChange}
             />
           </>

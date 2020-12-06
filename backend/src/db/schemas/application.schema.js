@@ -13,5 +13,9 @@ module.exports = (DataTypes) => ({
   birth_date: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 });

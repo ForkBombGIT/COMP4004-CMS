@@ -13,6 +13,7 @@ import {
   ModelDetailModal,
 } from "Components";
 import { notifySuccess, notifyFailure, subscribeToService } from "Utils/";
+import { paramsForServer } from "feathers-hooks-common";
 import { AdminCoursePage } from "Pages/";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { Client } from "Server";
@@ -57,7 +58,16 @@ const AdminPage = () => {
       setDbInteraction(true);
       const service = s === "application" ? "student" : s;
       Client.service(service)
-        .create(item)
+        .create(
+          item,
+          service === "student"
+            ? paramsForServer({
+                data: {
+                  email: item.email,
+            },
+              })
+            : null
+        )
         .then(() => {
           if (s === "application") {
             removeItem(s, item.id);
