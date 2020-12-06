@@ -24,7 +24,6 @@ const createLoginCredentials = () => async (context) => {
 
 const updateEmail = () => async (context) => {
   const email = context.params.data.email;
-  console.log(email);
   if (email) {
     const creds = await updateUserEmail(context,'administrator',email);
     if (creds === null) {

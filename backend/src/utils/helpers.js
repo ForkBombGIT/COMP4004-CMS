@@ -18,7 +18,6 @@ const updateUserEmail = (context, role, email) => {
     user_role: role,
   };
   query[`${role}Id`] = context.result.id;
-  console.log(query);
   context.app.service('loginCredential').find({query}).then((creds)=>{
     context.app.service('loginCredential').patch(creds[0].id,{email}).then(result=>{
       return result;
