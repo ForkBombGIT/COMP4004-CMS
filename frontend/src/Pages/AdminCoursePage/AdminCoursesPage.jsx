@@ -84,7 +84,8 @@ const AdminCoursePage = () => {
         .then(() => {
           notifySuccess("Success, professor added!");
         })
-        .catch(() => {
+        .catch((e) => {
+          console.log(e);
           notifyFailure("Failed to add professor");
         });
     } else {

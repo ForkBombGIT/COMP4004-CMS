@@ -56,11 +56,11 @@ const ModelCreationForm = (props) => {
 
   const handleCourseRegistrationDateChange = (event) => {
     setCourseRegistrationDateVal(event.target.value);
-  }
+  };
 
   const handleCourseWithdrawDateChange = (event) => {
     setCourseWithdrawDateVal(event.target.value);
-  }
+  };
 
   const handleStatusChange = (event) => {
     setStatusVal(event.target.value);
