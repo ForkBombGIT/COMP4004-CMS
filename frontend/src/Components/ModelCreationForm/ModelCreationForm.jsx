@@ -9,6 +9,7 @@ import {
   InputLabel,
 } from "@material-ui/core/";
 import { notifySuccess, notifyFailure, createModel } from "Utils/";
+import { paramsForServer } from "feathers-hooks-common";
 import "./ModelCreationForm.scss";
 import { Client } from "Server";
 
@@ -24,7 +25,9 @@ const ModelCreationForm = (props) => {
   const [capVal, setCapVal] = useState(0);
   const [timeVal, setTimeVal] = useState("");
   const [statusVal, setStatusVal] = useState("");
-  const [dueDateVal, setDueDateVal] = useState("");
+  const [courseRegistrationDateVal, setCourseRegistrationDateVal] = useState("");
+  const [courseWithdrawDateVal, setCourseWithdrawDateVal] = useState("");
+  const [deliverableDueDateVal, setDeliverableDueDateVal] = useState("");
   const [weightVal, setWeightVal] = useState(0);
 
   const handleModelVal = (event) => {
@@ -51,12 +54,20 @@ const ModelCreationForm = (props) => {
     setTimeVal(event.target.value);
   };
 
+  const handleCourseRegistrationDateChange = (event) => {
+    setCourseRegistrationDateVal(event.target.value);
+  }
+
+  const handleCourseWithdrawDateChange = (event) => {
+    setCourseWithdrawDateVal(event.target.value);
+  }
+
   const handleStatusChange = (event) => {
     setStatusVal(event.target.value);
   };
 
-  const handleDueDateChange = (event) => {
-    setDueDateVal(event.target.value);
+  const handleDeliverableDueDateChange = (event) => {
+    setDeliverableDueDateVal(event.target.value);
   };
 
   const handleWeightChange = (event) => {
@@ -72,21 +83,33 @@ const ModelCreationForm = (props) => {
       capVal,
       timeVal,
       statusVal,
-      dueDateVal,
+      courseRegistrationDateVal,
       weightVal,
       relatedModelId
     );
     Client.service(modelVal)
-      .create(createdModel)
+      .create(
+        createdModel,
+        modelVal === "course"
+          ? paramsForServer({
+              data: {
+                courseRegistrationDate: courseRegistrationDateVal,
+                courseWithdrawDate: courseWithdrawDateVal,
+              },
+            })
+          : null
+      )
       .then(() => {
         notifySuccess("Successful Creation!");
         setNameVal("");
         setBirthVal("");
         setEmailVal("");
         setCapVal(0);
+        setCourseRegistrationDateVal("");
+        setCourseWithdrawDateVal("");
         setTimeVal("");
         setStatusVal("");
-        setDueDateVal("");
+        setDeliverableDueDateVal("");
         setWeightVal(0);
       })
       .catch((e) => {
@@ -176,6 +199,30 @@ const ModelCreationForm = (props) => {
               value={timeVal}
               onChange={handleTimeChange}
             />
+            <TextField
+              id="course-registration-date"
+              name="registration"
+              label="Registration Date"
+              variant="filled"
+              type="date"
+              value={courseRegistrationDateVal}
+              onChange={handleCourseRegistrationDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="course-withdraw-date"
+              name="withdraw"
+              label="Withdraw Date"
+              variant="filled"
+              type="date"
+              value={courseWithdrawDateVal}
+              onChange={handleCourseWithdrawDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             <FormControl variant="filled">
               <InputLabel>Status</InputLabel>
               <Select
@@ -215,8 +262,8 @@ const ModelCreationForm = (props) => {
               name="due"
               label="Due Date"
               variant="filled"
-              value={dueDateVal}
-              onChange={handleDueDateChange}
+              value={deliverableDueDateVal}
+              onChange={handleDeliverableDueDateChange}
             />
           </>
         )}
