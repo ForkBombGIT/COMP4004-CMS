@@ -25,8 +25,10 @@ const ModelCreationForm = (props) => {
   const [cap, setCap] = useState(0);
   const [time, setTime] = useState("");
   const [status, setStatus] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const [deliverableDueDate, setDeliverableDueDate] = useState("");
   const [weight, setWeight] = useState(0);
+  const [courseRegistrationDate, setCourseRegistrationDate] = useState("");
+  const [courseWithdrawDate, setCourseWithdrawDate] = useState("");
 
   const handleModel = (event) => {
     setModel(event.target.value);
@@ -52,12 +54,20 @@ const ModelCreationForm = (props) => {
     setTime(event.target.value);
   };
 
+  const handleCourseRegistrationDateChange = (event) => {
+    setCourseRegistrationDate(event.target.value);
+  };
+
+  const handleCourseWithdrawDateChange = (event) => {
+    setCourseWithdrawDate(event.target.value);
+  };
+
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
 
-  const handleDueDateChange = (event) => {
-    setDueDate(event.target.value);
+  const handleDeliverableDueDateChange = (event) => {
+    setDeliverableDueDate(event.target.value);
   };
 
   const handleWeightChange = (event) => {
@@ -73,21 +83,27 @@ const ModelCreationForm = (props) => {
       cap,
       time,
       status,
-      dueDate,
+      deliverableDueDate,
       weight,
       relatedModelId
     );
+    let paramsToSend;
+    if (model === "course") {
+      paramsToSend = paramsForServer({
+        data: {
+          courseRegistrationDate,
+          courseWithdrawDate,
+        },
+      });
+    } else if (model !== "course" && model !== "deliverable") {
+      paramsToSend = paramsForServer({
+        data: {
+          email,
+        },
+      });
+    }
     Client.service(model)
-      .create(
-        createdModel,
-        model.service !== "course" && model.service !== "deliverable"
-          ? paramsForServer({
-              data: {
-                email,
-              },
-            })
-          : null
-      )
+      .create(createdModel, paramsToSend)
       .then(() => {
         notifySuccess("Successful Creation!");
         setName("");
@@ -96,7 +112,9 @@ const ModelCreationForm = (props) => {
         setCap(0);
         setTime("");
         setStatus("");
-        setDueDate("");
+        setCourseRegistrationDate("");
+        setCourseWithdrawDate("");
+        setDeliverableDueDate("");
         setWeight(0);
       })
       .catch((e) => {
@@ -183,6 +201,30 @@ const ModelCreationForm = (props) => {
               value={time}
               onChange={handleTimeChange}
             />
+            <TextField
+              id="course-registration-date"
+              name="registration"
+              label="Registration Date"
+              variant="filled"
+              type="date"
+              value={courseRegistrationDate}
+              onChange={handleCourseRegistrationDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="course-withdraw-date"
+              name="withdraw"
+              label="Withdraw Date"
+              variant="filled"
+              type="date"
+              value={courseWithdrawDate}
+              onChange={handleCourseWithdrawDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             <FormControl variant="filled">
               <InputLabel>Status</InputLabel>
               <Select
@@ -222,8 +264,8 @@ const ModelCreationForm = (props) => {
               name="due"
               label="Due Date"
               variant="filled"
-              value={dueDate}
-              onChange={handleDueDateChange}
+              value={deliverableDueDate}
+              onChange={handleDeliverableDueDateChange}
             />
           </>
         )}

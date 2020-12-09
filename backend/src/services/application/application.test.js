@@ -26,7 +26,6 @@ describe('"application" service', () => {
     } catch (e) {console.log('No record to remove');}
 
     let createdRecord = await service.create(testApplication);
-    console.log(createdRecord);
 
     expect(checkObjectContains(createdRecord, testApplication)).toBeTruthy();
   });

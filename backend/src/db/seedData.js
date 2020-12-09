@@ -227,12 +227,36 @@ const ACADEMIC_DEADLINE = [
     created_at: new Date(),
     updated_at: new Date()
   },
-  // used for test 'dropped with W'
+  {
+    id: '7583ccee-266b-4387-8f40-e53d411b4431',
+    type: 'withdraw',
+    due_date: lastYear,
+    course_id: COURSE_IDS_BY_NAME['BIOL3004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
   {
     id: '622d895e-9e43-474b-9539-05bfb46d5d8b',
+    type: 'registration',
+    due_date: lastYear,
+    course_id: COURSE_IDS_BY_NAME['BIOL2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  // used for test 'dropped with W'
+  {
+    id: '622d895e-9e43-474b-9539-12bfb46d5d8b',
     type: 'withdraw',
     due_date: lastYear,
     course_id: COURSE_IDS_BY_NAME['BIOL2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e95e635-ad49-45e2-b0ef-a80ca273328b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['BIOL1004'],
     created_at: new Date(),
     updated_at: new Date()
   },
@@ -242,6 +266,198 @@ const ACADEMIC_DEADLINE = [
     type: 'withdraw',
     due_date: nextYear,
     course_id: COURSE_IDS_BY_NAME['BIOL1004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e95e635-ad49-45e2-b0ef-a20ca273328b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP4004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e95e635-ad49-45e2-b0ef-b21dc217328b',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP4004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e25e635-ad49-45e2-b0ef-a20ca273328b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP3004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '2b95e635-ad49-45e2-b0ef-b21dc217328b',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP3004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '2e25e635-ad49-45e2-b0ef-b20ca273328b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '2b35e635-ad49-45e2-b0ef-b21dc217328b',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e25e635-ad49-45e2-b0ef-a21ca273328b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP1104'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '2b45e635-ad49-45e2-b0ef-b21dc217328b',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP1104'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e25e635-ad49-45e2-b0ef-a20ca273321a',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['JAPA1004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '2b15e635-ad49-45e2-b0ef-b21dc217328b',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['JAPA1004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e25e635-ad49-45e2-b0ef-a20cb273328b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['JAPA2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '2b95e635-ad49-45e1-b0ef-b21dc227322b',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['JAPA2004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e25b635-ad49-45e2-b0ef-a20cb273328b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP2406'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '2b95e635-ad49-45e2-b0ef-b21dc227322c',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['COMP2406'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '7e25b635-ad49-45e2-b0ef-a20cb273228b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['JAPA3004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '2b95e635-ad49-45e2-b0ef-b21dc213322c',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['JAPA3004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1a25b635-ad49-45e2-b0ef-a20cb273228b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['JAPA4004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1b25e635-ad49-45e2-b0ef-b21dc213322c',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['JAPA4004'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1a25b635-ad49-45e2-a2ef-a20cb273338b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['BUSI2503'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1b25e635-ad49-45e2-b1bf-a21dc213322c',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['BUSI2503'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1a25b635-ad49-45e2-a2ef-a20cb273228b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['BUSI3119'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1b21e635-ad49-45e2-b1bf-a21dc213322c',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['BUSI3119'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1a25b635-ad49-45e2-a2ef-a20cb272128b',
+    type: 'registration',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['FREN1000'],
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1b21e635-ad49-45e2-b1af-a21ab223322c',
+    type: 'withdraw',
+    due_date: nextYear,
+    course_id: COURSE_IDS_BY_NAME['BUSI3119'],
     created_at: new Date(),
     updated_at: new Date()
   },

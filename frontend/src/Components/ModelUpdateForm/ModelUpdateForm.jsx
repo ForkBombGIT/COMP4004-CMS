@@ -23,9 +23,10 @@ const ModelUpdateForm = (props) => {
   const [cap, setCap] = useState(model.capacity);
   const [time, setTime] = useState(model.time_slot);
   const [status, setStatus] = useState(model.status);
-  const [dueDate, setDueDate] = useState(model.due_date);
+  const [courseRegistrationDate, setCourseRegistrationDate] = useState("");
+  const [courseWithdrawDate, setCourseWithdrawDate] = useState("");
+  const [deliverableDueDate, setDeliverableDueDate] = useState(model.due_date);
   const [weight, setWeight] = useState(model.weight);
-
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -50,8 +51,16 @@ const ModelUpdateForm = (props) => {
     setStatus(event.target.value);
   };
 
-  const handleDueDateChange = (event) => {
-    setDueDate(event.target.value);
+  const handleCourseRegistrationDateChange = (event) => {
+    setCourseRegistrationDate(event.target.value);
+  };
+
+  const handleCourseWithdrawDateChange = (event) => {
+    setCourseWithdrawDate(event.target.value);
+  };
+
+  const handleDeliverableDueDateChange = (event) => {
+    setDeliverableDueDate(event.target.value);
   };
 
   const handleWeightChange = (event) => {
@@ -67,22 +76,28 @@ const ModelUpdateForm = (props) => {
       cap,
       time,
       status,
-      dueDate,
+      deliverableDueDate,
       weight,
       relatedModelId
     );
+    let paramsToSend = null;
+    if (model.service === "course") {
+      paramsToSend = paramsForServer({
+        data: {
+          courseRegistrationDate,
+          courseWithdrawDate,
+        },
+      });
+    } else if (model.service !== "course" && model.service !== "deliverable") {
+      paramsToSend = paramsForServer({
+        data: {
+          email,
+        },
+      });
+    }
+    console.log(createdModel);
     Client.service(model.service)
-      .patch(
-        model.id,
-        createdModel,
-        model.service !== "course" && model.service !== "deliverable"
-          ? paramsForServer({
-              data: {
-                email,
-              },
-            })
-          : null
-      )
+      .patch(model.id, createdModel, paramsToSend)
       .then(() => {
         notifySuccess("Successful Update!");
         setDisplay(false);
@@ -92,10 +107,13 @@ const ModelUpdateForm = (props) => {
         setCap(0);
         setTime("");
         setStatus("");
-        setDueDate("");
+        setCourseRegistrationDate("");
+        setCourseWithdrawDate("");
+        setDeliverableDueDate("");
         setWeight(0);
       })
       .catch((e) => {
+        console.log(e);
         notifyFailure("Unsuccessful Update!");
       });
   };
@@ -109,6 +127,23 @@ const ModelUpdateForm = (props) => {
         .find({ query })
         .then((cred) => {
           setEmail(cred[0].email);
+        });
+    }
+    if (model.service === "course") {
+      Client.service("academicDeadline")
+        .find({
+          query: {
+            courseId: model.id,
+          },
+        })
+        .then((deadlines) => {
+          // eslint-disable-next-line no-plusplus
+          for (let i = 0; i < deadlines.length; i++) {
+            if (deadlines[i].type === "registration")
+              setCourseRegistrationDate(deadlines[i].due_date.split("T")[0]);
+            else if (deadlines[i].type === "withdraw")
+              setCourseWithdrawDate(deadlines[i].due_date.split("T")[0]);
+          }
         });
     }
   }, []);
@@ -168,6 +203,30 @@ const ModelUpdateForm = (props) => {
               value={time}
               onChange={handleTimeChange}
             />
+            <TextField
+              id="course-registration-date"
+              name="registration"
+              label="Registration Date"
+              variant="filled"
+              type="date"
+              value={courseRegistrationDate}
+              onChange={handleCourseRegistrationDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="course-withdraw-date"
+              name="withdraw"
+              label="Withdraw Date"
+              variant="filled"
+              type="date"
+              value={courseWithdrawDate}
+              onChange={handleCourseWithdrawDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             <FormControl variant="filled">
               <InputLabel>Status</InputLabel>
               <Select
@@ -207,8 +266,8 @@ const ModelUpdateForm = (props) => {
               name="modal-due"
               label="Due Date"
               variant="filled"
-              value={dueDate}
-              onChange={handleDueDateChange}
+              value={deliverableDueDate}
+              onChange={handleDeliverableDueDateChange}
             />
           </>
         )}
