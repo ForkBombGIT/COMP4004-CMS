@@ -16,105 +16,111 @@ import { Client } from "Server";
 const ModelCreationForm = (props) => {
   const { title, service, relatedModelId } = props;
   const formRef = useRef();
-  const [modelVal, setModelVal] = useState(
+  const [model, setModel] = useState(
     service === undefined ? "student" : service
   );
-  const [nameVal, setNameVal] = useState("");
-  const [emailVal, setEmailVal] = useState("");
-  const [birthVal, setBirthVal] = useState();
-  const [capVal, setCapVal] = useState(0);
-  const [timeVal, setTimeVal] = useState("");
-  const [statusVal, setStatusVal] = useState("");
-  const [courseRegistrationDateVal, setCourseRegistrationDateVal] = useState("");
-  const [courseWithdrawDateVal, setCourseWithdrawDateVal] = useState("");
-  const [deliverableDueDateVal, setDeliverableDueDateVal] = useState("");
-  const [weightVal, setWeightVal] = useState(0);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [birth, setBirth] = useState();
+  const [cap, setCap] = useState(0);
+  const [time, setTime] = useState("");
+  const [status, setStatus] = useState("");
+  const [deliverableDueDate, setDeliverableDueDate] = useState("");
+  const [weight, setWeight] = useState(0);
+  const [courseRegistrationDate, setCourseRegistrationDate] = useState("");
+  const [courseWithdrawDate, setCourseWithdrawDate] = useState("");
 
-  const handleModelVal = (event) => {
-    setModelVal(event.target.value);
+  const handleModel = (event) => {
+    setModel(event.target.value);
   };
 
   const handleNameChange = (event) => {
-    setNameVal(event.target.value);
+    setName(event.target.value);
   };
 
   const handleEmailChange = (event) => {
-    setEmailVal(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handleBirthChange = (event) => {
-    setBirthVal(event.target.value);
+    setBirth(event.target.value);
   };
 
   const handleCapacityChange = (event) => {
-    setCapVal(event.target.value);
+    setCap(event.target.value);
   };
 
   const handleTimeChange = (event) => {
-    setTimeVal(event.target.value);
+    setTime(event.target.value);
   };
 
   const handleCourseRegistrationDateChange = (event) => {
-    setCourseRegistrationDateVal(event.target.value);
+    setCourseRegistrationDate(event.target.value);
   };
 
   const handleCourseWithdrawDateChange = (event) => {
-    setCourseWithdrawDateVal(event.target.value);
+    setCourseWithdrawDate(event.target.value);
   };
 
   const handleStatusChange = (event) => {
-    setStatusVal(event.target.value);
+    setStatus(event.target.value);
   };
 
   const handleDeliverableDueDateChange = (event) => {
-    setDeliverableDueDateVal(event.target.value);
+    setDeliverableDueDate(event.target.value);
   };
 
   const handleWeightChange = (event) => {
-    setWeightVal(event.target.value);
+    setWeight(event.target.value);
   };
 
   const handleModelCreation = (event) => {
     event.preventDefault();
     const createdModel = createModel(
-      modelVal,
-      nameVal,
-      birthVal,
-      capVal,
-      timeVal,
-      statusVal,
-      courseRegistrationDateVal,
-      weightVal,
+      model,
+      name,
+      birth,
+      cap,
+      time,
+      status,
+      deliverableDueDate,
+      weight,
       relatedModelId
     );
-    Client.service(modelVal)
-      .create(
-        createdModel,
-        modelVal === "course"
-          ? paramsForServer({
-              data: {
-                courseRegistrationDate: courseRegistrationDateVal,
-                courseWithdrawDate: courseWithdrawDateVal,
-              },
-            })
-          : null
-      )
+    let paramsToSend;
+    if (model === "course") {
+      paramsToSend = paramsForServer({
+        data: {
+          courseRegistrationDate,
+          courseWithdrawDate,
+        },
+      });
+    } else if (model !== "course" && model !== "deliverable") {
+      paramsToSend = paramsForServer({
+        data: {
+          email,
+        },
+      });
+    }
+    Client.service(model)
+      .create(createdModel, paramsToSend)
       .then(() => {
         notifySuccess("Successful Creation!");
-        setNameVal("");
-        setBirthVal("");
-        setEmailVal("");
-        setCapVal(0);
-        setCourseRegistrationDateVal("");
-        setCourseWithdrawDateVal("");
-        setTimeVal("");
-        setStatusVal("");
-        setDeliverableDueDateVal("");
-        setWeightVal(0);
+        setName("");
+        setBirth("");
+        setEmail("");
+        setCap(0);
+        setTime("");
+        setStatus("");
+        setCourseRegistrationDate("");
+        setCourseWithdrawDate("");
+        setDeliverableDueDate("");
+        setWeight(0);
       })
       .catch((e) => {
         notifyFailure("Unsuccessful Creation!");
         // eslint-disable-next-line no-console
+        console.log(e);
       });
   };
 
@@ -124,14 +130,10 @@ const ModelCreationForm = (props) => {
         {title}
       </Typography>
       <form ref={formRef} onSubmit={handleModelCreation}>
-        {modelVal !== "deliverable" && (
+        {model !== "deliverable" && (
           <FormControl variant="filled">
             <InputLabel>Model</InputLabel>
-            <Select
-              name="model-select"
-              value={modelVal}
-              onChange={handleModelVal}
-            >
+            <Select name="model-select" value={model} onChange={handleModel}>
               <MenuItem name="student" value="student">
                 Student
               </MenuItem>
@@ -152,34 +154,34 @@ const ModelCreationForm = (props) => {
           name="name"
           label="Name"
           variant="filled"
-          value={nameVal}
+          value={name}
           onChange={handleNameChange}
         />
-        {modelVal === "student" && (
+        {model === "student" && (
           <TextField
             id="user-birth"
             name="birth"
             label="Birthday"
             type="date"
             variant="filled"
-            value={birthVal}
+            value={birth}
             onChange={handleBirthChange}
             InputLabelProps={{
               shrink: true,
             }}
           />
         )}
-        {modelVal !== "course" && modelVal !== "deliverable" && (
+        {model !== "course" && model !== "deliverable" && (
           <TextField
             id="user-email"
             name="email"
             label="Email"
             variant="filled"
-            value={emailVal}
+            value={email}
             onChange={handleEmailChange}
           />
         )}
-        {modelVal === "course" && (
+        {model === "course" && (
           <>
             <TextField
               id="course-capacity"
@@ -188,7 +190,7 @@ const ModelCreationForm = (props) => {
               variant="filled"
               type="number"
               InputProps={{ inputProps: { min: 0 } }}
-              value={capVal}
+              value={cap}
               onChange={handleCapacityChange}
             />
             <TextField
@@ -196,7 +198,7 @@ const ModelCreationForm = (props) => {
               name="time"
               label="Time"
               variant="filled"
-              value={timeVal}
+              value={time}
               onChange={handleTimeChange}
             />
             <TextField
@@ -205,7 +207,7 @@ const ModelCreationForm = (props) => {
               label="Registration Date"
               variant="filled"
               type="date"
-              value={courseRegistrationDateVal}
+              value={courseRegistrationDate}
               onChange={handleCourseRegistrationDateChange}
               InputLabelProps={{
                 shrink: true,
@@ -217,7 +219,7 @@ const ModelCreationForm = (props) => {
               label="Withdraw Date"
               variant="filled"
               type="date"
-              value={courseWithdrawDateVal}
+              value={courseWithdrawDate}
               onChange={handleCourseWithdrawDateChange}
               InputLabelProps={{
                 shrink: true,
@@ -227,7 +229,7 @@ const ModelCreationForm = (props) => {
               <InputLabel>Status</InputLabel>
               <Select
                 name="course-status-select"
-                value={statusVal}
+                value={status}
                 onChange={handleStatusChange}
               >
                 <MenuItem name="inprogress" value="inprogress">
@@ -246,7 +248,7 @@ const ModelCreationForm = (props) => {
             </FormControl>
           </>
         )}
-        {modelVal === "deliverable" && (
+        {model === "deliverable" && (
           <>
             <TextField
               id="deliverable-weight"
@@ -254,7 +256,7 @@ const ModelCreationForm = (props) => {
               label="Weight"
               variant="filled"
               type="number"
-              value={weightVal}
+              value={weight}
               onChange={handleWeightChange}
             />
             <TextField
@@ -262,7 +264,7 @@ const ModelCreationForm = (props) => {
               name="due"
               label="Due Date"
               variant="filled"
-              value={deliverableDueDateVal}
+              value={deliverableDueDate}
               onChange={handleDeliverableDueDateChange}
             />
           </>

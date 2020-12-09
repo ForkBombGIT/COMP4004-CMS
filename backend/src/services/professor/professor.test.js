@@ -1,8 +1,10 @@
 const app = require('app');
 const { checkObjectContains } = require('utils/helpers.js');
+const { paramsForServer } = require('feathers-hooks-common');
 
 describe('"professor" service', () => {
   let service;
+  const email = 'james@gmail.com';
 
   beforeAll(() => {
     service = app.service('professor');
@@ -18,12 +20,15 @@ describe('"professor" service', () => {
       id: '99d21763-f1e1-4bba-b163-a4a56dba5257',
       name: 'james'
     };
-
     try { 
       await service.remove(testProfessor.id);
     } catch (e) {console.log('No record to remove');}
 
-    let createdRecord = await service.create(testProfessor);
+    let createdRecord = await service.create(testProfessor, paramsForServer({
+      data:{
+        email
+      }
+    }));
 
     expect(checkObjectContains(createdRecord, testProfessor)).toBeTruthy();
   });
@@ -40,7 +45,11 @@ describe('"professor" service', () => {
       await service.remove(testProfessor.id);
     } catch (e) {console.log('No record to remove');}
 
-    let createdRecord = await service.create(testProfessor);
+    let createdRecord = await service.create(testProfessor, paramsForServer({
+      data:{
+        email
+      }
+    }));
 
     expect(checkObjectContains(createdRecord, testProfessor)).toBeTruthy();
     
@@ -69,7 +78,11 @@ describe('"professor" service', () => {
       await service.remove(testProfessor.id);
     } catch (e) {console.log('No record to remove');}
 
-    let createdRecord = await service.create(testProfessor);
+    let createdRecord = await service.create(testProfessor, paramsForServer({
+      data:{
+        email
+      }
+    }));
 
     expect(checkObjectContains(createdRecord, testProfessor)).toBeTruthy();
 

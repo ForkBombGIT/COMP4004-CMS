@@ -21,7 +21,6 @@ const LoginPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const client = await auth.signin(emailVal, passVal);
     if (client === null) notifyFailure("Unsuccessful Login!");
     else if (client.token !== null) {

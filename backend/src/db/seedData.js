@@ -493,6 +493,15 @@ const APPLICATION = [
   {
     id: '715db196-4669-4dd2-9212-1cb677b02473',
     name: 'Xelostrad kulio',
+    email: 'xelo@gmail.com',
+    birth_date: new Date(),
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '525db196-4669-4dd2-9212-1cb677b02473',
+    name: 'Antwan Andre Patton',
+    email: 'antwan@gmail.com',
     birth_date: new Date(),
     created_at: new Date(),
     updated_at: new Date()
@@ -520,7 +529,7 @@ const STUDENT = [
   {
     id: 'df88f9b8-64bb-457c-a888-2efedd1295c3',
     name: 'Wesley Peckinghem',
-    student_number: '10103500',
+    student_number: '10103540',
     birth_date: new Date(),
     created_at: new Date(),
     updated_at: new Date()
@@ -528,7 +537,7 @@ const STUDENT = [
   {
     id: 'df88f9b9-64bb-457c-a888-2efedd1295c3',
     name: 'Jarold Patinkin',
-    student_number: '10103500',
+    student_number: '10103520',
     birth_date: new Date(),
     created_at: new Date(),
     updated_at: new Date()
@@ -739,10 +748,60 @@ const LOGIN_CREDENTIAL = [
     updated_at: new Date()
   },
   {
-    id: '81cdcfd0-969a-4949-affe-dc999a07617b',
+    id: '72cdcfd0-969a-4949-affe-dc999a07618e',
+    user_role: 'professor',
+    email: 'gull@gmail.com',
+    professor_id: PROFESSOR_IDS_BY_NAME['Gull Johnson'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '42cdcfd0-969a-4949-affe-dc999a07618e',
+    user_role: 'professor',
+    email: 'coleworld@gmail.com',
+    professor_id: PROFESSOR_IDS_BY_NAME['Jermaine Cole'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '45cdcfd0-969a-4949-affe-dc999a07618e',
+    user_role: 'professor',
+    email: 'feta@gmail.com',
+    professor_id: PROFESSOR_IDS_BY_NAME['Feta Porta'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '81cdcfd0-969a-4949-affa-dc999a07617b',
     user_role: 'administrator',
     email: 'jelog@gmail.com',
     administrator_id: ADMINISTRATOR_IDS_BY_NAME['Jelog Yugislav'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '81cdcfd0-969a-4949-affd-dc999a07617b',
+    user_role: 'administrator',
+    email: 'calvin@gmail.com',
+    administrator_id: ADMINISTRATOR_IDS_BY_NAME['Calvin Cordozar Broadus Jr.'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '81cdcfd0-969a-4949-affe-dc999a07617b',
+    user_role: 'administrator',
+    email: 'andre@gmail.com',
+    administrator_id: ADMINISTRATOR_IDS_BY_NAME['Andre Romelle Young'],
     //password = "supersecret"
     password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
     created_at: new Date(),
@@ -753,6 +812,36 @@ const LOGIN_CREDENTIAL = [
     user_role: 'student',
     email: 'josh@gmail.com',
     student_id: STUDENT_IDS_BY_NAME['Josh Gorman'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '1e4638ca-9921-45d1-8171-78db4090e0b6',
+    user_role: 'student',
+    email: 'eros@gmail.com',
+    student_id: STUDENT_IDS_BY_NAME['Eros Di Pede'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '9e3978ca-9921-45d1-8171-78db4090e0c1',
+    user_role: 'student',
+    email: 'wesley@gmail.com',
+    student_id: STUDENT_IDS_BY_NAME['Wesley Peckinghem'],
+    //password = "supersecret"
+    password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: '9e3218ca-9921-45d1-8171-78db4090e0b6',
+    user_role: 'student',
+    email: 'jarold@gmail.com',
+    student_id: STUDENT_IDS_BY_NAME['Jarold Patinkin'],
     //password = "supersecret"
     password: '$2a$10$0VIYauqooW157HRpbVP31.X8V3bN.AAgPgvquxsl7l.ggBbs5hcQW',
     created_at: new Date(),

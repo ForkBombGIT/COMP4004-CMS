@@ -23,11 +23,17 @@ describe('"enrolled" service', () => {
       name: 'TEST_NAME',
       birth_date: '2020-01-01',
     };
+    const email = 'test@gmail.com';
+
 
     const c = await courseService.create(course,paramsForServer({
       data: deadlines
     }));
-    const s = await studentService.create(student);
+    const s = await studentService.create(student, paramsForServer({
+      data:{
+        email
+      }
+    }));
     const e = await enrolledService.create({ studentId: s.id, courseId: c.id });
 
     await courseService.remove(c.id);

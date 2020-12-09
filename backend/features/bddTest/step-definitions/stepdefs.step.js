@@ -65,9 +65,10 @@ module.exports = function () {
               });
           })
     });
-    this.Given(/^An application is created with name "([^"]*)"$/, function (n,callback) {
+    this.Given(/^An application is created with name "([^"]*)" and email "([^"]*)"$/, function (n,e,callback) {
         helpers.loadPage('http://localhost:3000/');
         driver.findElement(By.id('student-name')).sendKeys(n);
+        driver.findElement(by.name("email")).sendKeys(e);
         driver.findElement(by.id("register-button")).click();
         driver.sleep(1000).then(() => {
             callback();

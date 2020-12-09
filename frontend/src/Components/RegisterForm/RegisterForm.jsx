@@ -4,13 +4,15 @@ import { Client } from "Server/";
 import { notifySuccess, notifyFailure } from "Utils/";
 import "./RegisterForm.scss";
 
-export const createApplication = (nameVar, birthVar) => ({
+export const createApplication = (nameVar, birthVar, emailVar) => ({
   name: nameVar,
   birth_date: birthVar,
+  email: emailVar,
 });
 
 const RegisterForm = () => {
   const [studentName, setStudentName] = useState();
+  const [studentEmail, setStudentEmailDate] = useState("");
   const [studentBirthDate, setStudentBirthDate] = useState("2020-05-24");
 
   const handleStudentChange = (event) => {
@@ -21,15 +23,20 @@ const RegisterForm = () => {
     setStudentBirthDate(event.target.value);
   };
 
+  const handleStudentEmailChange = (event) => {
+    setStudentEmailDate(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await Client.service("application").create(
-        createApplication(studentName, studentBirthDate)
+        createApplication(studentName, studentBirthDate, studentEmail)
       );
       notifySuccess("Application Created!");
       setStudentName("");
       setStudentBirthDate("");
+      setStudentEmailDate("");
     } catch (e) {
       notifyFailure("Application Creation Failed!");
     }
@@ -49,8 +56,17 @@ const RegisterForm = () => {
         onChange={handleStudentChange}
       />
       <TextField
+        id="student-email"
+        label="Email"
+        type="email"
+        name="email"
+        variant="filled"
+        value={studentEmail}
+        onChange={handleStudentEmailChange}
+      />
+      <TextField
         id="student-birth-date"
-        label="birthday"
+        label="Birthday"
         type="date"
         variant="filled"
         value={studentBirthDate}
