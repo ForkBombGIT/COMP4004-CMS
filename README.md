@@ -23,7 +23,7 @@ Running this code requires some dependencies:
 - [NPM](https://nodejs.org/en/)
 - [Make](http://gnuwin32.sourceforge.net/packages/make.htm)
 
-This code's development environment was setup using linux, as such it may not required to install make, if make is not functional steps inside the root directories Makefile can be run in sequence to achieve the same effects.
+This code's development environment was setup using linux and was not developed with windows support in mind, although not tested it is also likely functional in MacOS. If you are required to run this repository, it is *highly* recommended you do it with a linux distribution and or virtual machine.
 
 _If you are running docker using windows you may find unexpected errors_
 
