@@ -17,7 +17,9 @@ describe('"enrolled" service', () => {
       courseWithdrawDate: date,
     };
     const course = {
-      name: 'TEST_COURSE'
+      name: 'TEST_COURSE',
+      capacity: 10,
+      status: 'inprogress',
     };
     const student = {
       name: 'TEST_NAME',
@@ -34,8 +36,7 @@ describe('"enrolled" service', () => {
         email
       }
     }));
-    const e = await enrolledService.create({ studentId: s.id, courseId: c.id });
-
+    const e = await enrolledService.create({ studentId: s.id, courseId: c.id, status: 'inprogress' });
     await courseService.remove(c.id);
     await studentService.remove(s.id);
     await enrolledService.remove(e.id);

@@ -62,7 +62,11 @@ describe('"student" service', () => {
       birth_date: '2020-01-01',
     };
     
-    let updatedRecord = await service.patch(updateStudent.id,updateStudent);
+    let updatedRecord = await service.patch(updateStudent.id,updateStudent, paramsForServer({
+      data:{
+        email
+      }
+    }));
     expect(updatedRecord.name != createdRecord.name).toBeTruthy();
 
     try { 
