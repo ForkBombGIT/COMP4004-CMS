@@ -116,7 +116,8 @@ const ModelCRUDForm = (props) => {
           notifySuccess("Successful Update!");
           resetState();
         })
-        .catch(() => {
+        .catch((e) => {
+          console.log(e);
           notifyFailure(`Unsuccessful Update!`);
         });
     }
