@@ -6,6 +6,11 @@ module.exports = function () {
     callback();
   });
 
+  this.Then(/^I set the register email to "([^"]*)"$/, function (e,callback) {
+    driver.findElement(by.id("student-email")).sendKeys(e);
+    callback();
+});
+
   this.When(/^I click the register button$/, function (callback) {
     driver.findElement(By.id('register-button')).click();
     driver.sleep(500).then(() => {

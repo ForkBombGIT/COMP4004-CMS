@@ -8,49 +8,6 @@ module.exports = function () {
             callback()
         })
     });
-    this.Given(/^A "([^"]*)" is created with the name "([^"]*)" and email "([^"]*)"$/, function (s, n, e, callback) {
-        driver.findElement(by.className("MuiSelect-selectMenu")).click()
-        driver.findElement(by.name(s)).click();
-        driver.findElement(by.name("name")).sendKeys(n);
-        driver.findElement(by.name("email")).sendKeys(e);
-        driver.findElement(by.id("create-button")).click();
-        driver.sleep(2000).then(() => {
-            callback();
-        });
-    });
-    this.Given(/^A student is created with the name "([^"]*)" and email "([^"]*)" and birthday "([^"]*)"$/, function (n, e, b, callback) {
-        driver.findElement(by.className("MuiSelect-selectMenu")).click()
-        driver.findElement(by.name("student")).click();
-        driver.findElement(by.name("name")).sendKeys(n);
-        driver.findElement(by.name("email")).sendKeys(e);
-        driver.findElement(by.name("birth")).sendKeys(b);
-        driver.findElement(by.id("create-button")).click();
-        driver.sleep(2000).then(() => {
-            callback();
-        });
-    });
-    this.Given(/^A course is created with the name "([^"]*)" and capacity (\d+) and time "([^"]*)"$/, function (n, c, d, callback) {
-        driver.findElement(by.className("MuiSelect-selectMenu")).click()
-        driver.findElement(by.name("course")).click();
-        driver.findElement(by.name("name")).sendKeys(n);
-        driver.findElement(by.id("course-capacity")).sendKeys(selenium.Key.CONTROL + "a");
-        driver.findElement(by.id("course-capacity")).sendKeys(c);
-        driver.findElement(by.name("time")).sendKeys(d);
-        driver.findElement(by.id("create-button")).click();
-        driver.sleep(2000).then(() => {
-            callback();
-        });
-    });
-    this.Given(/^A deliverable is created with the name "([^"]*)" and weight (\d+) and due on "([^"]*)"$/, function (n, w, d, callback) {
-        driver.findElement(by.name("name")).sendKeys(n);
-        driver.findElement(by.id("deliverable-weight")).sendKeys(selenium.Key.CONTROL + "a");
-        driver.findElement(by.id("deliverable-weight")).sendKeys(w);
-        driver.findElement(by.name("due")).sendKeys(d);
-        driver.findElement(by.id("create-button")).click();
-        driver.sleep(2000).then(() => {
-            callback();
-        });
-    });
     this.Given(/^I am logged in as "([^"]*)" with password "([^"]*)" and role "([^"]*)"$/, function (email,password,role,callback) {
         helpers.loadPage('http://localhost:3000/');
         driver.findElement(by.name("email")).sendKeys(email);
@@ -86,20 +43,20 @@ module.exports = function () {
         })
     });
     this.Then(/^I click the model select and choose "([^"]*)"$/, function (m,callback) {
-        driver.findElement(by.className("MuiSelect-selectMenu")).click()
+        driver.findElement(by.id("create-model-select")).click()
         driver.findElement(by.name(m)).click();
         callback()
     });
     this.Then(/^I set the model name to "([^"]*)"$/, function (n,callback) {
-        driver.findElement(by.name("name")).sendKeys(n);
+        driver.findElement(by.id("create-name")).sendKeys(n);
         callback()
     });
     this.Then(/^I set the model email to "([^"]*)"$/, function (e,callback) {
-        driver.findElement(by.name("email")).sendKeys(e);
+        driver.findElement(by.id("create-email")).sendKeys(e);
         callback();
     });
     this.Then(/^I set the model birth to "([^"]*)"$/, function (e,callback) {
-        driver.findElement(by.name("birth")).sendKeys(e);
+        driver.findElement(by.id("create-birth")).sendKeys(e);
         callback();
     });
     this.When(/^I create the model$/, function (callback) {
@@ -127,7 +84,7 @@ module.exports = function () {
     });
 
     this.Then(/^I update the model "([^"]*)" to "([^"]*)"$/, function (field, value, callback) {
-        const elem = driver.findElement(by.name(field));
+        const elem = driver.findElement(by.id(field));
         elem.sendKeys(selenium.Key.CONTROL + "a");
         elem.sendKeys(selenium.Key.DELETE);
         elem.sendKeys(value);
@@ -135,7 +92,7 @@ module.exports = function () {
     });
 
     this.Then(/^I update the model "([^"]*)" to (\d+)$/, function (field, value, callback) {
-        const elem = driver.findElement(by.name(field));
+        const elem = driver.findElement(by.id(field));
         elem.sendKeys(selenium.Key.CONTROL + "a");
         elem.sendKeys(selenium.Key.DELETE);
         elem.sendKeys(value);
