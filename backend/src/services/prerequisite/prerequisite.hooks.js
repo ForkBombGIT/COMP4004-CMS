@@ -19,7 +19,7 @@ module.exports = {
     get: [],
     create: [validatePrerequisite()],
     update: [],
-    patch: [],
+    patch: [validatePrerequisite()],
     remove: []
   },
 

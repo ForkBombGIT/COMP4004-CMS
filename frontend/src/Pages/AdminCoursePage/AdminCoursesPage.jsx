@@ -16,6 +16,7 @@ import {
   RegisterList,
   ModelCRUDForm,
   ModelList,
+  ModelDetailModal,
 } from "Components";
 import { Client } from "Server";
 
@@ -35,6 +36,8 @@ const AdminCoursePage = () => {
   const [professors, setProfessors] = useState([]);
   const [professor, setProfessor] = useState([]);
   const [dbInteraction, setDbInteraction] = useState(false);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [modalModel, setModalModel] = useState({});
 
   /* ------------------------------------ Remove Functions --------------------------*/
   const removeRegistered = (data) => {
@@ -93,6 +96,13 @@ const AdminCoursePage = () => {
       .catch(() => {
         setProfessor("No professor");
       });
+  };
+
+  const editItem = (s, item) => {
+    setDisplayModal(true);
+    const modelForModal = item;
+    modelForModal.service = s;
+    setModalModel(modelForModal);
   };
 
   const registerProfessor = (service, id) => {
@@ -321,11 +331,18 @@ const AdminCoursePage = () => {
                     service="prerequisite"
                     list={prerequisites}
                     removeItem={removeItem}
+                    editItem={editItem}
                   />
                 </div>
               </div>
             </CardContent>
           </Card>
+          <ModelDetailModal
+            display={displayModal}
+            setDisplay={setDisplayModal}
+            model={modalModel}
+            relatedModelId={courseId}
+          />
         </Container>
       ) : (
         <Route component={NotFound} />

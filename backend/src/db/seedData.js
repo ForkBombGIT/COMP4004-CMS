@@ -723,6 +723,22 @@ const PREREQUISITE = [
     updated_at: new Date()
   },
   {
+    id: 'd59e0654-3cdb-4d68-b8ac-a3a370c673b4',
+    course_id: COURSE_IDS_BY_NAME['COMP4004'],
+    prerequisite_course_id: COURSE_IDS_BY_NAME['COMP1104'],
+    name: 'COMP1104',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: 'd59e0654-3cdb-4d68-b8ac-a3a370c573b4',
+    course_id: COURSE_IDS_BY_NAME['COMP4004'],
+    prerequisite_course_id: COURSE_IDS_BY_NAME['COMP1105'],
+    name: 'COMP1105',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
     id: '25de889b-0c4d-4e68-82a3-652f0f38fa3c',
     course_id: COURSE_IDS_BY_NAME['JAPA2004'],
     prerequisite_course_id: COURSE_IDS_BY_NAME['JAPA1004'],
