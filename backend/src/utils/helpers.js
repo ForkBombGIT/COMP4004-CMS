@@ -3,7 +3,7 @@ const createUserCredential = (context, role, email) => {
   const data = {
     user_role: role,
     email: email,
-    password: password,
+    password: 'supersecret',
   };
   data[`${role}Id`] = context.result.id;
   context.app.service('loginCredential').create(data).then(result=>{

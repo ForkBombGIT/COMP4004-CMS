@@ -40,7 +40,9 @@ const StudentCoursePage = () => {
   };
 
   const setDeliverablesFromCourse = (data) => {
-    setDeliverables(data[0].deliverables);
+    if (data.length > 0) {
+      setDeliverables(data[0].deliverables);
+    }
   };
 
   /* ------------------------------------ top level data setup --------------------------*/

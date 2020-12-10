@@ -4,13 +4,14 @@ const errors = require('@feathersjs/errors');
 const validateSubmission = () => async (context) => {
   // Test for the sutdent registering with space in the course
   const courseR = await context.app.service('course').get(context.data.courseId);
-  const enrolledR = await context.app.service('enrolled').find({
+  let enrolledR = await context.app.service('enrolled').find({
     query: {
       courseId: context.data.courseId
     }
   });
+  enrolledR = enrolledR.filter((val) => val.status === 'inprogress');
 
-  if (enrolledR.length+1 >= courseR.capacity) {
+  if (enrolledR.length+1 > courseR.capacity) {
     throw new errors.GeneralError('Failure, class already full!');
   }
 
