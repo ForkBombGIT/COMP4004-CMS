@@ -102,6 +102,17 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
+  // Used to test prereq removal
+  {
+    id: 'e21cd32c-900a-42fe-bd86-b2f554aeebcc',
+    professor_id: null,
+    name: 'COMP1105',
+    time_slot: 'Friday at noon',
+    capacity: 18,
+    status: 'inprogress',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
   // Used for test capacity 0 registraion
   {
     id: '94939c98-8433-47fb-af07-e6bfa6349d75',
@@ -113,7 +124,7 @@ const COURSE = [
     created_at: new Date(),
     updated_at: new Date()
   },
-  // Used for test deliverable submission
+  // Used for test deliverable submission, and remove prerequisite
   {
     id: '41b037cb-3e6e-429d-880a-0ecdd54f4833',
     professor_id: null,
@@ -700,6 +711,14 @@ const PREREQUISITE = [
     course_id: COURSE_IDS_BY_NAME['JAPA4004'],
     prerequisite_course_id: COURSE_IDS_BY_NAME['JAPA3004'],
     name: 'JAPA3004',
+    created_at: new Date(),
+    updated_at: new Date()
+  },
+  {
+    id: 'd59e0654-3cdb-4d68-b8ac-a3a370c773b4',
+    course_id: COURSE_IDS_BY_NAME['COMP2406'],
+    prerequisite_course_id: COURSE_IDS_BY_NAME['COMP1105'],
+    name: 'COMP1105',
     created_at: new Date(),
     updated_at: new Date()
   },

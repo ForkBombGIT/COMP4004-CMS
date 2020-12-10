@@ -34,6 +34,7 @@ const AdminCoursePage = () => {
   const [registeredStudents, setRegisteredStudents] = useState([]);
   const [professors, setProfessors] = useState([]);
   const [professor, setProfessor] = useState([]);
+  const [dbInteraction, setDbInteraction] = useState(false);
 
   /* ------------------------------------ Remove Functions --------------------------*/
   const removeRegistered = (data) => {
@@ -45,6 +46,21 @@ const AdminCoursePage = () => {
         return false;
       }, false);
     });
+  };
+
+  const removeItem = (s, id) => {
+    if (!dbInteraction) {
+      setDbInteraction(true);
+      Client.service(s)
+        .remove(id)
+        .then(() => {
+          setDbInteraction(false);
+          if (s !== "application") notifySuccess("Successful Deletion!");
+        })
+        .catch(() => {
+          notifyFailure("Unsuccessful Creation!");
+        });
+    }
   };
 
   const removeUnRegistered = (data) => {
@@ -304,6 +320,7 @@ const AdminCoursePage = () => {
                     title="Prerequisites"
                     service="prerequisite"
                     list={prerequisites}
+                    removeItem={removeItem}
                   />
                 </div>
               </div>

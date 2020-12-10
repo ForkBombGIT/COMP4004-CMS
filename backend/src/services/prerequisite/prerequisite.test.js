@@ -9,7 +9,7 @@ describe('"prerequisite" service', () => {
   it('registered the service', () => {
     expect(service).toBeTruthy();
   });
-  it('create a deliverable', async () => {
+  it('create a prerequisite', async () => {
     // Remove record if it exists
 
     const expectedPrerequisite = {
@@ -29,5 +29,34 @@ describe('"prerequisite" service', () => {
     let createdRecord = await service.create(testPrerequisite);
     console.log(createdRecord);
     expect(checkObjectContains(createdRecord, expectedPrerequisite)).toBeTruthy();
+  });
+  it('removes a prerequisite', async () => {
+    const expectedPrerequisite = {
+      id: '0a73b1a3-4d46-4f8e-ad10-2852a8bbaeb1',
+      prerequisite_course_id: '99d21763-f1e1-4bba-b163-a4a56dba4257',
+      name: 'COMP2406',
+    };
+
+    const testPrerequisite = {...expectedPrerequisite,
+      courseId: 'a11cd32c-900a-42fe-bd86-b3f554aeebcc'
+    };
+
+    try { 
+      await service.remove(testPrerequisite.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let createdRecord = await service.create(testPrerequisite);
+
+    expect(checkObjectContains(createdRecord, expectedPrerequisite)).toBeTruthy();
+
+    try { 
+      await service.remove(testPrerequisite.id);
+    } catch (e) {console.log('No record to remove');}
+
+    let course = await service.find({
+      query: {id: testPrerequisite.id}}
+    );
+    expect(course.length).toBe(0);
+
   });
 });
