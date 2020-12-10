@@ -14,7 +14,8 @@ import {
   LogoutButton,
   NotFound,
   RegisterList,
-  ModelCreationForm,
+  ModelCRUDForm,
+  ModelList,
 } from "Components";
 import { Client } from "Server";
 
@@ -29,6 +30,7 @@ const AdminCoursePage = () => {
     capacity: "",
   });
   const [students, setStudents] = useState([]);
+  const [prerequisites, setPrerequisites] = useState([]);
   const [registeredStudents, setRegisteredStudents] = useState([]);
   const [professors, setProfessors] = useState([]);
   const [professor, setProfessor] = useState([]);
@@ -85,7 +87,6 @@ const AdminCoursePage = () => {
           notifySuccess("Success, professor added!");
         })
         .catch((e) => {
-          console.log(e);
           notifyFailure("Failed to add professor");
         });
     } else {
@@ -177,6 +178,19 @@ const AdminCoursePage = () => {
       }),
       setRegisteredStudents
     );
+    subscribeToService(
+      ["prerequisite"],
+      "prerequisite",
+      (data) => {
+        return data;
+      },
+      {
+        query: {
+          courseId,
+        },
+      },
+      setPrerequisites
+    );
     /* ------------------------------------ Initial loading --------------------------*/
     Client.service("course")
       .get(courseId)
@@ -250,31 +264,49 @@ const AdminCoursePage = () => {
             </CardContent>
             <Divider />
             <CardContent id="user-management">
-              <ModelCreationForm title="User Creation Form" />
-              <RegisterList
-                title="Students"
-                service="student"
-                manageRegister={registerStudent}
-                registerService="enrolled"
-                type="add"
-                list={students}
+              <ModelCRUDForm
+                title="Prerequisite Creation Form"
+                action="create"
+                modelToUpdate={{
+                  service: "prerequisite",
+                }}
+                relatedModelId={courseId}
               />
-              <RegisterList
-                title="Registered Students"
-                service="registered-student"
-                manageRegister={unRegisterStudent}
-                registerService="enrolled"
-                type="remove"
-                list={registeredStudents}
-              />
-              <RegisterList
-                title="Professors"
-                service="professor"
-                manageRegister={registerProfessor}
-                registerService="course"
-                type="add"
-                list={professors}
-              />
+              <div id="lists" className="admin-course-lists">
+                <div className="list-div">
+                  <RegisterList
+                    title="Students"
+                    service="student"
+                    manageRegister={registerStudent}
+                    registerService="enrolled"
+                    type="add"
+                    list={students}
+                  />
+                  <RegisterList
+                    title="Registered Students"
+                    service="registered-student"
+                    manageRegister={unRegisterStudent}
+                    registerService="enrolled"
+                    type="remove"
+                    list={registeredStudents}
+                  />
+                  <RegisterList
+                    title="Professors"
+                    service="professor"
+                    manageRegister={registerProfessor}
+                    registerService="course"
+                    type="add"
+                    list={professors}
+                  />
+                </div>
+                <div id="prereq-list" className="list-div">
+                  <ModelList
+                    title="Prerequisites"
+                    service="prerequisite"
+                    list={prerequisites}
+                  />
+                </div>
+              </div>
             </CardContent>
           </Card>
         </Container>

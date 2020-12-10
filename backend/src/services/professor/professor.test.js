@@ -58,7 +58,11 @@ describe('"professor" service', () => {
       name: 'billy',
     };
     
-    let updatedRecord = await service.patch(updateProfessor.id,updateProfessor);
+    let updatedRecord = await service.patch(updateProfessor.id,updateProfessor, paramsForServer({
+      data:{
+        email
+      }
+    }));
     expect(updatedRecord.name != createdRecord.name).toBeTruthy();
 
     try { 

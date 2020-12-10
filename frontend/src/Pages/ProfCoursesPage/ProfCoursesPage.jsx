@@ -19,7 +19,7 @@ import {
   LogoutButton,
   NotFound,
   ModelList,
-  ModelCreationForm,
+  ModelCRUDForm,
   ModelDetailModal,
 } from "Components";
 import { notifySuccess, notifyFailure, subscribeToService } from "Utils/";
@@ -178,9 +178,12 @@ const ProfCoursesPage = () => {
                 </CardContent>
                 <Divider />
                 <CardContent id="course-management">
-                  <ModelCreationForm
+                  <ModelCRUDForm
                     title="Deliverable Creation Form"
-                    service="deliverable"
+                    modelToUpdate={{
+                      service: "deliverable",
+                    }}
+                    action="create"
                     relatedModelId={courseId}
                   />
                   <div>

@@ -1,27 +1,22 @@
-export const createModel = (
-  model,
-  name,
-  birth = undefined,
-  cap = undefined,
-  time = undefined,
-  status = undefined,
-  due = undefined,
-  weight = undefined,
-  relatedModelId = undefined
-) => {
+export const createModel = (model) => {
   const createdModel = {};
-  createdModel.name = name === undefined || name === "" ? null : name;
-  if (model === "student") {
+  createdModel.name =
+    model.name === undefined || model.name === "" ? null : model.name;
+  if (model.service === "student") {
     createdModel.birth_date =
-      birth === undefined || birth === "" ? null : birth;
-  } else if (model === "course") {
-    createdModel.capacity = cap;
-    createdModel.time_slot = time;
-    createdModel.status = status;
-  } else if (model === "deliverable") {
-    createdModel.weight = weight;
-    createdModel.due_date = due;
-    createdModel.courseId = relatedModelId;
+      model.birth === undefined || model.birth === "" ? null : model.birth;
+  } else if (model.service === "course") {
+    createdModel.capacity = model.cap;
+    createdModel.time_slot = model.time;
+    createdModel.status = model.status;
+  } else if (model.service === "deliverable") {
+    createdModel.weight = model.weight;
+    createdModel.due_date = model.due;
+    createdModel.courseId = model.relatedModelId;
+  } else if (model.service === "prerequisite") {
+    console.log(model.prerequisite_course_id);
+    createdModel.prerequisite_course_id = model.prerequisite_course_id;
+    createdModel.courseId = model.relatedModelId;
   }
   return createdModel;
 };

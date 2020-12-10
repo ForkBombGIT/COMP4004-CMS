@@ -1,15 +1,15 @@
 import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import ModelCreationForm from ".";
-import { createModel } from "./ModelCreationForm";
+import { createModel } from "Utils";
+import ModelCRUDForm from ".";
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Testing Model Creation Form", () => {
   test("Component renders", () => {
     // eslint-disable-next-line
-    const wrapper = shallow(<ModelCreationForm />);
+    const wrapper = shallow(<ModelCRUDForm />);
     expect(wrapper.exists()).toBe(true);
   });
   test("Student Data Creation", () => {
