@@ -11,7 +11,11 @@
   h2 {
     text-align: left !important;
   }
-  #user-management {
-    display: flex;
+  .admin-course-lists {
+    display: block !important;
+  }
+  #prereq-list {
+    margin-left: -10px;
+    width: 96%;
   }
 }

@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core/";
 import {
   ModelList,
-  ModelCreationForm,
+  ModelCRUDForm,
   LogoutButton,
   ModelDetailModal,
 } from "Components";
@@ -50,6 +50,7 @@ const AdminPage = () => {
     setDisplayModal(true);
     const modelForModal = item;
     modelForModal.service = s;
+    console.log(item);
     setModalModel(modelForModal);
   };
 
@@ -92,6 +93,7 @@ const AdminPage = () => {
       ["student"],
       "student",
       (data) => {
+        console.log(data);
         return data;
       },
       {},
@@ -149,7 +151,7 @@ const AdminPage = () => {
               </CardContent>
               <Divider />
               <CardContent id="user-management">
-                <ModelCreationForm title="Model Creation Form" />
+                <ModelCRUDForm title="Model Creation Form" action="create" />
                 <div id="lists">
                   <div className="list-div">
                     <ModelList

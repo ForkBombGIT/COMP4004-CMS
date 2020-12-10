@@ -699,7 +699,7 @@ const PREREQUISITE = [
     id: 'd59e0654-3cdb-4d68-b8ac-a3a370c773a4',
     course_id: COURSE_IDS_BY_NAME['JAPA4004'],
     prerequisite_course_id: COURSE_IDS_BY_NAME['JAPA3004'],
-    prerequisite_course_name: 'JAPA3004',
+    name: 'JAPA3004',
     created_at: new Date(),
     updated_at: new Date()
   },
@@ -707,7 +707,7 @@ const PREREQUISITE = [
     id: '25de889b-0c4d-4e68-82a3-652f0f38fa3c',
     course_id: COURSE_IDS_BY_NAME['JAPA2004'],
     prerequisite_course_id: COURSE_IDS_BY_NAME['JAPA1004'],
-    prerequisite_course_name: 'JAPA1004',
+    name: 'JAPA1004',
     created_at: new Date(),
     updated_at: new Date()
   }

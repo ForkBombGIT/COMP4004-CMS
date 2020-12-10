@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Typography, Card, CardContent } from "@material-ui/core/";
-import { ModelUpdateForm } from "Components";
+import { ModelCRUDForm } from "Components";
 import "./ModelDetailModal.scss";
 
 const ModelDetailModal = (props) => {
@@ -20,10 +20,11 @@ const ModelDetailModal = (props) => {
                   model.service.charAt(0).toUpperCase() + model.service.slice(1)
                 } Details`}
               </Typography>
-              <ModelUpdateForm
+              <ModelCRUDForm
                 setDisplay={setDisplay}
-                model={model}
+                modelToUpdate={model}
                 relatedModelId={relatedModelId}
+                action="update"
               />
             </div>
           )}
