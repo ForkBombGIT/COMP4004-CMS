@@ -14,5 +14,3 @@ Feature: As an administrator I want to be able to update a course
         When I update the model
         Then I am notified about a "error" with message "Unsuccessful Update!"
         Then "COMP2406" should be displayed in the "course" list
-
-    Scenario: Invalid path B: Invalid fields for course

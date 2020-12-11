@@ -7,7 +7,7 @@ Scenario: Successful Login
     Then I am notified about a "success" with message "Successful Login!"
     Then I should be on the "professor" page
     
-Scenario: Unsuccessful Login
+Scenario: Invalid Path A: Incorrect credentials
     Given I am on the login page
     Then I enter "joslo@gmail.com" in the email field
     Then I enter "incorrectpassword" in the password field

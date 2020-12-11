@@ -12,5 +12,3 @@ Feature: As a student I want to be able to apply to join the university
     When I click the register button
     Then I am notified about a "error" with message "Application Creation Failed!"
     Then the system creates my application
-
-  Scenario: Invalid path B: Invalid fields for course

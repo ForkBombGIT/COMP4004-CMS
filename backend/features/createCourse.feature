@@ -17,5 +17,3 @@ Feature: As an administrator I want to be able to create a course
         When I create the model
         Then I am notified about a "error" with message "Unsuccessful Creation!"
         Then "TESTCOURSE" should NOT be displayed in the "course" list
-
-    Scenario: Invalid path B: Invalid fields for course

@@ -17,5 +17,3 @@ Feature: As a professor I want to be able to update a deliverable
         When I update the model
         Then I am notified about a "error" with message "Unsuccessful Update!"
         Then "deliverable assignment 1" should be displayed in the "deliverable" list
-
-    Scenario: Invalid path B: Invalid fields for deliverable

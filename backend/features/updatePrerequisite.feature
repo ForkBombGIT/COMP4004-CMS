@@ -27,4 +27,3 @@ Feature: As an administrator I want to be able to update a prerequisite
         Then I update the model prerequisite course name to "COMP1104"
         When I update the model
         Then I am notified about a "error" with message "Unsuccessful Update!"
-        Then "COMP1105" should be displayed in the "prerequisite" list

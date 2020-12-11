@@ -15,5 +15,3 @@ Feature: As an administrator I want to be able to create an administrator
         When I create the model
         Then I am notified about a "error" with message "Unsuccessful Creation!"
         Then "TESTADM" should NOT be displayed in the "administrator" list
-
-    Scenario: Invalid path B: Invalid fields for administrator
