@@ -11,10 +11,9 @@ export const createModel = (model) => {
     createdModel.status = model.status;
   } else if (model.service === "deliverable") {
     createdModel.weight = model.weight;
-    createdModel.due_date = model.due;
+    createdModel.due_date = new Date(model.due);
     createdModel.courseId = model.relatedModelId;
   } else if (model.service === "prerequisite") {
-    console.log(model.prerequisite_course_id);
     createdModel.prerequisite_course_id = model.prerequisite_course_id;
     createdModel.courseId = model.relatedModelId;
   }

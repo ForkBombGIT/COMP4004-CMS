@@ -7,7 +7,7 @@ module.exports = (DataTypes) => ({
     autoIncrement: false
   },
   due_date: {
-    type: DataTypes.STRING
+    type: DataTypes.DATE
   },
   name: {
     type: DataTypes.STRING,

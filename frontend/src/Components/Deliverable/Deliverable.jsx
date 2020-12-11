@@ -78,11 +78,12 @@ const Deliverable = (props) => {
   }, [deliverable]);
 
   const dateConv = (date) => {
-    const convDate = date.split(" ");
-    const g = String(
-      new Date(`${convDate[0]} ${convDate[1]}`).toLocaleString()
-    );
-    return g;
+    return date;
+    // const convDate = date.split(" ");
+    // const g = String(
+    //   new Date(`${convDate[0]} ${convDate[1]}`).toLocaleString()
+    // );
+    // return g;
   };
 
   return (
