@@ -16,5 +16,3 @@ Feature: As an administrator I want to be able to create a student
         When I create the model
         Then I am notified about a "error" with message "Unsuccessful Creation!"
         Then "TESTSTU" should NOT be displayed in the "student" list
-
-    Scenario: Invalid path B: Invalid fields for student

@@ -14,5 +14,3 @@ Feature: As an administrator I want to be able to update a student
         When I update the model
         Then I am notified about a "error" with message "Unsuccessful Update!"
         Then "Eros Di Pede" should be displayed in the "student" list
-
-    Scenario: Invalid path B: Invalid fields for student

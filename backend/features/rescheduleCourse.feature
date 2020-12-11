@@ -16,5 +16,3 @@ Feature: As an administrator I want to be able to re-schedule a course
         When I update the model
         Then I am notified about a "error" with message "Unsuccessful Update!"
         Then "COMP2406" should be displayed in the "course" list
-
-    Scenario: Invalid path B: Invalid fields for course

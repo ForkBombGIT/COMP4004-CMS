@@ -17,5 +17,3 @@ Feature: As an professor I want to be able to create a deliverable
         When I create the model
         Then I am notified about a "error" with message "Unsuccessful Creation!"
         Then "TESTDELIVERABLE" should NOT be displayed in the "deliverable" list
-
-    Scenario: Invalid path B: Invalid fields for deliverable
