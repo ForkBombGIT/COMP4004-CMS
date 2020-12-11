@@ -48,14 +48,14 @@ Tests in this repository can be found in three forms:
 And can be run in the following ways:
 
 ### Manual Testing
-Manual testing for ensuring feature compatibility can be done by starting the app as normal with `make up` and loggin into on of the available accounts.
+Manual testing for ensuring feature compatibility can be done by starting the app as normal with `make up` and logging into one of the available accounts.
 
 #### Credentials
 Administrator: jelog@gmail.com
 Student: josh@gmail.com
 Professor: joslo@gmail.com
 
-And all accounts on this application make use of the password _supersecret_
+All accounts on this application make use of the password _supersecret_
 
 As this is not a production version of the application, all new accounts are also created with the password _supersecret_, to test new accounts simply use given e-mail plus this password.
 
