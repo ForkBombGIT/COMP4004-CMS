@@ -74,6 +74,8 @@ Once the project is running, open a new shell, enter the `backend/` directory an
 
 *This code is ran using `selenium` and as such, the test suite requires a viewable browser window. While running the test suite ensure adequate space on your monitor for selenium to interact.*
 
+We choose to utilize selenium for this project as it was required for the project to utilize `cucumbe`   scenarios
+
 Start the project by running  a shell in the root directory of the project and running `make up`
 
 Once the project is running, open a new shell, enter the `backend/` directory and run the command `npm run bdd`
@@ -86,49 +88,56 @@ Explained here are the most important points of the code structure, where to fin
 |   ├── config
 |   ├── features
 │   |   ├── bddTest
-│   |   |   ├── share-objects
-│   |   |   ├── step-definitions
+│   |   |   ├── share-objects         # Commonly utilized testing objects
+│   |   |   ├── step-definitions      # Definitions corresponding to steps outlined in Cucumber feature files
 │   |   └── ...
-|   ├── public
-|   ├── scripts
-|   ├── src
-│   |   ├── db
-│   |   ├── middleware
-│   |   ├── services
-│   |   ├── utils
-│   |   ├── app.js
-│   |   ├── authentication.js
+|   ├── public                        # Static assets that are deployed as-is
+|   ├── scripts                       # Utility scripts used by package.json build scripts
+|   ├── src                           # Code directory for backend container
+│   |   ├── db                        # Database structure related files
+|   |   |   ├── config                # Database configuaration files, detailing usernames, passwords, host, etc.
+|   |   |   ├── migrations            # Files to initialize and update table schemas
+|   |   |   ├── schemas               # Files outlining the structure of table columns and values
+|   |   |   ├── seeders               # Files utilized to initialize database tables with seed data
+|   |   |   ├── utils                 # Common utitlity files utilized by several other files
+|   |   |   ├── database.js           # File used to initialize database and connection to database it
+|   |   |   ├── seedData.js           # Sample data used to populate database upon initialization
+|   |   |   ├── tableNames.js         # Object that outlines the names of the tables within the database
+│   |   ├── services                  # Code directory detailing project services and their accompanying tests, hooks, and db related files
+│   |   ├── utils                     # Common utitlity files utilized by several other files
+│   |   ├── app.js                    # Main app file starting and handling node server.
+│   |   ├── authentication.js         # Initilization file for authentication service
 │   |   └── ...
-|   ├── test
-|   ├── .editorconfig
-|   ├── .eslintrc.json
-|   ├── .gitignore
-|   ├── .sequelizerc
-|   ├── Dockerfile 
-|   ├── package.json 
-|   ├── selenium-cucumber-js.json 
-|   ├── yarn.lock 
+|   ├── test                          # Code directory containing general backend tests
+|   ├── .editorconfig                 # Configuration maintaining coding styles
+|   ├── .eslintrc.json                # Airbnb Eslint configs/rules
+|   ├── .gitignore                    # Files that should not be posted to git (ex. npm modules)
+|   ├── .sequelizerc                  # Configuration file for sequelize module
+|   ├── Dockerfile                    # Backend container configuration
+|   ├── package.json                  # Frontend code dependencies, configurations, build scripts, and metadata
+|   ├── selenium-cucumber-js.json     # Configuration file for selenium-cucumber-js module
+|   ├── yarn.lock                     # Specific dependency versions
 │   └── ...
-├── frontend
-|   ├── public
-|   ├── src
-│   |   ├── Components
-│   |   ├── Pages
-│   |   ├── Server
-│   |   ├── Utils
-│   |   ├── App.jsx
-│   |   ├── AppRouter.jsx
+├── frontend                          
+|   ├── public                        # Static assets that are deployed as-is
+|   ├── src                           # Code directory for frontend container
+│   |   ├── Components                # Non-page level react components (ex. login form)
+│   |   ├── Pages                     # React component pages (ex. admin, student)
+│   |   ├── Server                    # Directory containing client-side feathers initialization
+│   |   ├── Utils                     # Reusable functions and globals
+│   |   ├── App.jsx                   # Main app file composing the entire application
+│   |   ├── AppRouter.jsx             # File outlining the routes existing in the application
 │   |   └── ...
-|   ├── .eslintrc.js
-|   ├── .gitignore
-|   ├── Dockerfile
-|   ├── jsconfig.json
-|   ├── package.json
-|   ├── yarn.lock
+|   ├── .eslintrc.js                  # Airbnb Eslint configs/rules
+|   ├── .gitignore                    # Files that should not be posted to git (ex. npm modules)
+|   ├── Dockerfile                    # Frontend container configuration
+|   ├── jsconfig.json                 # Project config (enables absolute path imports)
+|   ├── package.json                  # Frontend code dependencies, configurations, build scripts, and metadata
+|   ├── yarn.lock                     # Specific dependency versions
 │   └── ...
-├── .gitignore              # Files that should not be posted to git (ex. npm modules)
-├── Makefile                # Project build management commands
-├── docker-compose.yml      # Container runner and configurations
+├── .gitignore                        # Files that should not be posted to git (ex. npm modules)
+├── Makefile                          # Project build management commands
+├── docker-compose.yml                # Container runner and configurations
 └── ...
 ```
 
@@ -168,7 +177,7 @@ This website is currently not deployed.
 ## Contributors
 - Eros Di Pede
   + [Github](https://github.com/ForkBombGIT)
-  + [Website](https://erosdipede.me/)
+  + [Website](https://erosdipede.ca/)
 - Josh Gorman
   + [Github](https://github.com/Liannus)
   + [Website](https://joshgorman.ca/)
