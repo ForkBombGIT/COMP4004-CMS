@@ -81,7 +81,55 @@ Once the project is running, open a new shell, enter the `backend/` directory an
 ## Code Structure
 Explained here are the most important points of the code structure, where to find configs, etc.
 ```
-TBD
+.
+├── backend
+|   ├── config
+|   ├── features
+│   |   ├── bddTest
+│   |   |   ├── share-objects
+│   |   |   ├── step-definitions
+│   |   └── ...
+|   ├── public
+|   ├── scripts
+|   ├── src
+│   |   ├── db
+│   |   ├── middleware
+│   |   ├── services
+│   |   ├── utils
+│   |   ├── app.js
+│   |   ├── authentication.js
+│   |   └── ...
+|   ├── test
+|   ├── .editorconfig
+|   ├── .eslintrc.json
+|   ├── .gitignore
+|   ├── .sequelizerc
+|   ├── Dockerfile 
+|   ├── package.json 
+|   ├── selenium-cucumber-js.json 
+|   ├── yarn.lock 
+│   └── ...
+├── frontend
+|   ├── public
+|   ├── src
+│   |   ├── Components
+│   |   ├── Pages
+│   |   ├── Server
+│   |   ├── Utils
+│   |   ├── App.jsx
+│   |   ├── AppRouter.jsx
+│   |   └── ...
+|   ├── .eslintrc.js
+|   ├── .gitignore
+|   ├── Dockerfile
+|   ├── jsconfig.json
+|   ├── package.json
+|   ├── yarn.lock
+│   └── ...
+├── .gitignore              # Files that should not be posted to git (ex. npm modules)
+├── Makefile                # Project build management commands
+├── docker-compose.yml      # Container runner and configurations
+└── ...
 ```
 
 ## Tech
