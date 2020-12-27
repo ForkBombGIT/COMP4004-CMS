@@ -103,7 +103,8 @@ Explained here are the most important points of the code structure, where to fin
 |   |   |   ├── database.js           # File used to initialize database and connection to database it
 |   |   |   ├── seedData.js           # Sample data used to populate database upon initialization
 |   |   |   ├── tableNames.js         # Object that outlines the names of the tables within the database
-│   |   ├── services                  # Code directory detailing project services and their accompanying tests, hooks, and db related files
+│   |   ├── services                  # Code directory detailing project services and their accompanying tests, 
+                                        hooks, and db related files
 │   |   ├── utils                     # Common utitlity files utilized by several other files
 │   |   ├── app.js                    # Main app file starting and handling node server.
 │   |   ├── authentication.js         # Initilization file for authentication service
